@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="stream" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <group name="contact" order="1" minOccurs="1" maxOccurs="unbounded">
+      <record name="contactRecord" order="1" xmlName="person" class="org.beanio.parser.xml.Person" minOccurs="1" maxOccurs="1">
+        <property name="type" rid="true" value="C" />
+        <field name="firstName" xmlType="text" />
+      </record>
+      <record name="address" order="2" class="org.beanio.parser.xml.Address" minOccurs="0" maxOccurs="1">
+        <field name="state" xmlType="text" />
+      </record>      
+      <group name="parents" order="3" minOccurs="0">
+        <record name="parent" xmlName="person" class="org.beanio.parser.xml.Person" minOccurs="0" maxOccurs="2">
+          <property name="type" rid="true" value="P" />
+          <field name="firstName" xmlType="text" />
+        </record>
+      </group>
+    </group>
+    <group name="friends" order="1" minOccurs="0" maxOccurs="unbounded">
+      <record name="friend" class="org.beanio.parser.xml.Person" minOccurs="1" maxOccurs="unbounded">
+        <property name="type" rid="true" value="F" />
+        <field name="firstName" xmlType="text" />
+      </record>    
+    </group>
+  </stream>
+
+  <stream name="stream2" xmlName="stream" format="xml">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <group name="contacts" order="1" minOccurs="1" maxOccurs="unbounded" xmlType="none">
+      <record name="person" class="org.beanio.parser.xml.Person" minOccurs="1" maxOccurs="1">
+        <field name="type" rid="true" xmlType="attribute" literal="C" />
+        <field name="firstName" xmlType="text" />
+      </record>
+      <record name="address" class="org.beanio.parser.xml.Address" minOccurs="1" maxOccurs="1">
+        <field name="state" xmlType="text" />
+      </record>
+    </group>
+    <group name="friends" order="1" minOccurs="0" maxOccurs="unbounded" xmlType="none">
+      <record name="person" class="org.beanio.parser.xml.Person" minOccurs="1" maxOccurs="1">
+        <field name="type" rid="true" xmlType="attribute" literal="F" />
+        <field name="firstName" xmlType="text" />
+      </record>
+    </group>
+  </stream>
+
+  <stream name="stream3" format="xml" xmlType="none">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <group name="contact" order="1" minOccurs="1" maxOccurs="unbounded">
+      <record name="person" class="org.beanio.parser.xml.Person" minOccurs="1" maxOccurs="1">
+        <field name="firstName" xmlType="text" />
+        <segment name="address" class="org.beanio.parser.xml.Address">
+          <field name="state" xmlType="text" />
+        </segment>
+      </record>
+    </group>
+  </stream>
+
+</beanio>

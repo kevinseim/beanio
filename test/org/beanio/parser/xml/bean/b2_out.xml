@@ -1,0 +1,12 @@
+<stream>
+  <person>
+    <firstName>John</firstName>
+    <homeAddress xmlns="address">
+      <state>IL</state>
+      <zip>60610</zip>
+    </homeAddress>
+  </person>
+  <person>
+    <firstName>Mary</firstName>
+  </person>
+</stream>

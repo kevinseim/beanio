@@ -1,0 +1,11 @@
+<stream>
+  <person>
+    <firstName>John</firstName>
+    <color>Red</color>
+    <color>Blue</color>
+    <color>Green</color>
+  </person>
+  <person>
+    <firstName>George</firstName>
+  </person>
+</stream>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2011/01 http://www.beanio.org/2011/01/mapping.xsd">
+
+  <stream name="stream1" format="csv">
+    <record name="header" order="1" minOccurs="1" maxOccurs="1">
+      <field name="type" rid="true" literal="H" />
+    </record>
+    <record name="trailer" order="3" minOccurs="1" maxOccurs="1">
+      <field name="type" rid="true" literal="T" />
+    </record>
+  </stream>
+
+  <stream name="stream2" format="csv">
+    <record name="header" order="1" minOccurs="1" maxOccurs="1">
+      <field name="type" rid="true" literal="H" />
+    </record>
+    <record name="trailer" order="3" minOccurs="1" maxOccurs="1">
+      <field name="type" rid="true" literal="T" />
+    </record>
+  </stream>
+
+</beanio>

@@ -1,0 +1,5 @@
+<stream>
+  <person last="Smith" xmlns:ns="fieldNS" ns:first="John" ns:gender="M"/>
+  <person last="Smith" xmlns:ns="fieldNS" ns:first="Mary" ns:gender="F"/>
+  <person last=""/>
+</stream>

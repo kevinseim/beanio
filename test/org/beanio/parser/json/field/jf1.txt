@@ -1,0 +1,8 @@
+{
+  "first": "Joe",
+  "last": "Johnson",
+  "age": 20,
+  "number": [1],
+  "healthy": true,
+  "array": [10, 20]
+}

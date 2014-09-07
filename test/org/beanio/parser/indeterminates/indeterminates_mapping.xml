@@ -1,0 +1,58 @@
+<beanio xmlns="http://www.beanio.org/2012/03">
+
+  <stream name="d1" format="csv" strict="false">
+    <record name="record" class="map">
+      <field name="f1" />
+      <field name="f2" collection="list" occurs="1+" />
+      <field name="f3" collection="list" occurs="2"/>
+      <field name="f4" />
+    </record>
+  </stream>
+
+  <stream name="d2" format="csv" strict="true">
+    <record name="record" class="map">
+      <field name="f1" />
+      <segment name="rs1" collection="list" class="map" occurs="1+">
+        <field name="f2" />
+        <field name="f3" />
+      </segment>
+      <field name="f4" />
+      <segment name="rs2" collection="list" class="map" occurs="2">
+        <field name="f5" />
+        <field name="f6" collection="list" occurs="2" />
+      </segment>
+      <field name="f7" />
+    </record>
+  </stream>
+
+  <stream name="d3" format="csv" strict="true">
+    <record name="record" class="map">
+      <field name="f3" collection="list" occurs="2" position="-3" />
+      <field name="f1" position="0" />
+      <field name="f2" collection="list" occurs="1+" position="1" until="-3" />
+      <field name="f4" position = "-1" />
+    </record>
+  </stream>
+  
+  <stream name="d4" format="csv" strict="true">
+    <record name="record" class="map">
+      <field name="f1" />
+      <segment name="rs1" class="map" occurs="1">
+        <segment name="rs2" collection="list" class="map" occurs="0-2">
+          <field name="f2" />
+          <field name="f3" />
+        </segment>
+      </segment>
+    </record>
+  </stream>
+  
+  <stream name="fl1" format="fixedlength" strict="true">
+    <record name="record" class="map">
+      <field name="f1" length="2" />
+      <field name="f2" length="4" collection="list" occurs="1+" />
+      <field name="f3" length="4" collection="list" occurs="2"/>
+      <field name="f4" length="2" />
+    </record>
+  </stream>
+ 
+</beanio>

@@ -1,0 +1,13 @@
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="s1" format="csv">
+    <record name="record" class="map">
+      <field name="text" />
+      <field name="text_trim" trim="true" />
+      <field name="number" type="int" trim="true" />
+    </record>
+  </stream>
+
+</beanio> 

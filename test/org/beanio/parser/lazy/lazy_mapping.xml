@@ -1,0 +1,43 @@
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="s1" format="fixedlength">
+    <record name="record" class="org.beanio.parser.lazy.LazyUser">
+      <field name="name" length="5" />
+      <segment name="account" class="org.beanio.parser.lazy.Account" lazy="true">
+        <field name="number" length="5" />
+        <field name="text" length="5" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="s2" format="fixedlength">
+    <record name="record" class="org.beanio.parser.lazy.LazyUser">
+      <field name="name" length="5" />
+      <segment name="accounts" collection="list" class="org.beanio.parser.lazy.Account" lazy="true" occurs="2">
+        <field name="number" length="3" padding="0" justify="right" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="s3" format="csv">
+    <record name="record" class="org.beanio.parser.lazy.LazyUser">
+      <field name="name" />
+      <segment name="account" class="org.beanio.parser.lazy.Account" lazy="true">
+        <field name="number" />
+        <field name="text" />
+        <segment name="transactions" class="org.beanio.parser.lazy.Transaction" collection="list" occurs="2" lazy="true">
+          <field name="type" />
+        </segment>
+      </segment>
+    </record>
+  </stream>
+  
+  <stream name="s4" format="csv">
+    <record name="record" class="map">
+      <field name="names" collection="list" lazy="true" occurs='0+'/>
+    </record>
+  </stream>
+  
+</beanio> 

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+  
+  <import resource="file:test/org/beanio/parser/imports/import_mapping3.xml" />
+
+  <typeHandler name="name" class="org.beanio.types.StringTypeHandler">
+    <property name="trim" value="true" />
+  </typeHandler>
+
+  <stream name="stream2.1" format="csv">
+    <record name="record" class="map">
+      <field name="name" />
+      <field name="date" type="date" />
+    </record>
+  </stream>
+
+</beanio>

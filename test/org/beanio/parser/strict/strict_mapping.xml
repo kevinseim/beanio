@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="s1_strict" format="csv" strict="true">
+    <record name="header" minOccurs="1" maxOccurs="1">
+      <field name="type" rid="true" literal="header" />
+      <field name="date" type="date" format="yyyy-MM-dd" />
+    </record>
+    <record name="detail" minOccurs="0" maxOccurs="unbounded">
+      <field name="type" rid="true" literal="detail" />
+      <field name="firstName" />
+      <field name="lastName" />
+    </record>
+    <record name="trailer" minOccurs="1" maxOccurs="1" >
+      <field name="type" rid="true" literal="trailer" />
+      <field name="count" />
+    </record>
+  </stream>
+
+  <stream name="s1_not_strict" format="csv" strict="false">
+    <record name="header" minOccurs="1" maxOccurs="1">
+      <field name="type" rid="true" literal="header" />
+      <field name="date" type="date" format="yyyy-MM-dd" />
+    </record>
+    <record name="detail" minOccurs="0" maxOccurs="unbounded">
+      <field name="type" rid="true" literal="detail" />
+      <field name="firstName" />
+      <field name="lastName" />
+    </record>
+    <record name="trailer" minOccurs="1" maxOccurs="1" >
+      <field name="type" rid="true" literal="trailer" />
+      <field name="count" />
+    </record>
+  </stream>
+
+</beanio>

@@ -1,0 +1,11 @@
+<stream xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <person>
+    <colors>
+      <color>Red</color>
+      <color>Blue</color>
+    </colors>
+  </person>
+  <person>
+    <colors xsi:nil="true"/>
+  </person>
+</stream>

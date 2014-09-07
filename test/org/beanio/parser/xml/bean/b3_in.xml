@@ -1,0 +1,11 @@
+<stream>
+  <person>
+    <address>IL</address>
+    <address>CO</address>
+    <address>MN</address>
+    <firstName>John</firstName>
+  </person>
+  <person>
+    <firstName>Mary</firstName>
+  </person>
+</stream>

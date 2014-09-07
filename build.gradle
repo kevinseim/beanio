@@ -1,0 +1,241 @@
+/**
+ * Gradle 1.5 build script.
+ * 
+ * Custom gradle tasks:
+ *   zip     - Builds the BeanIO zip distribution
+ *   site    - Builds the BeanIO site distribution
+ * 
+ * See the following URL for instructions regarding deployment to the Sonatype Maven repo:
+ *   https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+ * 
+ * BeanIO 3.x and up is built using Java 8, with Java 7 source/target compatibility.
+ *  
+ * To execute the 'uploadArchives' task, the following properties must be specified
+ * in an external 'gradle.properties' file:
+ *   - (signing properties, see http://www.gradle.org/docs/current/userguide/signing_plugin.html)
+ *   - sonatypeUsername
+ *   - sonatypePassword
+ */
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'signing'
+// emma does not support Java 8
+//apply from: 'https://raw.github.com/breskeby/gradleplugins/master/emmaPlugin/emma.gradle'
+
+version = "3.0.0.SNAPSHOT"
+group = "org.beanio"
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+ext.artifactId = "beanio"
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    jarjar
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'org.codehaus.groovy', name: 'groovy-all', version: '1.8.9'
+    testRuntime group: 'commons-logging', name: 'commons-logging', version: '1.1.2'
+    //emma group: 'emma', name: 'emma', version: '2.0.5312'
+    //emma group: 'emma', name: 'emma', version: '2.0.5312' 
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src'
+            exclude '**/*.java'
+            exclude '**/package.html'
+        }
+    }
+    test {
+        java {
+            srcDir 'test'
+            include '**/*.java'
+        }
+        groovy {
+            srcDir 'test'
+            include '**/*.groovy'
+        }
+        resources {
+            srcDir 'test'
+            exclude '**/*.java'
+            exclude '**/*.groovy'
+        }
+    }
+}
+
+javadoc {
+    options.header = "BeanIO $version"
+    options.docTitle = "<h2>BeanIO 3.0 API</h2>"
+    options.footer = "<i>Copyright &copy; 2010-2014 Kevin Seim</i>"
+    options.links = [
+        "http://download.oracle.com/javase/7/docs/api/"
+    ]
+}
+
+jar {
+    baseName = "$artifactId"
+    includeEmptyDirs = false
+    ext.metaInfDir = "$buildDir/tmp/jar"
+    // create a list of exported packages for OSGi
+    ant.dirset(id:"osgi.dirs", dir:"src/org/beanio", excludes: "xsd/**")
+    ant.pathconvert(refid:"osgi.dirs", property:"osgi.packages", dirsep:".", pathsep:";version=\"${version}\",") {
+        map(from:"$basedir/src/", to:"")
+    }
+    manifest {
+        attributes(
+            "Implementation-Title": "BeanIO ${version}",
+            "Implementation-Version": version,
+            "Bundle-ManifestVersion": "2",
+            "Bundle-Name": "BeanIO",
+            "Bundle-SymbolicName": "org.beanio",
+            "Bundle-Version": version,
+            "Bundle-Vendor": "Kevin Seim",
+            "Bundle-Description": "BeanIO OSGi support",
+            "Bundle-License": "http://www.apache.org/licenses/LICENSE-2.0",
+            "Bundle-DocURL": "http://beanio.org",
+            "Export-Package": ant.properties["osgi.packages"] + ";version=\"${version}\"",
+            "DynamicImport-Package": "*")
+    }
+    doLast {
+        manifest.writeTo("$metaInfDir/MANIFEST.MF")
+    }
+}
+
+test {
+  jvmArgs = ["-XX:-UseSplitVerifier"]
+}
+
+task sourcesJar(type: Jar, dependsOn:classes) {
+    baseName = "$artifactId"
+    classifier = 'sources'
+    from("$projectDir/src") {
+        exclude '**/package.html'
+    }
+    manifest {
+        attributes(
+            "Implementation-Title": "BeanIO ${version}",
+            "Implementation-Version": version
+        )
+    }
+    metaInf {
+        from("$projectDir") {
+            include "LICENSE.txt"
+            include "NOTICE.txt"
+        }
+    }
+}
+
+task javadocJar(type: Jar, dependsOn:javadoc) {
+    baseName = "$artifactId"
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+    manifest {
+        attributes(
+            "Implementation-Title": "BeanIO ${version}",
+            "Implementation-Version": version
+        )
+    }
+    metaInf {
+        from("$projectDir") {
+            include "LICENSE.txt"
+            include "NOTICE.txt"
+        }
+    }
+}
+
+task zip(type: Zip, dependsOn: [javadoc, jar] ) {
+    baseName = "$artifactId"
+    from jar.archivePath
+    from(javadoc.destinationDir) {
+        into "docs/api"
+    }
+    from("$projectDir") {
+        include "docs/**"
+        include "src/**"
+        include "test/**"
+        include "*.txt"
+        include "*.xml"
+        include "*.properties"
+        include "build.gradle"
+    }
+}
+
+task site(type: Tar, dependsOn: javadoc) {
+    baseName = "$artifactId"
+    classifier "site"
+    version ""
+    compression Compression.GZIP
+    from(javadoc.destinationDir) {
+        into "3.0/docs/api"
+    }
+    from ("$projectDir/docs") {
+        into "3.0/docs"
+    }
+    from("$projectDir/site")
+    from("$projectDir/src/org/beanio/xsd") {
+        include "2012/**"
+    }
+}
+
+artifacts {
+    archives jar
+    archives sourcesJar
+    archives javadocJar
+}
+
+signing {
+    required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signPom(deployment) }
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+            pom.project {
+               name 'BeanIO'
+               artifactId "$artifactId"
+               packaging 'jar'
+               description 'A Java un/marshalling library for CSV, XML, delimited and fixed length stream formats.'
+               url 'http://beanio.org/'
+               scm {
+                   url 'http://beanio.googlecode.com/svn'
+                   connection 'scm:svn:http://beanio.googlecode.com/svn/trunk'
+                   developerConnection 'scm:svn:https://beanio.googlecode.com/svn/trunk'
+               }
+               licenses {
+                   license {
+                       name 'The Apache Software License, Version 2.0'
+                       url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                       distribution 'repo'
+                   }
+               }
+               developers {
+                   developer {
+                       id 'kevinseim'
+                       name 'Kevin Seim'
+                   }
+               }
+            }
+            pom.whenConfigured {
+                dependencies.find { dep -> dep.artifactId == 'commons-logging' }.optional = true
+            }
+        }
+    }
+}

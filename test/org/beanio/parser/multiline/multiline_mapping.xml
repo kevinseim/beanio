@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="ml1" format="csv">
+    <parser>
+      <property name="lineSeparator" value="\n" />
+    </parser>
+    <group name="orderGroup" class="org.beanio.beans.Order">
+      <record name="order" minOccurs="1" maxOccurs="1" order="1">
+        <field name="type" rid="true" literal="order" ignore="true" />
+        <field name="id" />
+        <field name="date" format="yyyy-MM-dd" />
+      </record>
+      <record name="customer" class="org.beanio.beans.Person" minOccurs="0" maxOccurs="1" order="2">
+        <field name="type" rid="true" literal="customer" ignore="true" />
+        <field name="firstName" />
+        <field name="lastName" />
+      </record>
+      <record name="item" getter="getItems" setter="setItems" class="org.beanio.beans.OrderItem" 
+        collection="list" minOccurs="1" maxOccurs="100" order="3">
+        <field name="type" rid="true" literal="item" ignore="true" />
+        <field name="name" />
+        <field name="quantity" />
+      </record>
+    </group>
+  </stream>
+
+  <stream name="ml2" format="csv" strict="true">
+    <parser>
+      <property name="lineSeparator" value="\n" />
+    </parser>
+    <group name="batch" class="org.beanio.beans.OrderBatch" minOccurs="1" maxOccurs="unbounded">
+      <record name="header" minOccurs="1" maxOccurs="1">
+        <field name="type" rid="true" literal="header" ignore="true" />
+        <field name="batchCount" />
+      </record>
+      <group name="order" getter="getOrderArray" setter="setOrderArray" class="org.beanio.beans.Order" 
+        collection="array" minOccurs="1" maxOccurs="unbounded">
+        <record name="order" minOccurs="1" maxOccurs="1" order="1">
+          <field name="type" rid="true" literal="order" ignore="true" />
+          <field name="id" />
+          <field name="date" format="yyyy-MM-dd" />
+        </record>
+        <record name="customer" class="org.beanio.beans.Person" minOccurs="1" maxOccurs="1" order="2">
+          <field name="type" rid="true" literal="customer" ignore="true" />
+          <field name="firstName" />
+          <field name="lastName" />
+        </record>
+        <record name="items" minOccurs="1" maxOccurs="100" order="3">
+          <field name="type" rid="true" literal="item" ignore="true" />
+          <field name="name" />
+          <field name="quantity" />
+        </record>
+      </group>
+    </group>
+  </stream>
+
+  <stream name="ml3" format="csv" strict="true">
+    <parser>
+      <property name="lineSeparator" value="\n" />
+    </parser>
+    <group name="result" class="map" minOccurs="1" maxOccurs="unbounded">
+      <group name="batch" class="org.beanio.beans.OrderBatch" collection="list" minOccurs="1" maxOccurs="unbounded">
+      
+        <record name="header" order="1" minOccurs="1" maxOccurs="1">
+          <field name="type" rid="true" literal="header" ignore="true" />
+          <field name="batchCount" />
+        </record>
+        
+        <group name="orders" class="org.beanio.beans.Order" collection="list" 
+            order="2" minOccurs="1" maxOccurs="unbounded">
+          <record name="order" minOccurs="1" maxOccurs="1" order="1">
+            <field name="type" rid="true" literal="order" ignore="true" />
+            <field name="id" />
+            <field name="date" format="yyyy-MM-dd" />
+          </record>
+          <record name="customer" class="org.beanio.beans.Person" minOccurs="1" maxOccurs="1" order="2">
+            <field name="type" rid="true" literal="customer" ignore="true" />
+            <field name="firstName" />
+            <field name="lastName" />
+          </record>
+        </group>
+        
+      </group>
+    </group>
+  </stream>
+
+  <stream name="ml4" format="csv" strict="true">
+    <parser>
+      <property name="lineSeparator" value="\n" />
+    </parser>
+    <group name="order" class="org.beanio.beans.Order" order="2" occurs="1+">
+      <record name="header" minOccurs="1" maxOccurs="1" order="1">
+        <field name="type" rid="true" literal="order" ignore="true" />
+        <field name="id" />
+        <field name="date" format="yyyy-MM-dd" />
+      </record>
+      <record name="itemMap" class="org.beanio.beans.OrderItem" collection="map" key="name" occurs="1-100" order="2">
+        <field name="type" rid="true" literal="item" ignore="true" />
+        <field name="name" />
+        <field name="quantity" />
+      </record>
+    </group>
+  </stream>
+
+  <stream name="ml5" format="csv" strict="true">
+    <parser>
+      <property name="lineSeparator" value="\n" />
+    </parser>
+    <group name="batch" class="org.beanio.beans.OrderBatch" occurs="1">
+
+      <record name="header" order="1" occurs="1">
+        <field name="type" rid="true" literal="header" ignore="true" />
+        <field name="batchCount" />
+      </record>
+      
+      <group name="order" class="org.beanio.beans.Order" order="2" occurs="1">
+        <record name="order" order="1" occurs="1">
+          <field name="type" rid="true" literal="order" ignore="true" />
+          <field name="id" />
+          <field name="date" format="yyyy-MM-dd" />
+        </record>
+        <record name="customer" class="org.beanio.beans.Person" order="2" occurs="1">
+          <field name="type" rid="true" literal="customer" ignore="true" />
+          <field name="firstName" />
+          <field name="lastName" />
+        </record>
+      </group>
+      
+    </group>
+  </stream>
+
+  <stream name="ml6" format="csv" strict="true">
+    <parser>
+      <property name="lineSeparator" value="\n" />
+    </parser>
+    <group name="orderGroup" class="org.beanio.beans.Order" order="2" occurs="1">
+      <record name="order" order="1" occurs="1">
+        <field name="type" rid="true" literal="order" ignore="true" />
+        <field name="id" />
+        <field name="date" format="yyyy-MM-dd" />
+      </record>
+      <record name="items" class="org.beanio.beans.OrderItem" collection="list" order="2" occurs="0+">
+        <field name="type" rid="true" literal="item" ignore="true" />
+        <field name="name" />
+        <field name="quantity" />
+      </record>
+    </group>
+  </stream>
+
+  <stream name="ml7" format="csv" strict="true">
+    <parser>
+      <property name="lineSeparator" value="\n" />
+    </parser>
+    <group name="group" value="record">
+      <record name="record" collection="map" key="name" target="value">
+        <field name="name" />
+        <field name="value" />
+      </record>
+    </group>
+  </stream>
+  
+  <stream name="ml8" format="fixedlength">
+    <group name="group" class="org.beanio.beans.Order" occurs="1">
+      <record name="customer" occurs="1" order="1" class="org.beanio.beans.Person">
+        <field name="id" rid="true" literal="CUST" />
+        <field name="firstName" length="unbounded" />
+      </record>
+      <record name="shipper" occurs="0-1" order="2" class="org.beanio.beans.Person">
+        <field name="id" rid="true" literal="SHIP" />
+        <field name="firstName" length="unbounded" />
+      </record>
+    </group>
+  </stream>
+
+</beanio>

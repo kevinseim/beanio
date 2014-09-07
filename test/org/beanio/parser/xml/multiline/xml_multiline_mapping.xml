@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="ml1" format="xml" xmlName="orders">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <group name="orderGroup" class="org.beanio.beans.Order" xmlType="none">
+      <record name="order" minOccurs="1" maxOccurs="1" order="1">
+        <field name="id" />
+        <field name="date" format="yyyy-MM-dd" />
+      </record>
+      <record name="customer" class="org.beanio.beans.Person" minOccurs="0" maxOccurs="1" order="2">
+        <field name="firstName" />
+        <field name="lastName" />
+      </record>
+      <record name="item" getter="getItems" setter="setItems" class="org.beanio.beans.OrderItem" 
+        collection="list" minOccurs="1" maxOccurs="100" order="3">
+        <field name="name" />
+        <field name="quantity" />
+      </record>
+    </group>
+  </stream>
+
+</beanio>

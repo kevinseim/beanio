@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="o1" format="csv">
+    <record name="record" class="map">
+      <field name="occurs" ignore="true" />
+      <field name="values" collection="list" occursRef="occurs" />
+      <field name="occurs2" />
+      <field name="values2" collection="list" occursRef="occurs2" />
+      <field name="after" />
+    </record>
+  </stream>
+
+  <stream name="o2" format="fixedlength">
+    <record name="record" class="map">
+      <field name="n1" length="2" justify="right" padding="0" ignore="true" />
+      <segment name="people" class="org.beanio.beans.Person" collection="list" occursRef="n1">
+        <field name="firstName" length="4" />
+        <field name="numbersCount" length="2" justify="right" padding="0" ignore="true" />
+        <field name="numbers" type="int" length="2" collection="list" justify="right" padding="0" occursRef="numbersCount" />
+      </segment>
+      <field name="end" literal="end" />
+    </record>
+  </stream>
+  
+  <stream name="o3" format="fixedlength">
+    <record name="record" class="map">
+      <field name="n1" length="2" justify="right" padding="0" ignore="true" />
+      <segment name="names" collection="map" key="id" value="name" occursRef="n1">
+        <field name="id" justify="right" padding="0" type="int" length="2" />
+        <field name="name" length="4" />
+      </segment>
+      <field name="end" literal="end" />
+    </record>
+  </stream>
+
+  <stream name="o4" format="csv">
+    <record name="record" class="map">
+      <field name="n" ignore="true" />
+      <field name="numbers" collection="array" type="int" occursRef="n" />
+      <field name="end" literal="end" />
+    </record>
+  </stream>
+
+  <stream name="o5" format="csv">
+    <record name="record" value="values">
+      <field name="n" ignore="true" />
+      <field name="values" collection="list" occursRef="n" occurs="1-2" />
+    </record>
+  </stream>
+
+</beanio>

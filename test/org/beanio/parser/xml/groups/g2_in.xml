@@ -1,0 +1,6 @@
+<stream>
+  <person type="C">John</person>
+  <address>IL</address>
+  <person type="F">George</person>
+  <person type="F">Jane</person>
+</stream>

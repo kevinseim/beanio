@@ -1,0 +1,21 @@
+<stream>
+  <contact>
+    <person>John</person>
+    <address>IL</address>
+    <parents>
+      <person>David</person>
+      <person>Mary</person>
+    </parents>
+  </contact>
+  <contact>
+    <person>George1</person>
+  </contact>
+  <contact>
+    <person>George2</person>
+    <address>IL</address>
+  </contact>
+  <friends>
+    <friend>Kevin</friend>
+    <friend>Jen</friend>
+  </friends>
+</stream>

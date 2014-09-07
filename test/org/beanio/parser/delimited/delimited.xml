@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="d1" format="delimited" resourceBundle="org.beanio.parser.delimited.d1_messages">
+    <parser>
+      <property name="delimiter" value="," />
+    </parser>
+    <record name="record1" class="map" minLength="2" maxLength="4">
+      <field name="field1" />
+      <field name="field2" />
+      <field name="field3" />
+      <field name="field4" required="true" />
+    </record>
+  </stream>
+
+  <stream name="d2" format="delimited" resourceBundle="org.beanio.parser.delimited.d1_messages">
+    <parser>
+      <property name="delimiter" value="," />
+    </parser>
+    <record name="record1" class="map" minLength="2" maxLength="4">
+      <field name="field1" />
+      <field name="field2" />
+      <field name="field3" minOccurs="0" />
+      <field name="field4" minOccurs="0" />
+    </record>
+  </stream>
+
+  <stream name="d3" format="delimited" resourceBundle="org.beanio.parser.delimited.d1_messages">
+    <parser>
+      <property name="delimiter" value="\t" />
+      <property name="recordTerminator" value="~" />
+    </parser>
+    <record name="record1" class="map">
+      <field name="field1" collection="array" minOccurs="0" maxOccurs="unbounded" length="3" padding="x" justify="right" />
+    </record>
+  </stream>
+
+</beanio>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="stream" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="record" class="map">
+      <field name="date" type="date" />
+      <field name="datetime" type="datetime" />
+      <field name="time" type="time" />
+      <field name="customdate" type="date" format="MM/dd/yyyy" />
+      <field name="boolean" type="boolean" />
+    </record>
+  </stream>
+
+</beanio>

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <typeHandler type="java.util.Date" format="delimited" class="org.beanio.types.DateTypeHandler">
+    <property name="pattern" value="yyyy-MM-dd" />
+  </typeHandler>
+  <typeHandler type="java.util.Date" format="csv" class="org.beanio.types.DateTypeHandler">
+    <property name="pattern" value="MMddyy" />
+  </typeHandler>
+  <typeHandler type="calendar" format="csv" class="org.beanio.types.CalendarTypeHandler">
+    <property name="pattern" value="M-d-yyyy" />
+  </typeHandler>
+  <typeHandler name="time" class="org.beanio.types.DateTypeHandler">
+    <property name="pattern" value="hh:mm:ss" />
+  </typeHandler>
+
+  <stream name="t1" format="csv">
+    <record name="record" class="org.beanio.parser.types.ObjectRecord">
+      <field name="byteValue" />
+      <field name="shortValue" />
+      <field name="integerValue" />
+      <field name="longValue" />
+      <field name="floatValue" />
+      <field name="doubleValue" />
+      <field name="characterValue" />
+      <field name="stringValue" />
+      <field name="dateValue" />
+      <field name="booleanValue" />
+      <field name="bigIntegerValue" />
+      <field name="bigDecimalValue" />
+      <field name="calendar" />
+      <field name="id" />
+      <field name="url" />
+      <field name="enum1" />
+      <field name="enum2" format="toString" />
+    </record>
+  </stream>
+
+  <stream name="t2" format="csv">
+    <record name="record" class="org.beanio.parser.types.PrimitiveRecord">
+      <field name="byteValue" default="0" />
+      <field name="shortValue" default="0" />
+      <field name="intValue" default="0" />
+      <field name="longValue" default="0" />
+      <field name="floatValue" default="0" />
+      <field name="doubleValue" default="0" />
+      <field name="charValue" default="x" />
+      <field name="booleanValue" default="false" />
+    </record>
+  </stream>
+
+  <stream name="t3" format="csv">
+    <typeHandler type="java.util.Date" class="org.beanio.types.DateTypeHandler">
+      <property name="pattern" value="MM-dd-yyyy" />
+    </typeHandler>
+    <record name="record" class="org.beanio.parser.types.ObjectRecord">
+      <field name="dateValue" />
+    </record>
+  </stream>
+
+  <stream name="t4" format="csv">
+    <record name="record" class="map">
+      <field name="dateValue" typeHandler="time" />
+    </record>
+  </stream>
+
+  <stream name="t5" format="csv">
+    <typeHandler type="String" class="org.beanio.types.StringTypeHandler">
+      <property name="nullIfEmpty" value="false" />
+      <property name="trim" value="true" />
+    </typeHandler>
+    <record name="record" class="map">
+      <field name="field" trim="false" />
+    </record>
+  </stream>
+
+  <stream name="t6" format="csv">
+    <record name="record" class="org.beanio.parser.types.PrimitiveRecord">
+      <field name="intValue" />
+    </record>
+  </stream>
+
+  <stream name="t7" format="csv">
+    <record name="record" class="org.beanio.parser.types.ObjectRecord">
+      <field name="byteValue" format="0x" />
+      <field name="shortValue" format="0x" />
+      <field name="integerValue" format="0x" />
+      <field name="longValue" format="0x" />
+      <field name="floatValue" format="0.00x" />
+      <field name="doubleValue" format="0.00x" />
+      <field name="dateValue" format='yyyy-MM-dd' />
+      <field name="bigIntegerValue" format="0x" />
+      <field name="bigDecimalValue" format="0.00x" />
+    </record>
+  </stream>
+
+  <stream name="t8" format="delimited">
+    <parser>
+      <property name="delimiter" value="," />
+    </parser>
+    <record name="record" class="org.beanio.parser.types.ObjectRecord">
+      <field name="dateValue" />
+    </record>
+  </stream>
+
+</beanio>

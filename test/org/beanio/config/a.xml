@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <import resource="classpath:org/beanio/config/ab_template.xml" />
+
+  <stream name="a" format="csv">
+    <record name="record" class="map" template="template" />
+  </stream>
+
+</beanio>

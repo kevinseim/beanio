@@ -1,0 +1,68 @@
+<orders>
+
+  <order>
+    <id>100</id>
+    <date>2012-01-01</date>
+  </order>
+  <customer>
+    <firstName>George</firstName>
+    <lastName>Smith</lastName>
+  </customer>
+  <item>
+    <name>soda</name>
+    <quantity>2</quantity>
+  </item>
+  <item>
+    <name>carrots</name>
+    <quantity>5</quantity>
+  </item>
+  
+  <order>
+    <id>101</id>
+    <date>2012-01-01</date>
+  </order>
+  <item>
+    <name>banana</name>
+    <quantity>a</quantity>
+  </item>
+  
+  <order>
+    <id>102</id>
+    <date>2012-01-01</date>
+  </order>
+  <item>
+    <name>apple</name>
+    <quantity>a</quantity>
+  </item>
+  
+  <order>
+    <id>103</id>
+    <date>2012-01-01</date>
+  </order>
+  <customer>
+    <firstName>John</firstName>
+    <lastName>Smith</lastName>
+  </customer>
+  <item>
+    <name>apple</name>
+    <quantity>a</quantity>
+  </item>
+  <item>
+    <name>orange</name>
+    <quantity>5</quantity>
+  </item>  
+  
+  <order>
+    <id>104</id>
+    <date>2012-01-01</date>
+  </order>
+  <item>
+    <name>bread</name>
+    <quantity>1</quantity>
+  </item>
+  <item>
+    <name>cereal</name>
+    <quantity>2</quantity>
+  </item>  
+  
+</orders>

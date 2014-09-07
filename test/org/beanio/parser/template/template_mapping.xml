@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <template name="t1">
+    <field name="id" type="int" />
+    <field name="name" />
+  </template>
+  <template name="t2">
+    <include template="t1" />
+  </template>
+  <template name="t3">
+    <field name="firstName" position="0" />
+    <include template="t4" offset="1" />
+  </template>
+  <template name="t4">
+    <field name="lastName" position="0" />
+  </template>
+
+  <stream name="stream1" format="csv">
+    <record name="record" template="t1" class="map">
+      <field name="gender" type="char" />
+    </record>
+  </stream>
+  <stream name="stream2" format="csv">
+    <record name="record" class="map">
+      <segment name="bean" template="t2" class="map" />
+      <field name="gender" type="char" />
+    </record>
+  </stream>
+  <stream name="stream3" format="csv">
+    <record name="record" class="map">
+      <field name="id" type="int" position="0" />
+      <include template="t3" offset="1" />
+      <field name="gender" type="char" position="3" />
+    </record>
+  </stream>
+
+</beanio>

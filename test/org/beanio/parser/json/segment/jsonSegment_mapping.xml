@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="stream1" format="json">
+    <parser class="org.beanio.parser.json.JsonTestRecordParserFactory" />
+    <record name="record" class="map">
+      <segment name="customer" class="org.beanio.beans.Person">
+        <field name="firstName" />
+        <field name="lastName" />
+      </segment>
+      <field name="account" />
+    </record>
+  </stream>
+
+  <stream name="stream2" format="json">
+    <parser class="org.beanio.parser.json.JsonTestRecordParserFactory" />
+    <record name="record" class="map">
+      <segment name="friends" collection="list" class="org.beanio.beans.Person" minOccurs="0" maxOccurs="unbounded">
+        <field name="firstName" />
+        <field name="lastName" />
+      </segment>
+      <field name="count" type="int" />
+    </record>
+  </stream>
+
+  <stream name="stream3" format="json">
+    <parser class="org.beanio.parser.json.JsonTestRecordParserFactory" />
+    <record name="record" class="map">
+      <segment name="array" jsonType="array">
+        <field name="numbers" collection="list" type="int" minOccurs="0" maxOccurs="3" />
+        <segment name="person" class="org.beanio.beans.Person">
+          <field name="firstName" />
+          <field name="lastName" />
+        </segment>
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="stream4" format="json">
+    <parser class="org.beanio.parser.json.JsonTestRecordParserFactory" />
+    <record name="record" class="map">
+      <segment name="person" class="org.beanio.beans.Person" jsonType="none">
+        <field name="firstName" />
+        <field name="lastName" />
+      </segment>
+      <field name="account" />
+    </record>
+  </stream>
+
+</beanio>

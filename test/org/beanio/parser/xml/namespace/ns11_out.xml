@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:stream xmlns:s="stream" xmlns:xi="http://www.w3.org/2001/XMLSchema-instance" xmlns:r="urn:record" xmlns:g="urn:group">
+  <g:group>
+    <person xmlns="urn:record">
+      <firstName>Joe</firstName>
+      <lastName>Smith</lastName>
+    </person>
+  </g:group>
+</s:stream>

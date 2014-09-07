@@ -1,0 +1,10 @@
+<stream xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <person gender="M">
+    <firstName>John</firstName>
+    <lastName>Smith</lastName>
+  </person>
+  <person gender="F">
+    <firstName xsi:nil="true" />
+    <lastName>Smith</lastName>
+  </person>
+</stream>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <property name="format" value="csv" />
+
+  <stream name="stream" format="${format}">
+    <record name="record" class="map">
+      <field name="date" type="date" format="${dateFormat}" />
+      <field name="age" type="${type,int}" />
+      <field name="name" />
+    </record>
+  </stream>
+  
+</beanio>

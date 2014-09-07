@@ -1,0 +1,10 @@
+<stream>
+  <person>
+    <gender>M</gender>
+    <firstName>John</firstName>
+  </person>
+  <person>
+    <gender>F</gender>
+    <firstName>Mary</firstName>
+  </person>
+</stream>

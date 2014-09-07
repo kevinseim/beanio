@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="stream" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory">
+      <property name="namespaces" value="xsi http://www.w3.org/2001/XMLSchema-instance" />
+    </parser>
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <segment name="firstName">
+        <field name="firstName" xmlType="text" />
+      </segment>
+      <segment name="name" minOccurs="0">
+        <field name="lastName" xmlType="attribute" />
+      </segment>
+      <segment name="colors">
+        <field name="color" collection="list" type="string" minOccurs="0" maxOccurs="unbounded" />
+      </segment>
+      <segment name="addresses" nillable="true">
+        <segment name="addressList" xmlName="address" class="org.beanio.parser.xml.Address" minOccurs="0" maxOccurs="unbounded" 
+          collection="list" nillable="true">
+          <field name="state" xmlType="text" />
+        </segment>
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="stream2" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory">
+      <property name="namespaces" value="xsi http://www.w3.org/2001/XMLSchema-instance" />
+    </parser>
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <segment name="colors" nillable="true">
+        <field name="color" collection="list" type="string" minOccurs="0" maxOccurs="unbounded" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="stream3" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory">
+      <property name="namespaces" value="xsi http://www.w3.org/2001/XMLSchema-instance" />
+    </parser>
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <segment name="colors">
+        <field name="color" collection="list" type="string" minOccurs="1" maxOccurs="unbounded" />
+      </segment>
+    </record>
+  </stream>
+
+</beanio>

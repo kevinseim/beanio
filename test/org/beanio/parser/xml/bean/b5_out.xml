@@ -1,0 +1,13 @@
+<stream>
+  <person>
+    <firstName>John</firstName>
+    <address>
+      <state>IL</state>
+      <zip>60610</zip>
+    </address>
+  </person>
+  <person>
+    <firstName>Mary</firstName>
+    <address xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+  </person>
+</stream>

@@ -1,0 +1,8 @@
+<stream>
+  <person>
+    <firstName/>
+  </person>
+  <person>
+    <lastName xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+  </person>
+</stream>

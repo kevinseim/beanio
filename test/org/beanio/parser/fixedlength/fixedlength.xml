@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <typeHandler type="java.util.Date" class="org.beanio.types.DateTypeHandler">
+    <property name="pattern" value="MMddyy" />
+  </typeHandler>
+
+  <stream name="f1" format="fixedlength" strict="true">
+    <parser>
+      <property name="recordTerminator" value="" />
+    </parser>
+    <record name="record" class="map">
+      <field name="default" position="0" length="10" trim="false" />
+      <field name="number" position="10" type="int" length="10" justify="right" padding="0" />
+      <field name="padx" position="20" length="10" justify="left" padding="x" trim="false" />
+      <field name="pos40" position="40" length="5" trim="false" />
+    </record>
+  </stream>
+
+  <stream name="f2" format="fixedlength" resourceBundle="org.beanio.parser.fixedlength.f2_messages">
+    <parser>
+      <property name="recordTerminator" value="\r\n" />
+    </parser>
+    <record name="record" class="map" minLength="10" maxLength="20">
+      <field name="field1" length="5" />
+      <field name="field2" length="5" />
+      <field name="field3" length="5" minOccurs="0" />
+    </record>
+  </stream>
+
+  <stream name="f3" format="fixedlength">
+    <record name="record0" class="map">
+      <field name="field1" rid="true" literal="1000" />
+    </record>
+    <record name="record1" class="map">
+      <field name="field1" rid="true" length="5" literal="00001"/>
+      <field name="field2" length="5" />
+      <field name="field3" length="5" />
+    </record>
+    <record name="record2" class="map">
+      <field name="field1" rid="true" length="5" literal="00002"/>
+      <field name="field2" length="5" />
+    </record>
+  </stream>
+
+  <stream name="f4" format="fixedlength">
+    <parser>
+      <property name="recordTerminator" value="" />
+    </parser>
+    <record name="record" class="map">
+      <field name="type" rid="true" literal="INT" />
+      <field name="number" type="int" collection="list" length="5" justify="right" padding="0" maxOccurs="unbounded" />
+    </record>
+    <record name="record" class="map">
+      <field name="type" rid="true" literal="CHA" />
+      <field name="character" type="char" collection="list" length="1" align="right" padding=" " maxOccurs="unbounded" />
+    </record>
+    <record name="record" class="map">
+      <field name="type" rid="true" literal="STL" />
+      <field name="stringLeft" collection="list" length="3" justify="left" padding=" " maxOccurs="unbounded" />
+    </record>
+    <record name="record" class="map">
+      <field name="type" rid="true" literal="STR" />
+      <field name="stringRight" collection="list" length="3" justify="right" padding=" " maxOccurs="unbounded" />
+    </record>
+  </stream>
+
+  <stream name="f5" format="fixedlength">
+    <parser>
+      <property name="recordTerminator" value="" />
+    </parser>
+    <record name="record" class="map">
+      <field name="firstName" length="10" ignore="true" padding="A" default="" />
+      <field name="lastName" length="10"/>
+    </record>
+  </stream>
+
+  <stream name="f6" format="fixedlength">
+    <record name="record" class="map">
+      <field name="firstName" length="10" />
+      <field name="lastName" length="unbounded" />
+    </record>
+  </stream>
+
+  <stream name="f7" format="fixedlength">
+    <record name="record" class="map">
+      <field name="firstName" length="10" required="true" keepPadding="true" />
+      <field name="lastName" length="10" keepPadding="true" />
+    </record>
+  </stream>
+  
+  <stream name="f8" format="fixedlength">
+    <parser>
+      <property name="recordTerminator" value="\n" />
+    </parser>
+    <record name="record1" class="map">
+      <field name="number" type="int" length="3" padding="0" justify="right" />
+      <field name="name" length="7" />
+    </record>
+    <record name="record2" class="map">
+      <field name="number" length="4" required="true" padding="0" justify="right" />
+    </record>
+  </stream>
+
+</beanio>

@@ -1,0 +1,20 @@
+<stream xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <person>
+    <firstName>John</firstName>
+    <name lastName="Smith"/>
+    <colors>
+      <color>Red</color>
+      <color>Blue</color>
+      <color>Green</color>
+    </colors>
+    <addresses xsi:nil="true"/>
+  </person>
+  <person>
+    <firstName/>
+    <colors/>
+    <addresses>
+      <address>CO</address>
+      <address>IL</address>
+    </addresses>
+  </person>
+</stream>

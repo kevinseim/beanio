@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="stream" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <field name="firstName" />
+      <segment name="address" xmlName="homeAddress" class="org.beanio.parser.xml.Address" nillable="true">
+        <field name="state" />
+        <field name="zip" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="stream2" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <field name="firstName" />
+      <segment name="address" xmlName="homeAddress" class="org.beanio.parser.xml.Address" minOccurs="0" xmlNamespace="address">
+        <field name="state" />
+        <field name="zip" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="stream3" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <segment name="addressList" xmlName="address" class="org.beanio.parser.xml.Address" minOccurs="0" maxOccurs="unbounded" collection="list">
+        <field name="state" xmlType="text" />
+      </segment>
+      <field name="firstName" />
+    </record>
+  </stream>
+
+  <stream name="stream4" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <field name="firstName" />
+      <segment name="address" xmlType="none" class="org.beanio.parser.xml.Address">
+        <field name="state" minOccurs="0" />
+        <field name="zip" minOccurs="1" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="stream5" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="person" class="map">
+      <field name="firstName" />
+      <segment name="address" nillable="true">
+        <field name="state" />
+        <field name="zip" />
+      </segment>
+    </record>
+  </stream>
+
+</beanio>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="stream" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="person" class="list">
+      <field name="firstName" />
+      <field name="lastName" minOccurs="0" />
+      <field name="age" type="int" />
+    </record>
+  </stream>
+
+</beanio>

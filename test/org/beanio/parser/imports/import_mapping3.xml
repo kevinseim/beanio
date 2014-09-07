@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+  
+  <typeHandler type="date" class="org.beanio.types.DateTypeHandler">
+    <property name="pattern" value="MMddyyyy" />
+  </typeHandler>
+
+  <stream name="stream3.1" format="csv">
+    <record name="record" class="map">
+      <field name="name" />
+      <field name="date" type="date" />
+    </record>
+  </stream>
+
+</beanio>

@@ -1,0 +1,249 @@
+Project BeanIO Change Log
+=========================
+
+Changes in version 3.0.0 (TBD)
+-------------------------------------
+* Requires JDK 1.7 or higher
+* Removed support for ASM class rewriting
+* Removed Spring framework support
+
+Changes in version 2.1.0 (2014-09-06)
+-------------------------------------
+* Added 'ordinal' property to @Field and @Segment (gc0095)
+* Fixed OSGi manifest attributes (gc0101)
+* Improved date/calendar type handling performance when a pattern is set (gc0099)
+* Fixed @Group collection handling (gc0103)
+* Added 'record.unsatisfied' message keys (gc0107)
+* Fixed reading field annotations for collections in a group (gc0111)
+
+Changes in version 2.1.0.M2 (2013-11-15)
+----------------------------------------
+* Modified visibility of *BuilderSupport classes (gc0074)
+* Fixed record termination configuration for Windows/DOS operating systems (gc0077)
+* Added support for static record marshalling using a Marshaller (gc0079)
+* Modified occursRef search logic to find the "nearest" field (gc0080)
+* Added the 'lenientPadding' field attribute (gc0082)
+* Fixed import of the same mapping file multiple times (gc0084)
+* Fixed NumberTypeHandler.format() to call createDecimalFormat() (gc0085)
+* Fixed bean identification for optional components (group/record/segment) that contain a record identifying field (gc0087)
+* Fixed state maintenance (for Spring batch) for multiline records bound to a collection or map (gc0089)
+* Fixed handling of nested segments with indeterminate length (gc0090)
+* Fixed a jdk1.7 compile error in TreeNode (gc0088)
+* Added support for accessing non-public fields and constructors
+* Added support for annotating groups
+* Added locale support for type handlers
+* Added 'defaultValue' attribute to Field annotation
+* Modified NumberTypeHandler to reuse a DecimalFormat instance when safe to do so
+	
+Changes in version 2.0.6 (2013-05-20)
+------------------------------------
+* Fixed constructor argument logic, registered constructorArg parser local (gc0068)
+* Fixed the unmarshaling of records and segments where a value/target is configured (gc0072)
+* Fixed UnmarshallerImpl to make record text available (if known) on the RecordContext (gc0075)
+
+Changes in version 2.1.0.M1 (2013-04-27)
+----------------------------------------
+* Added annotation and builder API's (gc0047)
+* Exposed some metadata from the underlying BeanReader on the BeanIOFlatFileItemReader (gc0067)
+* Added 'lazy' attribute to record/field components and applied logic to record/segment/field collections (gc0066)
+* Allow 'lazy' to convert empty Strings to null when applied to a non-collection field
+* Added support for dynamic field and segment occurrences based on the value of another field using 'occursRef' (gc0069)
+* Fixed handling of XML attribute fields with no namespace
+* Changed unmarshalling behavior to ignore null field values bound to a primitive property
+* Default field values are now unmarshalled for fields missing from the input stream
+* Added java.util.Calendar type handlers
+* Converted build process from Ant to Gradle
+* Fixed constructor argument logic, registered constructorArg parser local (gc0068)
+* Fixed the unmarshaling of records and segments where a value/target is configured (gc0072)
+
+Changes in version 2.0.5 (2013-03-13)
+-------------------------------------
+* Fixed a critical bug introduced in 2.0.4 that affects the marshalling of fixed length formatted streams (gc0065)
+
+Changes in version 2.0.4 (2013-03-05)
+-------------------------------------
+* Fixed check for unsatisfied records and groups at EOF (gc0056)
+* Fixed NPE when an exception is ignored (by a custom error handler) when EOF is reached (gc0055)
+* Fixed the line number reported by a RecordContext for malformed records (gc0059)
+* Added ignoreUnidentifiedRecords attribute to stream definition (gc0046)
+* Prevent possible IOException (stream already closed) when the last record in a file is malformed (gc0060)
+* Added support for collection="map" records assigned a key and target (gc0061)
+* Added support for a group 'value' attribute (previously called 'target')
+* Renamed (deprecated) record and segment 'target' attributes to 'value'
+* Fixed xmlWriter.close() to close underlying writer (gc0063)
+* Fixed record matching logic for repeating streams (gc0062)
+* Added support for segments and fields of indeterminate length in the middle of a record (g0057)
+* Added class RecordParserFactorySupport
+
+Changes in version 2.0.3 (2012-12-22)
+-------------------------------------
+* Fixed support for nested groups bound to a non-collection type bean (gc0043)
+* Added support for v2.0.0 style unmarshalling which under many circumstances created empty lists,
+  maps and bean objects for missing record components by setting 'org.beanio.createMissingBeans'
+  to true (not recommended)
+* Fixed unmarshalling logic that called setter methods for missing components in some situations
+* Fixed property substitution for property name and value attributes in a mapping file
+* Added support for matching records by length using 'ridLength' (gc0046)
+* Fixed support for overriding the default namespace on a segment with no child elements (gc0032)
+
+Changes in version 2.0.2 (2012-09-29)
+-------------------------------------
+* Fixed field trim logic (gc0038)
+* Exception is thrown for a CSV space delimiter (gc0039)
+* Prevented possible duplicate segment bean creation (gc0041)
+* Added support for "lazy" beans assigned to a segment
+* Added support for a single variable length field at the end of a fixed length record
+* Added support for the 'keepPadding' field attribute
+* Added support for escaping the null character using \0 in property values
+* Fixed OSGi class loading issues when loading internal 'org.beanio' classes and resources (gc0042)
+
+Changes in version 2.0.1 (2012-07-01)
+-------------------------------------
+* Added support for marshalling static records (gc0036)
+* Added default type handling support for enums
+* Added support for binding a collection of segments to an "inline" map
+* Added support for binding a collection of records to a map
+* Added support for accessing properties using ASM bytecode generation
+* Fixed additional occurrences of auto boxing errors (gc0034)
+
+Changes in version 2.0.0 (2012-05-20)
+-------------------------------------
+* Added support for nested groups bound to bean objects.
+* Added support for mapping file properties using ${propertyName[,default]} syntax.
+* Improved performance for instantiating new parsers. 
+* Added 'occurs' attribute for specifying both minOccurs and maxOccurs.
+* Added experimental support for JSON (still missing some critical features).
+* Added support for xmlPrefix="" despite a namespace declaration on the root element (gc0032)
+* Fixed auto boxing mistake for comparing Integers that may cause a BeanIOConfigurationException for repeating segments (gc0034).
+
+Changes in version 2.0.0.M1 (2012-03-03)
+----------------------------------------
+* New parser engine, internal classes moved to org.beanio.internal
+* BeanReaderContext renamed RecordContext
+* Added Marshaller and Unmarshaller interfaces
+* Added support for constructor arguments using setter="#N" notation, where N is the argument number starting at 1
+* Added support for direct access to public bean attributes
+* Consolidated RecordReaderFactory and RecordWriterFactory into RecordParserFactory
+* Added RecordMarshaller and RecordUnmarshaller interfaces and implementations for supported stream formats
+* Added support for binding records to a Collection
+* Modified OSGi Export-Package manifest entry to include all BeanIO packages (gc0026)
+* Added support for instantiating a StreamFactory with a user provided ClassLoader (gc0021)
+* Mapping file changes:
+  - Renamed 'bean' to 'segment'
+  - Added record 'target' support
+  - Removed support for 'xmlWrapper' attributes (use 'segment' instead)
+  - Consolidated 'reader' and 'writer' elements into a single 'parser' element
+  - Removed the 'ordered' attribute from the 'stream' element 
+  - Changed 'minOccurs' to default to 0 for 'record' elements
+  - Changed 'minOccurs' to default to 1 for non-nillable XML elements
+  - Added a 'strict' attribute to the 'stream' element to calculate and enforce record ordering and lengths
+  - Modified 'minLength' and 'maxLength' to default to '0' and 'unbounded' respectively for 'record' elements, unless 'strict'
+  - The 'order' attribute must be declared for all components with the same parent, or for none of them which defaults to unordered (unless 'strict')
+
+Changes in version 1.2.5 (2012-05-18)
+-------------------------------------
+* Fixed calculation of record length in some circumstances for repeating nested beans (gc0033)
+* Added support for xmlPrefix="" despite a namespace declaration on the root element (gc0032)
+
+Changes in version 1.2.4 (2012-03-24)
+-------------------------------------
+* Updated OSGi manifest entries in build.xml (gc0026)
+* Fixed HTML comments in reference guide example
+
+Changes in version 1.2.3 (2012-02-12)
+-------------------------------------
+* Modified DefaultStreamFactory to use default locale if 'locale' is null (gc0022)
+* Updated build.xml to include OSGi JAR manifest entries (gc0026)
+* Fixed build.xml to include correct BeanIO version in javadocs.
+* Updated copyrights for 2012
+
+Changes in version 1.2.2 (2011-12-18)
+-------------------------------------
+* NPE prevented in FixedLengthFieldDefinition.parseField() (gc0019).
+* Configured field defaults are marshalled for null property values and ignored fields (gc0020)
+  May be disabled by setting 'org.beanio.marshalDefaultEnabled' to 'false'.
+* Fixed class loading so that Thread.getContextClassLoader() is observed throughout.
+
+Changes in version 1.2.1 (2011-09-21)
+-------------------------------------
+* Added support for templates
+* Fixed import logic (gc0016, gc0017)
+* Fixed behavior when reading a record with no field declarations (gc0015)
+* Fixed type validation for fields in a record/bean with no declared class, or where ignore=true (gc0018)
+
+Changes in version 1.2.0 (2011-09-08)
+-------------------------------------
+* Added support for Spring Batch 2.1.x
+* Added 'property' mapping element for records and beans
+* Added support for skipping commented lines in an input stream
+* Added support for assigning global type handlers to a specific stream format
+* Added import mapping file capability
+* Added support for a stream 'mode' attribute, and modified mapping validations based on set mode
+* Added support for property value escape sequences: \t, \n, \r, \f, \\
+* Added 'skip' to BeanReader for skipping previously processed bean objects in a restart scenario
+* Added TypeHandler.NIL constant to allow format() to instruct an XML writer to write a nil element
+* Modified bean introspection to allow beans with setters only in 'read' mode, and beans with getters only and non-concrete classes in 'write' mode
+* gc0013 - Fixed mapping validation to allow for multiple record identifying fields 
+* gc0014 - When unmarshalling XML, setter method will not be called for missing elements and attributes
+* Converted StringBuffer use to StringBuilder throughout
+
+Changes in version 1.1.1 (2011-07-21)
+-------------------------------------
+* gc0010 - Fixed to honor padding settings for XML formatted streams
+* gc0011 - Added support for optional padded fields
+* gc0012 - Disabled DTD loading when unmarshalling an XML document
+
+Changes in version 1.1.0 (2011-06-19)
+-------------------------------------
+* Added support for XML formatted streams.
+
+Changes in version 1.0.2 (2011-06-07)
+-------------------------------------
+* gc0008 - Fixed XmlConfigurationLoader to correctly validate the writer class type
+* gc0009 - Fixed build.xml to tar the site to deploy the mapping XSD to http://www.beanio.org/2011/01/mapping.xsd
+* Improved mapping XSD with documentation annotations and moved it to src/org/beanio/xsd/2010/01/mapping.xsd
+* Modified build.xml and pom.xml to dynamically populate the version in the POM
+
+Changes in version 1.0.1 (2011-04-18)
+-------------------------------------
+* Modified build script to deploy to a Maven repository 
+* Fixed the ant build 'clean' task
+* gc0007 - Fixed default position calculation for bean collections in a fixed length stream
+
+Changes in version 1.0 (2011-02-22)
+-----------------------------------
+* Added padding support for delimited/CSV fields
+* Added delimited and fixed length record reader support for a customized record terminator
+* Fixed TypeUtil to allow abstract property and collection types
+* Renamed 'lineSeparator' to 'recordTerminator' for all record writers, 'lineSeparator' term is deprecated
+* gc0006 - Fixed mapping file schema to allow record elements after a (sub)group element
+* Renamed method Node.getNodeContext() to Node.getNodeDefinition()
+
+Changes in version 0.9.3 (2011-02-07)
+-------------------------------------
+* Added support for mapping child bean objects, and collections of bean objects 
+* A null value for a field whose position is greater than the record 'minLength' will not be written to an output stream
+* A fixed length field will no longer default its length based on its position and the position of the field after it
+* Field position must be configured for all fields, or for none of them (in which case position is defaulted based on the order configured)
+* gc0005 - Fixed default record maxLength
+
+Changes in version 0.9.2 (2011-01-29)
+-------------------------------------
+* Added support for collection and array type bean properties
+* gc0001 - Fixed parsing of right justified fixed length fields
+* gc0002 - Fixed fixed length position based field length calculation
+* gc0003 - Fixed required field validation when record minLength less than field position 
+* gc0004 - Fixed parsing of fully padded fixed length Number and Character type fields
+
+Changes in version 0.9.1 (2011-01-23)
+-------------------------------------
+* Type aliases are no longer case sensitive
+* Added DecimalFormat pattern support for NumberTypeHandler and its subclasses
+* Updated the mapping file schema to allow a 'format' attribute on the field element
+* Improved support for Date types; added aliases 'date', 'time' and 'datetime'
+* Modified TypeHandlerFactory so that primitive and wrapper class types are registered using the same handler 
+* Added org.beanio.types.ConfigurableTypeHandler
+
+Changes in version 0.9.0 (2011-01-17)
+-------------------------------------
+* Baseline.  First BeanIO release (beta).

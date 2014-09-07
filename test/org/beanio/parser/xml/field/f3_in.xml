@@ -1,0 +1,9 @@
+<stream xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <person age="10">
+    <firstName>Joe</firstName>
+    <lastName xsi:nil="true" />
+  </person>
+  <person>
+    <firstName>J<![CDATA[ohn]]></firstName>
+  </person>
+</stream>

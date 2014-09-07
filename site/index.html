@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://www.w3.org/2005/10/profile">
+  <title>BeanIO</title>
+  <meta http-equiv="Content-Type" content="text/html;" />
+  <meta name="description" content="BeanIO is an open source Java library for marshalling and unmarshalling bean objects from a stream, with support for XML, CSV, delimited and fixed length file formats."/>
+  <meta name="keywords" content="beanio, java, marshaller, unmarshaller, oxm, xml, fixed length, csv, delimited, parser, file, stream, bean, mapping"/>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<body>
+<div id="page">
+
+  <div class="header">
+  	<div class="title"><img src="images/logo.png"/>bean<span class="brown">io</span></div>
+  </div>
+  
+  <div class="menu">
+    <div class="submenu">
+	  <div class="item"><a class="active" href="#">about</a></div>
+      <div class="item"><a href="http://code.google.com/p/beanio/">news</a></div>
+	  <div class="item"><a href="http://www.apache.org/licenses/LICENSE-2.0">license</a></div>
+	  <div class="item"><a href="http://code.google.com/p/beanio/downloads/list">download</a></div>
+	  <div class="item"><a href="http://code.google.com/p/beanio/issues/list">issue tracking</a></div>
+	  <div class="item"><a href="http://groups.google.com/group/beanio">forum</a></div>
+    </div>
+    <br />
+    <h1>2.1 Documentation</h1>
+    <div style="font-size: 90%;" class="submenu">
+	  <div class="item"><a href="2.1/docs/api/index.html">javadocs</a></div>
+	  <div class="item"><a href="2.1/docs/reference/index.html">reference guide</a></div>
+    </div>
+    <br />
+    <h1>2.0 Documentation</h1>
+    <div style="font-size: 90%;" class="submenu">
+	  <div class="item"><a href="2.0/docs/api/index.html">javadocs</a></div>
+	  <div class="item"><a href="2.0/docs/reference/index.html">reference guide</a></div>
+    </div>
+    <br />
+    <h1>1.2 Documentation</h1>
+    <div style="font-size: 90%;" class="submenu">
+	  <div class="item"><a href="docs/api/index.html">javadocs</a></div>
+	  <div class="item"><a href="docs/reference/index.html">reference guide</a></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <p><b>BeanIO</b> is an open source Java framework for marshalling and unmarshalling Java beans
+    from a flat file, stream, or simple <tt>String</tt> object.
+    </p>
+    
+    <div class="features"><b>Features:</b>
+	  <ul style="margin-top: 3px">
+	    <li>Support for XML, CSV, delimited and fixed length stream formats</li>
+	    <li>XML, Java annotations or builder API based field mapping</li>
+	    <li>Configurable record ordering and grouping rules</li>
+	    <li>Object binding that spans multiple records</li>
+	    <li>Record identification by one or more field values, or by record length</li>
+	    <li>Common field validation rules with customizable error messages</li>
+	    <li>Extensible stream parsing and type handling</li>
+	    <li>Integration with <a href="http://static.springsource.org/spring-batch/">Spring Batch</a></li>
+        <li>OSGi compatible</li>
+	  </ul>
+    </div>
+    
+    <p>Source control for the BeanIO project is hosted by <a href="http://code.google.com/p/beanio/">Google Code</a></p>
+
+    <div class="overview">
+      <h2>A Quick Example</h2>
+      
+      <p>Let's suppose you want to read and write a CSV flat file of contact information
+        with the following record layout:</p>
+      
+      <table>
+        <tr><th>&nbsp;</th><th>Field Name</th><th>Format</th></tr>
+        <tr><td colspan="3"><i>Header Record</i></td></tr>
+        <tr><td>0</td><td>Record Type</td><td>"H"</td></tr>
+        <tr><td>1</td><td>File Date</td><td>Date (YYYY-MM-DD)</td></tr>
+        <tr><td colspan="3"><i>Detail Record</i></td></tr>
+        <tr><td>0</td><td>Record Type</td><td>"D"</td></tr>
+        <tr><td>1</td><td>First Name</td><td>String</td></tr>
+        <tr><td>2</td><td>Last Name</td><td>String</td></tr>
+        <tr><td>3</td><td>Street</td><td>String</td></tr>
+        <tr><td>4</td><td>City</td><td>String</td></tr>
+        <tr><td>5</td><td>State</td><td>String</td></tr>
+        <tr><td>6</td><td>Zip</td><td>String</td></tr>
+        <tr><td colspan="3"><i>Trailer Record</i></td></tr>
+        <tr><td>0</td><td>Record Type</td><td>"T"</td></tr>
+        <tr><td>1</td><td>Detail Record Count</td><td>Integer</td></tr>        
+      </table>
+      
+      <p>A sample input file could look like this:</p>
+
+<pre class="file">
+H,2012-05-19
+D,Joe,Johnson,123 Main St,Chicago,IL,60610
+D,Jane,Smith,,,,
+D,Albert,Jackson,456 State St,Chicago,IL,60614
+T,3
+</pre>   
+
+      <p>And let's suppose you want to bind detail records to the following Java class.</p>
+      
+<pre class="java">
+package example;
+
+public class Contact {
+    String firstName;
+    String lastName;
+    String street;
+    String city;
+    String state;
+    String zip;
+    
+    <span class="comment">// getters and setters not shown...</span>
+}</pre>
+      
+      <p>BeanIO is configured using an XML mapping file.  A 2.0 mapping file named "contacts.xml"
+      (shown below) can be used to read and write our CSV contacts file.</p>
+      
+<pre class="file">
+&lt;beanio xmlns="http://www.beanio.org/2012/03"&gt;
+
+  <span class="comment">&lt;!-- 'format' identifies the type of stream --&gt;</span>
+  &lt;stream name="contacts" format="csv"&gt;
+    <span class="comment">&lt;!-- 'class' binds the header record to a java.util.HashMap --&gt;</span>
+    &lt;record name="header" class="map"&gt;
+      <span class="comment">&lt;!-- 'rid' indicates this field is used to identify the record --&gt;</span>
+      &lt;field name="recordType" rid="true" literal="H" /&gt;
+      <span class="comment">&lt;!-- 'format' can be used to provide Date and Number formats --&gt;</span>
+      &lt;field name="fileDate" type="date" format="yyyy-MM-dd" /&gt;
+    &lt;/record&gt;  
+  
+    <span class="comment">&lt;!-- Detail records are bound to example.Contact --&gt;</span>
+    &lt;record name="contact" class="example.Contact"&gt;
+      <span class="comment">&lt;!-- 'ignore' indicates this field is not bound to a bean property --&gt;</span>
+      &lt;field name="recordType" rid="true" literal="D" ignore="true" /&gt;
+      &lt;field name="firstName" /&gt;
+      &lt;field name="lastName" /&gt;
+      &lt;field name="street" /&gt;
+      &lt;field name="city" /&gt;
+      &lt;field name="state" /&gt;
+      &lt;field name="zip" /&gt;
+    &lt;/record&gt;
+
+    <span class="comment">&lt;!-- 'target' binds the trailer record to the Integer record count field --&gt;</span>
+    &lt;record name="trailer" target="recordCount"&gt;
+      <span class="comment">&lt;!-- 'literal' is used to define constant values --&gt;</span>
+      &lt;field name="recordType" rid="true" literal="T" /&gt;
+      <span class="comment">&lt;!-- 'type' can be declared where bean introspection is not possible --&gt;</span>
+      &lt;field name="recordCount" type="int" /&gt;
+    &lt;/record&gt;  
+    
+  &lt;/stream&gt;
+&lt;/beanio&gt;</pre>      
+      
+      <p>Using the mapping file and bean object from above, the following code will read
+        and write our CSV contacts file.  (For brevity, exception handling is lacking.)</p>
+      
+<pre class="java">
+package example;
+
+import org.beanio.*;
+import java.io.*;
+
+public class ExampleMain {
+
+    public static void main(String[] args) throws Exception {
+        <span class="comment">// create a BeanIO StreamFactory</span>
+        StreamFactory factory = StreamFactory.newInstance();
+        <span class="comment">// load the mapping file from the working directory</span>
+        factory.load("contacts.xml");
+        
+        <span class="comment">// create a BeanReader to read from "input.csv"</span>
+        BeanReader in = factory.createReader("contacts", new File("input.csv"));
+        <span class="comment">// create a BeanWriter to write to "output.csv"</span>
+        BeanWriter out = factory.createWriter("contacts", new File("output.csv"));        
+        
+        Object record = null;
+        
+        <span class="comment">// read records from "input.csv"</span>
+        while ((record = in.read()) != null) {
+        
+            <span class="comment">// process each record</span>
+            if ("header".equals(in.getRecordName())) {
+                Map&lt;String,Object&gt; header = (Map&lt;String,Object&gt;) record;
+                System.out.println(header.get("fileDate"));
+            }
+            else if ("contact".equals(in.getRecordName())) {
+                Contact contact = (Contact) record;
+                <span class="comment">// process the contact...</span>
+            }
+            else if ("trailer".equals(in.getRecordName())) {
+                Integer recordCount = (Integer) record;
+                System.out.println(recordCount + " contacts processed");
+            }
+            
+            <span class="comment">// write the record to "output.csv"</span>
+            out.write(record);
+        }
+        
+        in.close();
+        
+        out.flush();
+        out.close();
+    }
+}</pre>      
+      
+      <p>That's it!  But of course, BeanIO supports many other cool
+        features.  For example, if we wanted to strictly validate our contacts input
+        file, we could make the following additions to our mapping file.</p>
+      
+<pre class="file">
+&lt;beanio xmlns="http://www.beanio.org/2012/03"&gt;
+
+  <span class="comment">&lt;!-- 'strict' enforces record order and record sizes --&gt;</span>
+  &lt;stream name="contacts" format="csv" <b>strict="true"</b>&gt;
+    <span class="comment">&lt;!-- 'occurs' enforces minimum and maximum record occurrences --&gt;</span>
+    &lt;record name="header" class="map" <b>occurs="1"</b>&gt;
+      &lt;field name="recordType" rid="true" literal="H" /&gt;
+      <span class="comment">&lt;!-- 'required' indicates a field value is required --&gt;</span>
+      &lt;field name="fileDate" type="date" format="yyyy-MM-dd" <b>required="true"</b>/&gt;
+    &lt;/record&gt;  
+  
+    &lt;record name="contact" class="example.Contact" <b>occurs="0+"</b>&gt;
+      &lt;field name="recordType" rid="true" literal="D" ignore="true" /&gt;
+      <span class="comment">&lt;!-- 'maxLength' enforces a maximum String length --&gt;</span>
+      &lt;field name="firstName" <b>maxLength="20"</b> /&gt;
+      &lt;field name="lastName" <b>required="true"</b> <b>maxLength="30"</b> /&gt;
+      &lt;field name="street" <b>maxLength="30"</b> /&gt;
+      &lt;field name="city" <b>maxLength="25"</b> /&gt;
+      &lt;field name="state" <b>minLength="2" maxLength="2"</b> /&gt;
+      <span class="comment">&lt;!-- 'regex' enforces pattern matching --&gt;</span>
+      &lt;field name="zip" <b>regex="\d{5}"</b> /&gt;
+    &lt;/record&gt;
+
+    &lt;record name="trailer" target="recordCount" <b>occurs="1"</b>&gt;
+      &lt;field name="recordType" rid="true" literal="T" /&gt;
+      &lt;field name="recordCount" type="int" <b>required="true"</b> /&gt;
+    &lt;/record&gt;  
+    
+  &lt;/stream&gt;
+&lt;/beanio&gt;</pre>        
+      
+      <p>Prefer to annotate the <tt>Contact</tt> class instead?</p>
+<pre class="java">
+package example;
+
+<span class="highlight">@Record(minOccurs=0, maxOccurs=-1)
+@Fields({
+    @Field(at=0, name="recordType", rid=true, literal="D")
+})</span>
+public class Contact {
+
+    <span class="highlight">@Field(at=1, maxLength=20)</span>
+    String firstName;	
+    <span class="highlight">@Field(at=2, required=true, maxLength=30)</span>
+    String lastName;
+    <span class="highlight">@Field(at=3, maxLength=30)</span>
+    String street;
+    <span class="highlight">@Field(at=4, maxLength=25)</span>
+    String city;
+    <span class="highlight">@Field(at=5, minLength=2, maxLength=2)</span>
+    String state;
+    <span class="highlight">@Field(at=6, regex="\d{5}")</span>
+    String zip;
+    
+    <span class="comment">// getters and setters not shown...</span>
+}</pre>
+      
+      
+      <p>Need to support XML?  Simply change the stream <tt>format</tt> to 'xml', remove
+        the <tt>recordType</tt> fields, and presto!  You can now read and write documents
+        like the following:</p>
+      
+<pre class="file">
+&lt;contacts&gt;
+  &lt;header&gt;
+    &lt;fileDate&gt;2012-05-19&lt;/fileDate&gt;
+  &lt;/header&gt;
+  &lt;contact&gt;
+    &lt;firstName&gt;Joe&lt;/firstName&gt;
+    &lt;lastName&gt;Johnson&lt;/lastName&gt;
+    &lt;street&gt;123 Main St&lt;/street&gt;
+    &lt;city&gt;Chicago&lt;/city&gt;
+    &lt;state&gt;IL&lt;/state&gt;
+    &lt;zip&gt;60610&lt;/zip&gt;
+  &lt;/contact&gt;
+  &lt;contact&gt;
+    &lt;firstName&gt;Jane&lt;/firstName&gt;
+    &lt;lastName&gt;Smith&lt;/lastName&gt;
+    &lt;street/&gt;
+    &lt;city/&gt;
+    &lt;state/&gt;
+    &lt;zip/&gt;
+  &lt;/contact&gt;
+  &lt;trailer&gt;
+    &lt;recordCount&gt;2&lt;/recordCount&gt;
+  &lt;/trailer&gt;
+&lt;/contacts&gt;</pre>          
+      
+      <p>But that's not all, check out the <a href="2.0/docs/reference/index.html">reference guide</a>
+        for more information.</p>
+      
+    </div>
+  </div>
+  <div class="footer">
+    &copy;2011-2013 Kevin Seim, All rights reserved.
+  </div>
+</div>
+</body>
+</html>

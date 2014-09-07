@@ -1,0 +1,1208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema 
+  xmlns="http://www.w3.org/2001/XMLSchema" 
+  xmlns:tns="http://www.beanio.org/2012/03" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  elementFormDefault="qualified" 
+  targetNamespace="http://www.beanio.org/2012/03"
+  xml:lang="en"
+  version="2.1.0">
+
+  <annotation>
+    <documentation>
+      The BeanIO stream mapping configuration XML schema.
+
+      Copyright 2011-2013 Kevin Seim
+  
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+      You may obtain a copy of the License at
+      
+         http://www.apache.org/licenses/LICENSE-2.0
+      
+      Unless required by applicable law or agreed to in writing, software
+      distributed under the License is distributed on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      See the License for the specific language governing permissions and
+      limitations under the License.
+    </documentation>
+  </annotation>
+
+  <element name="beanio">
+    <annotation>
+      <documentation>
+        Root element for a BeanIO mapping file.
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="property" minOccurs="0" maxOccurs="unbounded" type="tns:Property">
+          <annotation>
+            <documentation>
+              Declares a property value for substitution using the syntax '${propertyName}'.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="import" minOccurs="0" maxOccurs="unbounded" type="tns:Import">
+          <annotation>
+            <documentation>
+              Imports a mapping file.
+            </documentation>
+          </annotation>
+        </element>       
+        <element name="typeHandler" minOccurs="0" maxOccurs="unbounded" type="tns:GlobalTypeHandler">
+          <annotation>
+            <documentation>
+              Declares a custom type handler for all streams.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="template" minOccurs="0" maxOccurs="unbounded" type="tns:Template">
+          <annotation>
+            <documentation>
+              Declares a reusable template that may include child segments, fields, and properties.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="stream" minOccurs="0" maxOccurs="unbounded" type="tns:Stream">
+          <annotation>
+            <documentation>
+              Declares a new stream mapping.
+            </documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+
+  <complexType name="Import">
+    <attribute name="resource" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The name of the mapping file to import.  Prefix the file name with 'classpath:' to load 
+          the file from the classpath, or with 'file:' to load the file from the file system.
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+  
+  <complexType name="Stream">
+    <sequence>
+      <element name="parser" minOccurs="0" maxOccurs="1" type="tns:Factory">
+        <annotation>
+          <documentation>
+            Declares format specific parser settings, or overrides the default RecordParserFactory.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="typeHandler" minOccurs="0" maxOccurs="unbounded" type="tns:TypeHandler">
+        <annotation>
+          <documentation>
+            Declares a new type handler implementation for this stream, 
+            or customizes a default handler.
+          </documentation>
+        </annotation>
+      </element>
+      <choice minOccurs="1" maxOccurs="unbounded">
+        <element name="record" type="tns:Record">
+          <annotation>
+            <documentation>
+              A record is used to map a single record in the stream to a bean object.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="group" type="tns:Group">
+          <annotation>
+            <documentation>
+              A group is used to group records together, or bind bean objects that span multiple records.
+            </documentation>
+          </annotation>
+        </element>
+      </choice>
+    </sequence>
+    <attribute name="name" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The name of the stream.
+        </documentation>
+      </annotation>  
+    </attribute>
+    <attribute name="format" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The stream format.  Either 'xml', 'csv', 'delimited' or 'fixedlength'.
+        </documentation>
+      </annotation>  
+    </attribute>
+    <attribute name="mode" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The allowed modes of operation for the stream mapping.  Defaults to 'readwrite' which
+          allows both reading from and writing to a stream.  If set to 'read' for read only, 
+          or 'write' for write only, some restrictions may be relaxed.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="strict" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Set to true to have BeanIO calculate and enforce record ordering (based on the order
+          records are declared) and record length (based on assigned field occurrence values).
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="minOccurs" type="xsd:nonNegativeInteger" use="optional">
+      <annotation>
+        <documentation>
+          The minimum number of times the stream may be read from the input
+          stream.  Defaults to 0.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="maxOccurs" type="tns:limit" use="optional">
+      <annotation>
+        <documentation>
+          The maximum number of times the stream may be read from the input
+          stream.  Defaults to 1.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="occurs" type="tns:range" use="optional">
+      <annotation>
+        <documentation>
+          Shortcut for specifying both minOccurs and maxOccurs.  Examples: '1', '0-3', '2+'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="ignoreUnidentifiedRecords" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Ignores unidentified records.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="resourceBundle" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The location of a resource bundle for customizing error messages.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlType" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML node type.  Defaults to 'element'.  Set to 'none' if a record
+          is bound to the root element.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlName" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML element name.  Defaults to the stream name.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlNamespace" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML namespace for this element.  A value of '*' (default) indicates any namespace
+          is matched when unmarshalling XML and no namespace is declared when marshalling XML.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlPrefix" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML namespace prefix to use when marshalling XML.  By default,
+          or when set to '', the default namespace is overridden for an element.
+        </documentation>
+      </annotation>
+    </attribute>
+   </complexType>
+
+  <complexType name="GlobalTypeHandler">
+    <complexContent>
+      <extension base="tns:TypeHandler">
+        <attribute name="format" type="xsd:string" use="optional">
+          <annotation>
+            <documentation>
+              The stream format to register this type handler for.  Either 'xml', 
+              'csv', 'delimited', or 'fixedlength'.
+            </documentation>
+          </annotation>
+        </attribute>      
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <complexType name="TypeHandler">
+    <sequence>
+      <element name="property" minOccurs="0" maxOccurs="unbounded" type="tns:Property">
+        <annotation>
+          <documentation>
+            Sets a property of the type handler.
+          </documentation>
+        </annotation>
+      </element>
+    </sequence>
+    <attribute name="name" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name to register the type handler under.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="type" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The class name or type alias to register the type handler for.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="class" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The type handler implementation class name.
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+
+  <complexType name="Factory">
+    <sequence>
+      <element name="property" minOccurs="0" maxOccurs="unbounded" type="tns:Property">
+        <annotation>
+          <documentation>
+            Sets a property on its parent bean object.
+          </documentation>
+        </annotation>
+      </element>
+    </sequence>
+    <attribute name="class" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The class name of the RecordParserFactory implementation.  If
+          not specified, a default implementation is used based on the stream format.
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+
+  <complexType name="Property">
+    <attribute name="name" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The property name to set.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="value" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The property value to set.
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+  
+  <complexType name="BeanProperty">
+    <attribute name="name" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The property name to set on its parent bean object.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="value" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The property value to set on its parent bean object.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="type" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The class name or type alias of the property value.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="typeHandler" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The type handler name for converting the property value to a Java object.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="format" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The format of the property value passed to the type handler.
+          A DecimalFormat pattern for number types, or a SimpleDateFormat
+          pattern for date types.
+        </documentation>
+      </annotation>      
+    </attribute>
+    <attribute name="setter" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the setter method to set the field property value on the bean class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="getter" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the getter method to get the field property value from the bean class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="rid" type="xsd:boolean" use="optional">
+      <annotation>
+        <xsd:documentation>
+          Set to true to indicate this property is used to identify the record.
+        </xsd:documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+
+  <complexType name="Template">
+    <choice minOccurs="0" maxOccurs="unbounded">
+      <element name="field" minOccurs="0" maxOccurs="unbounded" type="tns:Field">
+        <annotation>
+          <documentation>
+            A field is used to map a portion of a record to a bean property.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="property" minOccurs="0" maxOccurs="unbounded" type="tns:BeanProperty">
+        <annotation>
+          <documentation>
+            A property is used to set a constant property value (not found in the stream)
+            on a bean object.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="segment" minOccurs="0" maxOccurs="unbounded" type="tns:Segment">
+        <annotation>
+          <documentation>
+            A segment is used to group fields into a nested bean object.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="include" minOccurs="0" maxOccurs="unbounded" type="tns:Include">
+        <annotation>
+          <documentation>
+            Includes a template.
+          </documentation>
+        </annotation>
+      </element>      
+    </choice>
+    <attribute name="name" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The template name.
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+
+  <complexType name="Include">
+    <attribute name="template" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The name of the template to include.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="offset" type="xsd:nonNegativeInteger" use="optional">
+      <annotation>
+        <documentation>
+          The amount to offset positions from included fields.  This value
+          is additive with previous includes when a template is expanded.
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+
+  <attributeGroup name="NodeAttributes">
+    <attribute name="minOccurs" type="xsd:nonNegativeInteger" use="optional">
+      <annotation>
+        <documentation>
+          The minimum number of occurrences of this group or record.  Defaults to 0.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="maxOccurs" type="tns:limit" use="optional">
+      <annotation>
+        <documentation>
+          The maximum number of occurrences of this group or record.
+          Defaults to 'unbounded'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="occurs" type="tns:range" use="optional">
+      <annotation>
+        <documentation>
+          Shortcut for specifying both minOccurs and maxOccurs.  Examples: '1', '0-3', '2+'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="order" type="xsd:positiveInteger" use="optional">
+      <annotation>
+        <documentation>
+          The sequence of this record or group within its parent group or stream.
+          Records and groups that share the same order number may appear in
+          any order.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlName" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML element name.  Defaults to the record or group name.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlNamespace" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML namespace of this element.  A value of '*' indicates any namespace
+          is matched when unmarshalling XML and no namespace is declared when marshalling XML.
+          By default, xmlNamespace is inherited from its parent stream or group.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlPrefix" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML namespace prefix to use when marshalling XML.  By default,
+          or when set to '', the default namespace is overridden for an element.
+        </documentation>
+      </annotation>
+    </attribute>
+  </attributeGroup>
+  
+  <complexType name="Record">
+    <choice minOccurs="0" maxOccurs="unbounded">
+      <element name="field" minOccurs="0" maxOccurs="unbounded" type="tns:Field">
+        <annotation>
+          <documentation>
+            A field is used to validate and bind a property value found in the stream 
+            to its parent bean object.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="property" minOccurs="0" maxOccurs="unbounded" type="tns:BeanProperty">
+        <annotation>
+          <documentation>
+            A property is used to set a constant property value (not found in the stream)
+            on its parent record bean object.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="segment" minOccurs="0" maxOccurs="unbounded" type="tns:Segment">
+        <annotation>
+          <documentation>
+            A segment is used to group fields into a nested bean object.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="include" minOccurs="0" maxOccurs="unbounded" type="tns:Include">
+        <annotation>
+          <documentation>
+            Includes a template.
+          </documentation>
+        </annotation>
+      </element>      
+    </choice>
+    <attribute name="name" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The name of the record (used to format resource bundle keys
+          for error messages). 
+        </documentation>
+      </annotation>    
+    </attribute>
+    <attribute name="minLength" type="xsd:nonNegativeInteger" use="optional">
+      <annotation>
+        <documentation>
+          The minimum length of the record.  For delimited/CSV formatted streams,
+          the minimum length is specified in fields.  For fixed length formatted 
+          streams, the minimum length is specified in characters.
+        </documentation>
+      </annotation>  
+    </attribute>
+    <attribute name="maxLength" type="tns:limit" use="optional">
+      <annotation>
+        <documentation>
+          The maximum length of the record.  For delimited/CSV formatted streams,
+          the maximum length is specified in fields.  For fixed length formatted 
+          streams, the maximum length is specified in characters.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="ridLength" type="tns:range" use="optional">
+      <annotation>
+        <documentation>
+          The allowable range of record lengths for identifying the record.  
+          For delimited/CSV formatted streams, length is measured in fields.  
+          For fixed length formatted streams, length is measured in characters.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="class" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The class name or type alias of the bean object bound to this record.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="key" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The descendant field name to use for the map key when 'collection' is bound to a java.util.Map.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="target" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of a descendant to marshal or unmarshal in lieu of an assigned class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="value" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of a descendant to marshal or unmarshal in lieu of an assigned class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="collection" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The type of collection for repeating records.  May be set to any
+          collection class name or one of the following aliases: 'array', 'list',
+          'set', or 'map'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="setter" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the setter method for setting a record bean object on its parent.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="getter" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the getter method for getting a record bean object from its parent.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="lazy" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Set to true if null is returned for a empty collection or a collection
+          of null and/or empty Strings.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="template" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the template this record extends.
+        </documentation>
+      </annotation>    
+    </attribute>
+    <attributeGroup ref="tns:NodeAttributes" />
+  </complexType>
+  
+  <complexType name="Group">
+    <choice minOccurs="1" maxOccurs="unbounded">
+      <element name="record" type="tns:Record">
+        <annotation>
+          <documentation>
+            A record is used to map a record in a stream to a bean object.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="group" type="tns:Group">
+        <annotation>
+          <documentation>
+            A group is used to enforce record grouping or bind bean objects
+            that span multiple records.
+          </documentation>
+        </annotation>
+      </element>
+    </choice>
+    <attribute name="name" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The name of the group.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="setter" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the setter method to set this bean object on its parent bean class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="getter" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the getter method to get this bean object from its parent bean class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="class" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The class name or type alias of the bean object bound to this group.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="value" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of a descendant to marshal or unmarshal in lieu of an assigned class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="collection" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The type of collection for a repeating group.  May be set to any
+          collection class name or one of the following aliases: 'array', 'list',
+          or 'set'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlType" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML node type.  May be set to 'element' (default) or 'none'.
+        </documentation>
+      </annotation>    
+    </attribute>
+    <attributeGroup ref="tns:NodeAttributes" />
+  </complexType>
+  
+  <complexType name="Field">
+    <attribute name="name" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The name of the field, and by default, the
+          name of the bean property the field maps to.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="setter" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the setter method to set the field's property value on its parent bean object.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="getter" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the getter method to get the field's property value from its parent bean object.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="rid" type="xsd:boolean" use="optional">
+      <annotation>
+        <xsd:documentation>
+          Set to 'true' to indicate this field is used to identify a record.
+          Must be used in conjunction with either 'literal' or 'regex'.
+        </xsd:documentation>
+      </annotation>
+    </attribute>
+    <attribute name="position" type="xsd:int" use="optional">
+      <annotation>
+        <documentation>
+          Field position beginning at 0.  A negative number is relative to
+          the end of the record.  Same as 'at'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="at" type="xsd:int" use="optional">
+      <annotation>
+        <documentation>
+          Field position beginning at 0.  A negative number is relative to
+          the end of the record.  Same as 'position'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="until" type="xsd:int" use="optional">
+      <annotation>
+        <documentation>
+          Excluded maximum field position.  Must be a negative number to
+          indicate a position relative to the end of the record.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="required" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Set to 'true' to throw an exception if the field text is missing or empty.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="default" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The default value if the field text is missing or empty.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="minLength" type="xsd:nonNegativeInteger" use="optional">
+      <annotation>
+        <documentation>
+          The minimum length of the field text (in characters).
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="maxLength" type="tns:limit" use="optional">
+      <annotation>
+        <documentation>
+          The maximum length of the field text (in characters).
+        </documentation>
+      </annotation>
+    </attribute>    
+    <attribute name="regex" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The regular expression the field text must match.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="literal" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The literal expression the field text must match.
+        </documentation>
+      </annotation>    
+    </attribute>
+    <attribute name="type" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The class name or type alias of the field property value.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="typeHandler" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The type handler name for converting field text to its property value.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="format" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The format of the field property value passed to the type handler.
+          A DecimalFormat pattern for number types, or a SimpleDateFormat
+          pattern for date types.
+        </documentation>
+      </annotation>      
+    </attribute>
+    <attribute name="ignore" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Set to 'true' if this field is not a property of its parent bean class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="trim" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Set to 'true' to trim whitespace from the field text before validation
+          and type conversion.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="length" type="tns:limit" use="optional">
+      <annotation>
+        <documentation>
+          The padded length of the field text (in characters).  Use 'minLength'
+          and 'maxLength' for validation purposes.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="padding" type="tns:character" use="optional">
+      <annotation>
+        <documentation>
+          The character used to pad the field text.  Defaults to a space
+          for fixed length formatted streams.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="keepPadding" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Whether to keep the padding when unmarshalling a fixed length field.
+          Defaults to 'false'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="lenientPadding" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Whether to disable enforcement of the padding length for a fixed length field.
+          Defaults to 'false'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="justify" type="tns:justification" use="optional">
+      <annotation>
+        <documentation>
+          Synonym for 'align'.  The justification of the field text when 
+          padded- 'left' or 'right'.  Defaults to 'left'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="align" type="tns:justification" use="optional">
+      <annotation>
+        <documentation>
+          Synonym for 'justify'  The justification of the field text 
+          when padded- 'left' or 'right'.  Defaults to 'left'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="collection" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The type of collection for repeating fields.  May be set to any
+          collection class name or one of the following: 'array', 'list',
+          or 'set'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="lazy" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Set to true if null is returned for a empty collection or a collection
+          of null and/or empty Strings.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="minOccurs" type="xsd:nonNegativeInteger" use="optional">
+      <annotation>
+        <documentation>
+          The minimum number of times this field is found in its parent record.
+          Defaults to 0 for XML attributes, or 1 for all other field types.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="maxOccurs" type="tns:limit" use="optional">
+      <annotation>
+        <documentation>
+          The maximum number of times this field repeats in its parent record.
+          Defaults to 'minOccurs' or 1, whichever is greater.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="occurs" type="tns:range" use="optional">
+      <annotation>
+        <documentation>
+          Shortcut for specifying both minOccurs and maxOccurs.  Examples: '1', '0-3', '2+'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="occursRef" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of a field in the same record that dynamically indicates the number
+          of occurrences of this field.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlType" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML node type.  May be set to 'element', 'attribute', 'text' or 'none'.
+        </documentation>
+      </annotation>    
+    </attribute>
+    <attribute name="xmlName" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML element or attribute name.  By default, the field name is used.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlNamespace" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML namespace of this element or attribute.  A value of '*' indicates any namespace
+          is matched when unmarshalling XML and no namespace is declared when marshalling XML.
+          By default, xmlNamespace is inherited from its parent record or bean.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlPrefix" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML namespace prefix to use when marshalling XML.  By default,
+          or when set to '', the default namespace is overridden for an element.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="nillable" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Set to true if this element is nillable.  If 'true', null field values
+          are marshalled as nil.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="jsonName" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The JSON field name.  Defaults to the field name.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="jsonType" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The JSON field type.  Set to 'string', 'number' or 'boolean'.  Use a
+          '[]' suffix to indicate an array.  Defaults to 'string', or 'string[]'
+          if maxOccurs is greater than 1.
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>  
+
+  <complexType name="Segment">
+    <choice minOccurs="1" maxOccurs="unbounded">
+      <element name="field" minOccurs="0" maxOccurs="unbounded" type="tns:Field">
+        <annotation>
+          <documentation>
+            A field is used to bind a field in a record to a property 
+            of its parent bean object.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="property" minOccurs="0" maxOccurs="unbounded" type="tns:BeanProperty">
+        <annotation>
+          <documentation>
+            A property is used to set a constant property value (not found in the stream)
+            on its parent bean object.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="segment" minOccurs="0" maxOccurs="unbounded" type="tns:Segment">
+        <annotation>
+          <documentation>
+            A segment is used to group fields into a nested bean objects.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="include" minOccurs="0" maxOccurs="unbounded" type="tns:Include">
+        <annotation>
+          <documentation>
+            Includes a template.
+          </documentation>
+        </annotation>
+      </element>
+    </choice>
+    <attribute name="name" type="xsd:string" use="required">
+      <annotation>
+        <documentation>
+          The segment name, and by default, the name of the property to set
+          on its parent bean object.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="setter" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the setter method to set this bean object on its parent bean class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="getter" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the getter method to get this bean object from its parent bean class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="class" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The class name of the bean.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="collection" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The type of collection for repeating segments bound to a bean object.  
+          May be set to any java.util.Collection or java.util.Map implementation class name
+          or one of the following aliases: 'array', 'list', 'set', or 'map'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="lazy" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Set to true if the class should not be instantiated if all attributes
+          are null or empty strings, or if the collection is empty.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="target" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of a descendant to marshal or unmarshal in lieu of an assigned class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="value" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of a descendant to marshal or unmarshal in lieu of an assigned class.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="key" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The descendant field name to use for the map key when 'collection' is bound to a java.util.Map.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="minOccurs" type="xsd:nonNegativeInteger" use="optional">
+      <annotation>
+        <documentation>
+          The minimum number of times this segment repeats in its parent bean or record.
+          Defaults to 1.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="maxOccurs" type="tns:limit" use="optional">
+      <annotation>
+        <documentation>
+          The maximum number of times this segment repeats in its parent bean or record.
+          Defaults to 'minOccurs' or 1, whichever is greater.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="occurs" type="tns:range" use="optional">
+      <annotation>
+        <documentation>
+          Shortcut for specifying both minOccurs and maxOccurs.  Examples: '1', '0-3', '2+'.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="occursRef" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of a field in the same record that dynamically indicates the number
+          of occurrences of this segment.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="template" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The name of the template this segment extends.
+        </documentation>
+      </annotation>    
+    </attribute>
+    <attribute name="xmlType" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML node type.  May be set to 'element' (default) or 'none'.
+        </documentation>
+      </annotation>    
+    </attribute>
+    <attribute name="xmlName" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML element name.  By default, the segment name is used.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlNamespace" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML namespace of this element.  A value of '*' indicates any namespace
+          is matched when unmarshalling XML and no namespace is declared when marshalling XML.
+          By default, xmlNamespace is inherited from its parent record or bean.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="xmlPrefix" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The XML namespace prefix to use when marshalling XML.  By default,
+          or when set to '', the default namespace is overridden for an element.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="nillable" type="xsd:boolean" use="optional">
+      <annotation>
+        <documentation>
+          Set to true if this element is nillable.  If 'true', null bean values
+          are marshalled as nil.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="jsonName" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The JSON field name.  Defaults to the segment name.
+        </documentation>
+      </annotation>
+    </attribute>
+    <attribute name="jsonType" type="xsd:string" use="optional">
+      <annotation>
+        <documentation>
+          The JSON type.  Set to 'object', 'array' or 'none'.  Use a
+          '[]' suffix to indicate an array.  Defaults to 'object', or 'object[]'
+          if maxOccurs is greater than 1.
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+  
+  <simpleType name="justification">
+    <restriction base="xsd:string">
+      <enumeration value="left"/>
+      <enumeration value="right"/>
+    </restriction>
+  </simpleType>
+  
+  <simpleType name="limit">
+    <union memberTypes="xsd:nonNegativeInteger">
+      <simpleType>
+        <restriction base="xsd:NMTOKEN">
+          <enumeration value="unbounded"/>
+        </restriction>
+      </simpleType>
+    </union>
+  </simpleType>
+
+  <simpleType name="range">
+    <restriction base="xsd:string">
+      <xsd:pattern value="[0-9]+((-[0-9]+)|(\++))?" />
+    </restriction>
+  </simpleType>
+
+  <simpleType name="character">
+    <restriction base="xsd:string">
+      <length value="1" fixed="true" />
+    </restriction>  
+  </simpleType>
+
+</schema>

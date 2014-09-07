@@ -1,0 +1,10 @@
+<stream xmlns="stream">
+  <group>
+    <r:person xmlns:r="record">
+      <r:firstName>John</r:firstName>
+    </r:person>
+    <r:person xmlns:r="record">
+      <r:firstName>David</r:firstName>
+    </r:person>
+  </group>
+</stream>

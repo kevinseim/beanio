@@ -1,0 +1,11 @@
+<stream>
+  <person>
+    <firstName>John</firstName>
+    <state>IL</state>
+    <zip>60610</zip>
+  </person>
+  <person>
+    <firstName>Mary</firstName>
+    <zip/>
+  </person>
+</stream>

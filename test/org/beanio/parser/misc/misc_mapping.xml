@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="stream1" format="csv" strict="true">
+    <record name="header" minOccurs="1" maxOccurs="1" />
+    <record name="record" class="map">
+      <field name="field1" />
+      <field name="field2" />
+    </record>
+  </stream>
+
+  <stream name="stream2" format="csv" strict="true">
+    <record name="header" class="map" minOccurs="1" maxOccurs="1" />
+    <record name="record" class="map">
+      <field name="field1" />
+      <field name="field2" />
+    </record>
+  </stream>
+
+  <stream name="stream3" format="csv" strict="true">
+    <record name="header" class="map" minOccurs="1" maxOccurs="1">
+      <property name="key" value="value" />
+    </record>
+    <record name="record" class="map">
+      <field name="field1" />
+      <field name="field2" />
+    </record>
+  </stream>
+
+  <stream name="stream4" format="csv" strict="true">
+    <record name="header" minOccurs="1" maxOccurs="1">
+      <property name="key" value="value" />
+      <field name="field1" type="date" />
+      <field name="field2" />
+    </record>
+    <record name="record" class="map">
+      <field name="field1" />
+      <field name="field2" />
+    </record>
+  </stream>
+
+  <stream name="stream5" format="csv" strict="true">
+    <record name="header" minOccurs="1" maxOccurs="1">
+      <property name="key" value="value" />
+    </record>
+    <record name="record" class="map" minLength="2">
+      <field name="field1" />
+      <field name="field2" />
+      <segment name="skipbean" class="map" minOccurs="0">
+        <field name="field3" />
+      </segment>
+      <segment name="bean" class="map">
+        <property name="key" value="value" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="stream6" format="csv">
+    <record name="header" order="1" occurs="1">
+      <field name="h1" default="Header1" />
+      <field name="h2" default="Header2" />
+      <field name="h3" default="Header3" />
+    </record>
+    <record name="detail" class="map" order="2" occurs="0+">
+      <field name="d1" />
+      <field name="d2" />
+      <field name="d3" />
+    </record>
+  </stream>
+
+</beanio>

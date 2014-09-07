@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<s:stream xmlns:s="stream">
+  <g:group xmlns:g="group">
+    <s:person>
+      <s:firstName>John</s:firstName>
+    </s:person>
+  </g:group>
+</s:stream>

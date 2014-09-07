@@ -1,0 +1,2 @@
+10,10,-10,10,10.1,-10.1,A,ABC,010170,true,10,10,04-5-2013,fbd9d2be-35dc-41fb-abc9-f4b4c8757eb5,http://www.google.com,ONE,two
+,,,,,,,,,,,,,,,,

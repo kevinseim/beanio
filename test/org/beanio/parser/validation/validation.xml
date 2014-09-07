@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <typeHandler type="java.util.Date" class="org.beanio.types.DateTypeHandler">
+    <property name="pattern" value="MMddyy" />
+  </typeHandler>
+
+  <stream name="v1" format="csv" resourceBundle="org.beanio.parser.validation.v1_messages">
+    <record name="regex" class="map">
+      <field name="id" rid="true" literal="regex" />
+      <field name="field" regex="\d+"/>
+    </record>
+    <record name="minLength" class="map">
+      <field name="id" rid="true" literal="minLength" />
+      <field name="field" minLength="2" />
+    </record>
+    <record name="maxLength" class="map">
+      <field name="id" rid="true" literal="maxLength" />
+      <field name="field" maxLength="5" />
+    </record>
+    <record name="requiredWithTrim" class="map">
+      <field name="id" rid="true" literal="rwt" />
+      <field name="field" required="true" trim="true" />
+    </record>
+    <record name="typeHandler" class="map">
+      <field name="id" rid="true" literal="typeHandler" />
+      <field name="field" type="java.util.Date" />
+    </record>
+    <record name="requiredWithoutTrim" class="map">
+      <field name="id" rid="true" literal="rwot" />
+      <field name="field" required="true" trim="false" />
+    </record>
+    <record name="literal" class="map">
+      <field name="id" rid="true" literal="literal" />
+      <field name="field" literal="value" />
+    </record>
+  </stream>
+  
+</beanio>

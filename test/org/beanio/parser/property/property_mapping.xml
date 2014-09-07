@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="p1" format="csv">
+    <record name="header" class="map">
+      <property name="id" rid="true" type="int" value="1" />
+      <field name="recordType" rid="true" literal="Header" ignore="true" />
+      <field name="fileDate" type="date" format="yyyy-MM-dd" />
+    </record>
+    <record name="detail" class="org.beanio.parser.property.User">
+      <property name="id" rid="true" type="int" value="2" getter="getType" setter="setType" />
+      <field name="recordType" rid="true" literal="Detail" ignore="true" />
+      <field name="name" />
+    </record>
+    <record name="trailer" class="map">
+      <property name="id" rid="true" type="int" value="3" />
+      <field name="recordType" rid="true" literal="Trailer" ignore="true" />
+      <field name="recordCount" type="int" />
+    </record>    
+  </stream>
+  
+</beanio>

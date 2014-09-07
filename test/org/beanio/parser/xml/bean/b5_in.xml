@@ -1,0 +1,19 @@
+<stream xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <person>
+    <firstName>John</firstName>
+    <address>
+      <state>IL</state>
+      <zip>60610</zip>
+    </address>
+  </person>
+  <person>
+    <firstName>Mary</firstName>
+    <address xsi:nil="true" />
+  </person>
+  <person>
+    <firstName>Mary</firstName>
+    <address>
+      <state>IL</state>
+    </address>
+  </person>
+</stream>

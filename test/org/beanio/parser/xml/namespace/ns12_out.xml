@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<person xmlns="urn:stream" xmlns:xi="http://www.w3.org/2001/XMLSchema-instance" xmlns:e="urn:external" xmlns:r="urn:record">
+  <address xmlns="urn:record"/>
+</person>

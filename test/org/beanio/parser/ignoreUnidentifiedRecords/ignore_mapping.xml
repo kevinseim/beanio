@@ -1,0 +1,20 @@
+<beanio xmlns="http://www.beanio.org/2012/03">
+
+  <stream name="stream1" format="csv" ignoreUnidentifiedRecords="true">
+  
+    <record name="header" class="map">
+      <field name="id" rid="true" literal="H" /> 
+    </record>
+    
+    <group name="group" occurs="1+">
+      <record name="group_header" class="map" order="1" occurs="1">
+        <field name="id" rid="true" literal="GH" /> 
+      </record>
+      <record name="group_trailer" class="map" order="2" occurs="1">
+        <field name="id" rid="true" literal="GT" /> 
+      </record>
+    </group>
+    
+  </stream>
+
+</beanio>

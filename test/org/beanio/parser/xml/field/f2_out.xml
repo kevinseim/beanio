@@ -1,0 +1,8 @@
+<stream>
+  <person>
+    <age>00025</age>
+  </person>
+  <person>
+    <age/>
+  </person>
+</stream>

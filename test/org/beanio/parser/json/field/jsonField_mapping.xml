@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="stream" format="json">
+    <parser class="org.beanio.parser.json.JsonTestRecordParserFactory" />
+    <record name="record" class="map">
+      <field name="firstName" jsonName="first" />
+      <!-- json name overridden -->
+      <field name="lastName" jsonName="last" />
+      <!-- json type does not match field type -->
+      <field name="age" jsonType="number" />
+      <!-- optional field -->
+      <field name="phone" minOccurs="0" />
+      <!-- force array -->
+      <field name="number" type="int" jsonType="number[]" />
+      <!-- default to boolean type -->
+      <field name="healthy" type="boolean" />
+      <!-- default to array -->
+      <field name="array" type="int" collection="list" minOccurs="0" maxOccurs="5" />
+    </record>
+  </stream>
+
+</beanio>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="stream" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <field name="gender" xmlType="attribute" />
+      <field name="firstName" nillable="true" />
+      <field name="lastName" xmlType="element" minOccurs="0" />
+    </record>
+  </stream>
+
+  <stream name="stream2" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <field name="gender" xmlType="attribute" xmlNamespace="fieldNS" xmlPrefix="ns" />
+      <field name="firstName" xmlName="first" xmlType="attribute" xmlNamespace="fieldNS" xmlPrefix="ns" />
+      <field name="lastName" xmlName="last" xmlType="attribute" minOccurs="1" />
+    </record>
+  </stream>
+
+  <stream name="stream3" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <field name="gender" xmlType="attribute" />
+      <field name="firstName" xmlType="text" />
+    </record>
+  </stream>
+
+  <stream name="stream4" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="male" xmlName="person" class="org.beanio.parser.xml.Male">
+      <field name="gender" rid="true" xmlType="attribute" literal="M" />
+      <field name="firstName" xmlType="text" />
+    </record>
+    <record name="female" xmlName="person" class="org.beanio.parser.xml.Person">
+      <field name="gender" rid="true" xmlType="attribute" literal="F" />
+      <field name="firstName" xmlType="text" />
+    </record>
+  </stream>
+
+  <stream name="stream5" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="male" xmlName="person" class="org.beanio.parser.xml.Male">
+      <field name="gender" rid="true" xmlType="text" literal="M" />
+      <field name="firstName" xmlType="attribute" />
+    </record>
+    <record name="female" xmlName="person" class="org.beanio.parser.xml.Person">
+      <field name="gender" rid="true" xmlType="text" literal="F" />
+      <field name="firstName" xmlType="attribute" />
+    </record>
+  </stream>
+
+  <stream name="stream6" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <record name="male" xmlName="person" class="org.beanio.parser.xml.Male">
+      <field name="gender" rid="true" literal="M" />
+      <field name="firstName" />
+    </record>
+    <record name="female" xmlName="person" class="org.beanio.parser.xml.Person">
+      <field name="gender" rid="true" literal="F" />
+      <field name="firstName" />
+    </record>
+  </stream>
+
+  <stream name="stream7" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory" />
+    <typeHandler type="string" class="org.beanio.parser.xml.types.NillableStringTypeHandler" />
+    <record name="record" xmlName="person" class="org.beanio.parser.xml.Person">
+      <field name="firstName" minOccurs="0" nillable="false" />
+      <field name="lastName" minOccurs="0" nillable="true" />
+    </record>
+  </stream>
+
+</beanio>

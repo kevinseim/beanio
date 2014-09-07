@@ -1,0 +1,65 @@
+<beanio xmlns="http://www.beanio.org/2012/03">
+
+  <stream name="stream1" format="csv">
+    <record name="detail" target="map">
+      <segment name="map" collection="map" key="id" class="org.beanio.beans.Person" occurs="1+">
+        <field name="id" />
+        <field name="firstName" />
+        <field name="lastName" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="stream2" format="csv">
+    <record name="detail" target="map">
+      <segment name="map" collection="map" key="id" target="firstName" occurs="1+">
+        <field name="id" ignore="true" />
+        <field name="firstName" />
+        <field name="lastName" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="stream3" format="csv">
+    <record name="detail" class="org.beanio.parser.inlinemaps.Job">
+      <field name="recordType" rid="true" literal="J" ignore="true" />
+      <field name="id" />
+      <segment name="codes" collection="map" key="code" value="status" occurs="2">
+        <field name="code" />
+        <field name="status" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="stream4" format="csv">
+    <group name="group" class="org.beanio.parser.inlinemaps.Job">
+      <record name="codes" collection="map" key="code" value="status">
+        <field name="code" />
+        <field name="status" />
+      </record>
+   </group>
+  </stream>
+
+  <stream name="stream5" format="delimited">
+    <parser>
+      <property name="delimiter" value="," />
+    </parser>
+    <group name="entity" class="map" minOccurs="0" maxOccurs="unbounded">
+      <record name="entity" order="1" occurs="1">
+        <field name="recordType" rid="true" literal="entity" ignore="true" />
+        <property name="subtype" value="PERSON" />
+        <property name="status" value="ACTIVE" />
+        <field name="type" />
+        <field name="lat" type="java.lang.Double" />
+        <field name="lon" type="java.lang.Double" />
+        <field name="name" required="true" />
+      </record>
+      <record name="details" collection="map" key="key" value="value" order="2" occurs="0+">
+        <field name="recordType" rid="true" literal="detail" ignore="true" required="false" />
+        <field name="key" required="false" />
+        <field name="value" required="false" />
+      </record>
+    </group>
+  </stream>
+
+</beanio>

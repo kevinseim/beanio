@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="dc1" format="delimited">
+    <parser>
+      <property name="delimiter" value="," />
+    </parser>
+    <record name="record1" minLength="2" class="org.beanio.parser.collection.CollectionBean">
+      <field name="list" collection="list" minOccurs="3" />
+      <field name="array" type="int" collection="array" minOccurs="0" maxOccurs="unbounded" />
+    </record>
+  </stream>
+
+  <stream name="dc2" format="delimited">
+    <parser>
+      <property name="delimiter" value="," />
+    </parser>
+    <record name="record1" class="org.beanio.parser.collection.CollectionBean">
+      <field name="array" type="int" collection="array" minOccurs="3" />
+    </record>
+  </stream>
+
+  <stream name="fc1" format="fixedlength">
+    <record name="record1" minLength="2" class="org.beanio.parser.collection.CollectionBean">
+      <field name="array" type="int" length="3" justify="right" padding="0" collection="array" required="true" minOccurs="3" />
+      <field name="set" type="char" length="1" collection="java.util.LinkedHashSet" minOccurs="0" maxOccurs="5" />
+    </record>
+  </stream>
+  
+</beanio>

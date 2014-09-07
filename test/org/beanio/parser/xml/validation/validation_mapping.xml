@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+  <stream name="stream" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory">
+      <property name="namespaces" value="xsi http://www.w3.org/2001/XMLSchema-instance" />
+    </parser>
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <field name="firstName" minOccurs="1" nillable="false" />
+      <segment name="lastName" minOccurs="1" nillable="false">
+        <field name="lastName" minOccurs="1" xmlType="text" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="stream2" format="xml" xmlName="stream">
+    <parser class="org.beanio.parser.xml.TestXmlWriterFactory">
+      <property name="namespaces" value="xsi http://www.w3.org/2001/XMLSchema-instance" />
+    </parser>
+    <record name="person" class="org.beanio.parser.xml.Person">
+      <segment name="address" class="org.beanio.parser.xml.Address" minOccurs="1">
+        <field name="state" />
+      </segment>
+    </record>
+  </stream>
+
+</beanio>

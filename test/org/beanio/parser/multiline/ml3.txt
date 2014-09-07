@@ -1,0 +1,8 @@
+header,2
+order,100,2012-01-01
+customer,George,Smith
+order,101,2012-01-01
+customer,John,Smith
+header,1
+order,103,2012-01-01
+customer,Jen,Smith

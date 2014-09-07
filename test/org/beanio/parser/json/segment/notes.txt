@@ -1,0 +1,85 @@
+{ 
+  "customer": { 
+    "firstName": "Jen",
+    "lastName": "Jones"
+  },
+  "account": "1234"
+}
+
+-----------------------------------------------------
+GOOD:
+
+segment : { field1:1, field2:2 }
+
+<segment name="segment" jsonType="object">
+  <field name="field1" />
+  <field name="field1" />
+</segment>
+
+push object
+get field1
+get field2
+
+-----------------------------------------------------
+
+segment : [ 
+  { field1:1, field2:2 },
+  { field1:1, field2:2 },
+  [ 10, 20 ]
+]
+
+<segment name="segment" jsonType="array">
+  <segment name="IGNORED" class="bean" jsonType="object" minOccurs="2">
+    <field name="field1" />
+	<field name="field1" />
+  </segment>
+  <field name="number" jsonType="number" jsonArray="true" />
+</segment>
+
+push array
+push object at index 0
+push object at index 1
+push array
+get field1 at index 0
+get field2 at index 1
+
+-----------------------------------------------------
+
+segment : [ 
+  { field1:1, field2:2 },
+  { field1:1, field2:2 }
+}
+
+<segment name="segment" class="bean" collection="list" jsonType="object" jsonArray="true" minOccurs="1" maxOccurs="2">
+  <field name="field1" />
+  <field name="field1" />
+</segment>
+
+JsonArrayWrapper - to push array onto stack
+  CollectionParser
+    JsonObjectWrapper - to push object onto stack (knows parent is array?)
+      Segment - to push object onto stack
+        Field
+        Field
+
+push array
+push object at index
+
+-----------------------------------------------------
+
+segment : [ 10, true }
+
+<segment name="segment" class="map" jsonType="array">
+  <field name="field1" jsonType="number" />
+  <field name="field1" jsonType="boolean" />
+</segment>
+
+JsonArrayWrapper
+  Field
+  Field
+
+push array
+get field at index 0
+get field at index 1
+
+  

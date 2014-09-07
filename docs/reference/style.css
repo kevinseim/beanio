@@ -1,0 +1,72 @@
+body {
+  width: 900px;
+  margin: 0 auto 0 auto;
+  font-family: verdana, arial, sans-serif;
+  font-size: 85%;
+}
+
+.wrapping li { margin-top: 6px }
+tt { font-size: 10pt;	}
+pre { font-size: 9pt; }
+.toc { margin-left: 3%; }
+.indent { margin-left: 5%;}
+.red { color: red; }
+
+.title {
+  font-size: 180%;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+h1 {
+  font-size: 155%;
+  margin-top: 1em;
+}
+h2 {
+  font-size: 130%;
+  font-weight: bold;
+}
+h3 {
+  font-size: 115%;
+  font-style: italic;
+}
+h4 {
+  margin-bottom: 0;
+}
+
+.file {
+	background: #F5F5F5;
+    border: 1px solid black;
+    margin-left: 5%;
+    margin-right: 5%;	
+    padding: 3px 8px 3px 8px;
+}
+
+.java {
+    background: #F5F5F5;
+    border: 1px solid black;
+    margin-left: 5%;
+    margin-right: 5%;   
+    padding: 3px 8px 3px 8px;
+}
+.comment {
+    color: green;	
+}
+
+pre b, .highlight {
+	color: #000088;
+	font-weight: bold;
+}
+
+.typeTable {
+	margin-left: 5%;
+}
+
+table { border-collapse: collapse; }
+
+td, th {
+    vertical-align: top;
+    padding-right: 20px;
+    padding-left: 5px;
+    border: 1px solid gray;
+}

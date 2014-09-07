@@ -1,0 +1,12 @@
+header,2
+order,100,2012-01-01
+customer,George,Smith
+item,orange,1
+item,apple,2
+order,101,2012-01-01
+customer,Joe,Johnson
+item,banana,1
+header,1
+order,103,2012-01-02
+customer,George,Smith
+item,carrot,1

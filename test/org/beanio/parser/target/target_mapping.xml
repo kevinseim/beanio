@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beanio xmlns="http://www.beanio.org/2012/03" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.beanio.org/2012/03 http://www.beanio.org/2012/03/mapping.xsd">
+
+
+  <stream name="stream" format="csv">
+    <record name="nameRecord" target="nicknames">
+      <field name="type" rid="true" literal="N" />
+      <field name="name" />
+      <field name="nicknames" collection="list" minOccurs="0" maxOccurs="unbounded" />
+    </record>
+    <record name="ageRecord" target="age">
+      <field name="type" rid="true" literal="A" />
+      <field name="name" default="unknown" />
+      <field name="age" type="int" />
+    </record>
+  </stream>
+
+  <stream name="t2" format="csv">
+    <record name="person" class="org.beanio.beans.Person">
+      <segment name="lastName" value="last">
+        <field name="first" />
+        <field name="last" />
+      </segment>
+    </record>
+  </stream>
+
+  <stream name="t3" format="csv">
+    <group name="group" class="org.beanio.beans.Person">
+      <record name="lastName" value="last" occurs="1">
+        <field name="first" />
+        <field name="last" />
+      </record>
+    </group>
+  </stream>
+
+</beanio>
