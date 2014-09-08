@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2013 Kevin Seim
+ * Copyright 2010-2014 Kevin Seim
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -125,6 +125,11 @@ public class Settings {
      * Whether non-public fields and methods may be made accessible.
      */
     public static final String ALLOW_PROTECTED_PROPERTY_ACCESS = "org.beanio.allowProtectedAccess";
+    /**
+     * Whether to validate marshalled fields.
+     * @since 3.0.0
+     */
+    public static final String VALIDATE_ON_MARSHAL = "org.beanio.validateOnMarshal";
     
     private static final String DEFAULT_CONFIGURATION_PATH = "org/beanio/internal/config/beanio.properties";
     private static final String DEFAULT_CONFIGURATION_FILENAME = "beanio.properties";

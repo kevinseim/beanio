@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2013 Kevin Seim
+ * Copyright 2012-2014 Kevin Seim
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,6 +52,8 @@ public interface Marshaller extends Debuggable {
      * @return this <tt>Marshaller</tt>
      * @throws BeanWriterException if a record is not matched for the given bean object,
      *   or in some other rare (but fatal) conditions
+     * @throws InvalidBeanException if BeanIO is configured to validate fields during marshalling,
+     *   and a field does not meet the configured validation rules
      */
     public Marshaller marshal(Object bean) throws BeanWriterException;
     
@@ -62,6 +64,8 @@ public interface Marshaller extends Debuggable {
      * @return this <tt>Marshaller</tt>
      * @throws BeanWriterException if a record is not matched for the given record name
      *   and bean object, or in some other rare (but fatal) conditions
+     * @throws InvalidBeanException if BeanIO is configured to validate fields during marshalling,
+     *   and a field does not meet the configured validation rules
      */
     public Marshaller marshal(String recordName, Object bean) throws BeanWriterException;
 

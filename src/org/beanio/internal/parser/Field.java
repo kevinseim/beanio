@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2013 Kevin Seim
+ * Copyright 2011-2014 Kevin Seim
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,9 @@ public class Field extends ParserComponent implements Property {
     
     private static final boolean USE_DEFAULT_IF_MISSING = 
         Settings.getInstance().getBoolean(Settings.USE_DEFAULT_IF_MISSING);
+
+    private static final boolean VALIDATE_ON_MARSHAL = 
+            Settings.getInstance().getBoolean(Settings.VALIDATE_ON_MARSHAL);
     
     private static final boolean marshalDefault = 
         Settings.getInstance().getBoolean(Settings.DEFAULT_MARSHALLING_ENABLED);
@@ -192,6 +195,38 @@ public class Field extends ParserComponent implements Property {
             }
             
             text = formatValue(value);
+        }
+        
+        if (VALIDATE_ON_MARSHAL) {
+            if (text == Value.NIL) {
+                if (!format.isNillable()) {
+                    throw new InvalidBeanException("Invalid field '" + getName() + "', the value is not nillable");    
+                } else if (required) {
+                    throw new InvalidBeanException("Invalid field '" + getName() + "', a value is required");    
+                }
+            }
+            else if (text == null) {
+                if (required) {
+                    throw new InvalidBeanException("Invalid field '" + getName() + "', a value is required");
+                }
+            }
+            else {
+                // validate minimum length
+                if (text.length() < minLength) {
+                    throw new InvalidBeanException("Invalid field '" + getName() + "', '" + 
+                        text + "' does not meet minimum length of " + minLength);
+                }
+                // validate maximum length
+                if (text.length() > maxLength) {
+                    throw new InvalidBeanException("Invalid field '" + getName() + "', '" + 
+                        text + "' exceeds maximum length of " + maxLength);
+                }
+                // validate the regular expression
+                if (regex != null && !regex.matcher(text).matches()) {
+                    throw new InvalidBeanException("Invalid field '" + getName() + "', '" + 
+                        text + "' does not match pattern '" + regex.pattern() + "'");
+                }
+            }
         }
         
         format.insertField(context, text);

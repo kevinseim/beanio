@@ -6,6 +6,8 @@ Changes in version 3.0.0 (TBD)
 * Requires JDK 1.7 or higher
 * Removed support for ASM class rewriting
 * Removed Spring framework support
+* Fixed IOUtil.getResource() to use ClassLoader argument (gc0109)
+* Added support for validating marshalled fields (gc0096)
 
 Changes in version 2.1.0 (2014-09-06)
 -------------------------------------

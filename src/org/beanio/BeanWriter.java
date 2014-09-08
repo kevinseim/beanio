@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2013 Kevin Seim
+ * Copyright 2010-2014 Kevin Seim
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,8 @@ public interface BeanWriter extends Debuggable {
      *   or in a few other rare (but fatal) cases
      * @throws BeanWriterIOException if the underlying output stream throws an {@link IOException},
      *   or if this writer is closed
+     * @throws InvalidBeanException if BeanIO is configured to validate fields during marshalling,
+     *   and a field does not meet the configured validation rules
      */
     public void write(Object bean) throws BeanWriterException, BeanWriterIOException;
 
@@ -49,6 +51,8 @@ public interface BeanWriter extends Debuggable {
      *   or in a few other rare (but fatal) cases
      * @throws BeanWriterIOException if the underlying output stream throws an {@link IOException},
      *   or if this writer is closed
+     * @throws InvalidBeanException if BeanIO is configured to validate fields during marshalling,
+     *   and a field does not meet the configured validation rules
      */
     public void write(String recordName, Object bean) throws BeanWriterException;
 
