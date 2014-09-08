@@ -85,7 +85,7 @@ public class IOUtil {
      * @since 1.2.1
      */
     public static URL getResource(ClassLoader classLoader, String resource) {
-        ClassLoader cl = null;
+        ClassLoader cl = classLoader;
         try {
             cl = Thread.currentThread().getContextClassLoader();
         }
