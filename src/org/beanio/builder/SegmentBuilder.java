@@ -42,6 +42,16 @@ public class SegmentBuilder extends SegmentBuilderSupport<SegmentBuilder> {
     }
     
     /**
+     * Sets the position of the field.
+     * @param at the position
+     * @return this
+     */
+    public SegmentBuilder at(int at) {
+        config.setPosition(at);
+        return this;
+    }
+    
+    /**
      * Indicates the number of occurrences of this segment is governed by another field.
      * @param ref the name of the field that governs the occurrences of this segment
      * @return this
