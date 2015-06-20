@@ -571,11 +571,11 @@ factory.loadResource("mapping-2.xml");'
 
 <span class="comment">// create a BeanReader to read from 'in.txt'</span>
 Reader in = new BufferedReader(new FileReader("in.txt"));
-BeanReader beanReader = factory.createBeanReader("streamName", in);
+BeanReader beanReader = factory.createReader("streamName", in);
 
 <span class="comment">// create a BeanWriter to write to 'out.txt'</span>
 Writer out = new BufferedWriter(new FileWriter("out.txt"));
-BeanWriter beanWriter = factory.createBeanReader("streamName", out);
+BeanWriter beanWriter = factory.createWriter("streamName", out);
 
 <span class="comment">// create an Unmarshaller to unmarshal bean objects from record text</span>
 Unmarshaller unmarshaller = factory.createUnmarshaller("streamName");
