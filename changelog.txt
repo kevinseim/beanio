@@ -8,8 +8,7 @@ Changes in version 3.0.0 (TBD)
 * Removed Spring framework support
 * Fixed IOUtil.getResource() to use ClassLoader argument (gc0109)
 * Added support for validating marshalled fields (gc0096)
-* BeanWriter now implements AutoCloseable
-* BeanReader now implements Closeable
+* BeanWriter and BeanReader now implements AutoCloseable
 * Added SegmentBuilder.at(int) method
 
 Changes in version 2.1.0 (2014-09-06)
