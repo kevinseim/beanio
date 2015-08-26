@@ -85,12 +85,8 @@ public class StreamFactoryTest {
         factory.loadResource("org/beanio/mapping.xml");
         
         File file = new File("test/org/beanio/file.txt");
-        BeanReader in = factory.createReader("stream1", file);
-        try {
+        try (BeanReader in = factory.createReader("stream1", file)) {
             while (in.read() != null);
-        }
-        finally {
-            in.close();
         }
     }
     

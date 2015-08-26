@@ -29,7 +29,7 @@ import org.beanio.internal.util.Debuggable;
  * @since 1.0
  * @see StreamFactory
  */
-public interface BeanWriter extends Debuggable {
+public interface BeanWriter extends Debuggable, AutoCloseable {
 
     /**
      * Writes a bean object to this output stream.
@@ -68,6 +68,7 @@ public interface BeanWriter extends Debuggable {
      * @throws BeanWriterIOException if the underlying output stream throws an {@link IOException},
      *   or if this writer is already closed
      */
-    public void close() throws BeanWriterIOException;
+    @Override
+	public void close() throws BeanWriterIOException;
 
 }
