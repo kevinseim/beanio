@@ -83,7 +83,7 @@ public class BeanParserTest extends ParserTest {
     @Test
     public void testFixedLengthAndOptionalFields() {
         BeanReader in = factory.createReader("w3", new InputStreamReader(
-            getClass().getResourceAsStream("w3_fixedlength.txt")));
+            getClass().getResourceAsStream("w3_fixedLength.txt")));
         
         try {
             Widget w = (Widget) in.read();
