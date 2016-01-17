@@ -58,13 +58,13 @@ public class TypesParserTest extends ParserTest {
         try {
             ObjectRecord record;
             record = (ObjectRecord) in.read();
-            assertEquals(new Byte((byte) 10), record.getByteValue());
-            assertEquals(new Short((short) 10), record.getShortValue());
-            assertEquals(new Integer(-10), record.getIntegerValue());
-            assertEquals(new Long(10), record.getLongValue());
-            assertEquals(new Float(10.1f), record.getFloatValue());
-            assertEquals(new Double(-10.1), record.getDoubleValue());
-            assertEquals(new Character('A'), record.getCharacterValue());
+            assertEquals(Byte.valueOf((byte) 10), record.getByteValue());
+            assertEquals(Short.valueOf((short) 10), record.getShortValue());
+            assertEquals(Integer.valueOf(-10), record.getIntegerValue());
+            assertEquals(Long.valueOf(10), record.getLongValue());
+            assertEquals(Float.valueOf(10.1f), record.getFloatValue());
+            assertEquals(Double.valueOf(-10.1), record.getDoubleValue());
+            assertEquals(Character.valueOf('A'), record.getCharacterValue());
             assertEquals("ABC", record.getStringValue());
             assertEquals(new SimpleDateFormat("MMddyy").parse("010170"), record.getDateValue());
             assertEquals(Boolean.TRUE, record.getBooleanValue());
@@ -240,12 +240,12 @@ public class TypesParserTest extends ParserTest {
         try {
             ObjectRecord record;
             record = (ObjectRecord) in.read();
-            assertEquals(new Byte((byte)1), record.getByteValue());
-            assertEquals(new Short((short)2), record.getShortValue());
-            assertEquals(new Integer(-3), record.getIntegerValue());
-            assertEquals(new Long(4), record.getLongValue());
-            assertEquals(new Float("5.1"), record.getFloatValue());
-            assertEquals(new Double("-6.1"), record.getDoubleValue());
+            assertEquals(Byte.valueOf((byte)1), record.getByteValue());
+            assertEquals(Short.valueOf((short)2), record.getShortValue());
+            assertEquals(Integer.valueOf(-3), record.getIntegerValue());
+            assertEquals(Long.valueOf(4), record.getLongValue());
+            assertEquals(Float.valueOf("5.1"), record.getFloatValue());
+            assertEquals(Double.valueOf("-6.1"), record.getDoubleValue());
             assertEquals(sdf.parse("2011-01-01"), record.getDateValue());
             assertEquals(new BigInteger("10"), record.getBigIntegerValue());
             assertEquals(new BigDecimal("10.5"), record.getBigDecimalValue());

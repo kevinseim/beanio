@@ -47,7 +47,7 @@ public class TemplateParserTest extends ParserTest {
         
         try {
             Map map = (Map) in.read();
-            assertEquals(new Integer(1), map.get("id"));
+            assertEquals(Integer.valueOf(1), map.get("id"));
             assertEquals("joe", map.get("name"));
             assertEquals('M', map.get("gender"));
         }
@@ -67,7 +67,7 @@ public class TemplateParserTest extends ParserTest {
             assertEquals('M', map.get("gender"));
             assertNotNull(map.get("bean"));
             map = (Map) map.get("bean");
-            assertEquals(new Integer(1), map.get("id"));
+            assertEquals(Integer.valueOf(1), map.get("id"));
             assertEquals("joe", map.get("name"));
             
         }
@@ -84,7 +84,7 @@ public class TemplateParserTest extends ParserTest {
         
         try {
             Map map = (Map) in.read();
-            assertEquals(new Integer(1), map.get("id"));
+            assertEquals(Integer.valueOf(1), map.get("id"));
             assertEquals("joe", map.get("firstName"));
             assertEquals("smith", map.get("lastName"));
             assertEquals('M', map.get("gender"));

@@ -73,7 +73,7 @@ public class JsonReaderTest {
         map = in.read();
         assertEquals(int1, map.get("int1"));
         map = in.read();
-        assertEquals(new Integer(10), map.get("int2"));
+        assertEquals(Integer.valueOf(10), map.get("int2"));
         map = in.read();
         assertEquals(long1, map.get("long1"));
 
@@ -126,7 +126,7 @@ public class JsonReaderTest {
         Map object;
 
         Map map = in.read();
-        assertEquals(new Integer(20), map.get("field2"));
+        assertEquals(Integer.valueOf(20), map.get("field2"));
         object = (Map) map.get("o1");
         assertEquals("value1", object.get("field1"));
 
@@ -137,7 +137,7 @@ public class JsonReaderTest {
         map = in.read();
         object = (Map) map.get("o1");
         assertEquals("value1", object.get("field1"));
-        assertEquals(new Integer(10), object.get("field2"));
+        assertEquals(Integer.valueOf(10), object.get("field2"));
 
         assertNull(in.read());
     }
@@ -190,7 +190,7 @@ public class JsonReaderTest {
             "{ \"array\" : [ [10], { \"field\":\"value\" } ]}");
         
         List list = (List) ((List)map.get("array")).get(0);
-        assertEquals(new Integer(10), list.get(0));
+        assertEquals(Integer.valueOf(10), list.get(0));
         
         map = (Map) ((List)map.get("array")).get(1);
         assertEquals("value", map.get("field"));

@@ -46,7 +46,7 @@ public class PropertyParserTest extends ParserTest {
         
         try {
             Map map = (Map) in.read();
-            assertEquals(new Integer(1), map.get("id"));
+            assertEquals(Integer.valueOf(1), map.get("id"));
             assertNull(map.get("recordType"));
             
             StringWriter text = new StringWriter();
@@ -61,8 +61,8 @@ public class PropertyParserTest extends ParserTest {
             assertEquals("Detail,John" + lineSeparator, text.toString());
             
             map = (Map) in.read();
-            assertEquals(new Integer(3), map.get("id"));
-            assertEquals(new Integer(1), map.get("recordCount"));
+            assertEquals(Integer.valueOf(3), map.get("id"));
+            assertEquals(Integer.valueOf(1), map.get("recordCount"));
             assertNull(map.get("recordType"));
             
             text = new StringWriter();

@@ -1527,7 +1527,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
             if (config.getComponentType() == ComponentConfig.SEGMENT) {
                 required = config.getMinOccurs() > 0 && !config.isNillable();
             }
-            boolean matchNull = !required && new Integer(0).equals(config.getMinOccurs());
+            boolean matchNull = !required && Integer.valueOf(0).equals(config.getMinOccurs());
             
             CollectionBean collection = new CollectionBean();
             collection.setName(config.getName());
@@ -1538,7 +1538,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
         }
         else {
             boolean required = propertyStack.isEmpty();
-            boolean matchNull = !required && new Integer(0).equals(config.getMinOccurs());
+            boolean matchNull = !required && Integer.valueOf(0).equals(config.getMinOccurs());
             
             Bean bean = new Bean();
             bean.setName(config.getName());

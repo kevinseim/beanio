@@ -30,7 +30,7 @@ public class CharacterTypeHandlerTest {
     @Test
     public void testParse() throws TypeConversionException {
         CharacterTypeHandler handler = new CharacterTypeHandler();
-        assertEquals(new Character('V'), handler.parse("V"));
+        assertEquals(Character.valueOf('V'), handler.parse("V"));
         assertNull(handler.parse(null));
         assertNull(handler.parse(""));
     }
@@ -44,7 +44,7 @@ public class CharacterTypeHandlerTest {
     @Test
     public void testFormat() throws TypeConversionException {
         CharacterTypeHandler handler = new CharacterTypeHandler();
-        assertEquals("V", handler.format(new Character('V')));
+        assertEquals("V", handler.format(Character.valueOf('V')));
         assertEquals("", handler.format(""));
         assertNull(handler.format(null));
     }

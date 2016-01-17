@@ -113,13 +113,13 @@ public class AnnotationTest extends ParserTest {
             Assert.assertEquals("left", user.getHands()[0]);
             Assert.assertEquals("right", user.getHands()[1]);
             Assert.assertEquals(new GregorianCalendar(1970, 0, 1).getTime(), user.birthDate);
-            Assert.assertEquals(new Integer(28), user.getAge());
+            Assert.assertEquals(Integer.valueOf(28), user.getAge());
             Assert.assertEquals(2, user.letters.size());
-            Assert.assertEquals(new Character('A'), user.letters.get(0));
-            Assert.assertEquals(new Character('B'), user.letters.get(1));
+            Assert.assertEquals(Character.valueOf('A'), user.letters.get(0));
+            Assert.assertEquals(Character.valueOf('B'), user.letters.get(1));
             Assert.assertEquals(1, user.numbers.size());
             Assert.assertEquals(LinkedList.class, user.numbers.getClass());
-            Assert.assertEquals(new Integer(1), user.numbers.get(0));
+            Assert.assertEquals(Integer.valueOf(1), user.numbers.get(0));
             Assert.assertEquals("END", user.end);
             
             Assert.assertEquals(input[i], m[i].marshal(user).toString());

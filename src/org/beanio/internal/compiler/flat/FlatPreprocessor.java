@@ -360,7 +360,7 @@ public class FlatPreprocessor extends Preprocessor {
             }
         }
         else {
-            if (new Integer(-1).equals(field.getLength())) {
+            if (Integer.valueOf(-1).equals(field.getLength())) {
                 field.setLength(null);
             }
         }
