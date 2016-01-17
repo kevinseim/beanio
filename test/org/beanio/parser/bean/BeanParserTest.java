@@ -286,7 +286,7 @@ public class BeanParserTest extends ParserTest {
     
     @Test
     @SuppressWarnings("rawtypes")
-    public void testNestedBeans() throws IOException {
+    public void testNestedBeans() {
         BeanReader in = factory.createReader("w10", new InputStreamReader(
             getClass().getResourceAsStream("w10_nestedBeans.txt")));
         

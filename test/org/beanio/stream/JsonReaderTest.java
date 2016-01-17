@@ -183,7 +183,7 @@ public class JsonReaderTest {
     
     @Test
     @SuppressWarnings("rawtypes")
-    public void test_mixedArray() throws IOException {
+    public void test_mixedArray() {
         JsonRecordUnmarshaller u = new JsonRecordUnmarshaller();
         
         Map map = u.unmarshal(
@@ -197,49 +197,49 @@ public class JsonReaderTest {
     }
     
     @Test
-    public void test_missingObject() throws IOException {
+    public void test_missingObject() {
         assertError(null, "Expected '{' near position 1");
         assertError("", "Expected '{' near position 1");
         assertError(" ", "Expected '{' near position 1");
     }
     
     @Test
-    public void test_missingQuotes() throws IOException {
+    public void test_missingQuotes() {
         assertError("{ field : \"value\" }", "Expected string or '}' near position 3");
     }
     
     @Test
-    public void test_missingCommaInObject() throws IOException {
+    public void test_missingCommaInObject() {
         assertError("{ \"f1\" : \"value\" \"f2\" : \"value2\" }", "Expected ',' or '}' near position 18");
     }
 
     @Test
-    public void test_missingCommaInArray() throws IOException {
+    public void test_missingCommaInArray() {
         assertError("{ \"array\" : [ 10 20 ] }", "Expected ',' near position 18");
     }
     
     @Test
-    public void test_invalidValue() throws IOException {
+    public void test_invalidValue() {
         assertError("{ \"number\" : a }", "Cannot parse 'a' into a JSON string, number or boolean near position 15");
     }
 
     @Test
-    public void test_missingCloseObject() throws IOException {
+    public void test_missingCloseObject() {
         assertError("{ \"number\" : 10", "Expected ',' or '}' near position 15");
     }
 
     @Test
-    public void test_missingCloseArray() throws IOException {
+    public void test_missingCloseArray() {
         assertError("{ \"number\" : [ 10", "Expected ',' or ']' near position 17");
     }
     
     @Test
-    public void test_missingCloseString() throws IOException {
+    public void test_missingCloseString() {
         assertError("{ \"number", "Expected '\"' near position 9");
     }
     
     @Test
-    public void test_missingColon() throws IOException {
+    public void test_missingColon() {
         assertError("{ \"number\" 10 }", "Expected ':' near position 12");
     }    
     

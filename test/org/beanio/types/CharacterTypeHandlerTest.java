@@ -42,7 +42,7 @@ public class CharacterTypeHandlerTest {
     }
     
     @Test
-    public void testFormat() throws TypeConversionException {
+    public void testFormat() {
         CharacterTypeHandler handler = new CharacterTypeHandler();
         assertEquals("V", handler.format(Character.valueOf('V')));
         assertEquals("", handler.format(""));

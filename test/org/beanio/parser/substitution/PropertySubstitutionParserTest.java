@@ -60,7 +60,7 @@ public class PropertySubstitutionParserTest extends ParserTest {
 
     @Test
     @SuppressWarnings("rawtypes")
-    public void testDefaultSubstitution() throws ParseException {
+    public void testDefaultSubstitution() {
         Properties properties = new Properties();
         properties.setProperty("dateFormat", "yyyy-MM-dd");
         
@@ -73,7 +73,7 @@ public class PropertySubstitutionParserTest extends ParserTest {
     }
 
     @Test(expected=BeanIOConfigurationException.class)
-    public void testMissingProperty() throws ParseException {
+    public void testMissingProperty() {
         factory.loadResource("org/beanio/parser/substitution/substitution_mapping.xml");
     }    
 }
