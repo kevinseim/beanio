@@ -62,8 +62,8 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
     private PropertyAccessorFactory accessorFactory;
     private ClassLoader classLoader;
     
-    private LinkedList<Component> parserStack = new LinkedList<Component>();
-    private LinkedList<Component> propertyStack = new LinkedList<Component>();
+    private LinkedList<Component> parserStack = new LinkedList<>();
+    private LinkedList<Component> propertyStack = new LinkedList<>();
     
     /**
      * Constructs a new <tt>ParserFactory</tt>.
@@ -232,7 +232,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
             
             if (property.getAccessor().isConstructorArgument()) {
                 if (args == null) {
-                    args = new ArrayList<Property>();
+                    args = new ArrayList<>();
                 }
                 args.add(property);
             }

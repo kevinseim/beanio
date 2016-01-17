@@ -62,7 +62,7 @@ public class CsvReader implements RecordReader {
     private transient int recordLineNumber;
     private transient int lineNumber = 0;
     private transient boolean skipLF = false;
-    private transient List<String> fieldList = new ArrayList<String>();
+    private transient List<String> fieldList = new ArrayList<>();
     
     /**
      * Constructs a new <tt>CsvReader</tt>.

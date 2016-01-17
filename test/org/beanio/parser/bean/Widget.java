@@ -75,7 +75,7 @@ public class Widget {
     }
     public void addPart(Widget w) {
         if (partsList == null) {
-            partsList = new ArrayList<Widget>();
+            partsList = new ArrayList<>();
         }
         partsList.add(w);
     }

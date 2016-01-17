@@ -37,7 +37,7 @@ public class ResourceBundleMessageFactory implements MessageFactory {
     /* default resource bundle for messages based on the stream format */
     private ResourceBundle defaultResourceBundle;
     /* cache messages from resource bundles */
-    private ConcurrentHashMap<String, String> messageCache = new ConcurrentHashMap<String, String>();
+    private ConcurrentHashMap<String, String> messageCache = new ConcurrentHashMap<>();
     /* used to flag cache misses */
     private static final String NOT_FOUND = new String();
     

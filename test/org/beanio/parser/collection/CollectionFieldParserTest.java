@@ -94,7 +94,7 @@ public class CollectionFieldParserTest extends ParserTest {
         try {
             CollectionBean bean = (CollectionBean) in.read();
             assertArrayEquals(new int[] { 1, 100, 24 }, bean.getArray());
-            assertEquals(new HashSet<Character>(Arrays.asList('A', 'B', 'C', ' ')), bean.getSet());
+            assertEquals(new HashSet<>(Arrays.asList('A', 'B', 'C', ' ')), bean.getSet());
 
             StringWriter text = new StringWriter();
             factory.createWriter("fc1", text).write(bean);

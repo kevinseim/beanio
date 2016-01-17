@@ -30,9 +30,9 @@ public class DelimitedMarshallingContext extends MarshallingContext {
     // the index of the last committed field in the record
     private int committed = 0;
     // the list used to build the final record
-    private ArrayList<String> record = new ArrayList<String>();
+    private ArrayList<String> record = new ArrayList<>();
     // the list of entries for creating the record (may be unordered)
-    private ArrayList<Entry> entries = new ArrayList<Entry>();
+    private ArrayList<Entry> entries = new ArrayList<>();
     
     /**
      * Constructs a new <tt>DelimitedMarshallingContext</tt>.

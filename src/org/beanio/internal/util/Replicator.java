@@ -30,7 +30,7 @@ import java.util.*;
  */
 public class Replicator {
 
-    private Set<Replicateable> archetypes = new HashSet<Replicateable>();
+    private Set<Replicateable> archetypes = new HashSet<>();
     
     /**
      * Constructs a new <tt>Replicator</tt>.
@@ -61,7 +61,7 @@ public class Replicator {
         }
         
         // create a map of archetypes --> clones, aka old reference --> new reference
-        IdentityHashMap<Object, Object> clones = new IdentityHashMap<Object, Object>();
+        IdentityHashMap<Object, Object> clones = new IdentityHashMap<>();
         
         // clone all registered archetypes and add their reference to the map
         for (Replicateable archetype : archetypes) {

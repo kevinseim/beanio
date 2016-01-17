@@ -34,7 +34,7 @@ public class CollectionParser extends Aggregation {
     // the collection type
     private Class<? extends Collection<Object>> type;
     // the property value
-    private ParserLocal<Object> value = new ParserLocal<Object>();  
+    private ParserLocal<Object> value = new ParserLocal<>();  
     
     /**
      * Constructs a new <tt>CollectionParser</tt>.

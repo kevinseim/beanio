@@ -146,7 +146,7 @@ class ElementStack {
      */
     public void addNamespace(String prefix, String namespace) {
         if (nsMap == null) {
-            nsMap = new HashMap<String,String>();
+            nsMap = new HashMap<>();
         }
         nsMap.put(namespace, prefix);
     }

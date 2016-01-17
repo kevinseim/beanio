@@ -65,7 +65,7 @@ public class XmlMappingReader {
             DocumentBuilder builder = factory.newDocumentBuilder();
             builder.setEntityResolver(createEntityResolver());
 
-            final List<String> errorMessages = new ArrayList<String>();
+            final List<String> errorMessages = new ArrayList<>();
 
             builder.setErrorHandler(new ErrorHandler() {
                 public void warning(SAXParseException exception) throws SAXException {

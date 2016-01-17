@@ -95,7 +95,7 @@ public class XmlWriter implements RecordWriter, StatefulWriter {
     /* the next index to try when auto generating a namespace prefix */
     private int namespaceCount = 0;
     /* Map of auto-generated namespace prefixes to namespaces */
-    private Map<String,String> namespaceMap = new HashMap<String,String>();
+    private Map<String,String> namespaceMap = new HashMap<>();
     
     /* the minimum level last stored when the state was updated */
     private int dirtyLevel = 0;
@@ -365,7 +365,7 @@ public class XmlWriter implements RecordWriter, StatefulWriter {
                 if (declareNamespace) {
                     out.writeNamespace(attPrefix, attNamespace);
                     if (attPrefixSet == null) {
-                        attPrefixSet = new HashSet<String>();
+                        attPrefixSet = new HashSet<>();
                     }
                     attPrefixSet.add(attPrefix);
                 }
@@ -664,7 +664,7 @@ public class XmlWriter implements RecordWriter, StatefulWriter {
         if (s.length % 2 != 0) {
             throw new IllegalStateException("Invalid state information for key '" + key + "'");
         }
-        Map<String,String> map = new HashMap<String,String>();
+        Map<String,String> map = new HashMap<>();
         for (int n=0; n<s.length; n+=2) {
             map.put(s[n], s[n+1]);
         }

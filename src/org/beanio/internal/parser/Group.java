@@ -39,9 +39,9 @@ public class Group extends ParserComponent implements Selector {
     private int order = 1;
     private Property property = null;
     // the current group count
-    private ParserLocal<Integer> count = new ParserLocal<Integer>(0);
+    private ParserLocal<Integer> count = new ParserLocal<>(0);
     // the last matched child
-    private ParserLocal<Selector> lastMatched = new ParserLocal<Selector>();
+    private ParserLocal<Selector> lastMatched = new ParserLocal<>();
     
     /**
      * Constructs a new <tt>Group</tt>.

@@ -35,7 +35,7 @@ public class XmlParserConfiguration implements Cloneable {
     private String encoding = "utf-8";
     
     /* Map of namespace prefixes to namespace uri's */
-    private Map<String,String> namespaceMap = new HashMap<String,String>();
+    private Map<String,String> namespaceMap = new HashMap<>();
     
     /**
      * Constructs a new <tt>XmlConfiguration</tt>.

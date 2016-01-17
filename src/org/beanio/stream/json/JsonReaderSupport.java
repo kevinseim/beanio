@@ -57,7 +57,7 @@ public abstract class JsonReaderSupport {
         String fieldName = null;
         StringBuilder text = null;
         
-        Map<String,Object> map = new HashMap<String,Object>();
+        Map<String,Object> map = new HashMap<>();
         
         int state = 0;
         
@@ -178,7 +178,7 @@ public abstract class JsonReaderSupport {
      * @throws IOException
      */
     protected List<Object> readArray() throws IOException {
-        List<Object> list = new ArrayList<Object>();
+        List<Object> list = new ArrayList<>();
         StringBuilder text = null;
         int state = 0;
         

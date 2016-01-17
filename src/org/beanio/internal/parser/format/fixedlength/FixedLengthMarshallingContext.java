@@ -33,7 +33,7 @@ public class FixedLengthMarshallingContext extends MarshallingContext {
     // appending the last required field
     private int committed = 0;
     // the list of entries for creating the record (may be unordered)
-    private ArrayList<Entry> entries = new ArrayList<Entry>();
+    private ArrayList<Entry> entries = new ArrayList<>();
     
     /**
      * Constructs a new <tt>FixedLengthMarshallingContext</tt>.

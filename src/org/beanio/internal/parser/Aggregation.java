@@ -40,7 +40,7 @@ public abstract class Aggregation extends DelegatingParser implements Property, 
     protected Field occurs;
     
     // the current iteration index
-    private ParserLocal<Integer> index = new ParserLocal<Integer>();
+    private ParserLocal<Integer> index = new ParserLocal<>();
     
     /**
      * Constructs a new <tt>Aggregation</tt>.

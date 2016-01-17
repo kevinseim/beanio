@@ -26,8 +26,8 @@ import java.util.*;
 public class BeanIOConfig implements Cloneable {
 
     private String source;
-    private List<StreamConfig> streamList = new ArrayList<StreamConfig>();
-    private List<TypeHandlerConfig> handlerList = new ArrayList<TypeHandlerConfig>();
+    private List<StreamConfig> streamList = new ArrayList<>();
+    private List<TypeHandlerConfig> handlerList = new ArrayList<>();
     
     /**
      * Constructs a new <tt>BeanIOConfig</tt>.

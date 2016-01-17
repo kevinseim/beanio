@@ -54,10 +54,10 @@ public class TreeNode<T extends TreeNode> implements Replicateable, Iterable<T> 
             children = null;
         }
         else if (size < 0 || size > 10) {
-            children = new ArrayList<T>();
+            children = new ArrayList<>();
         }
         else {
-            children = new ArrayList<T>(size);
+            children = new ArrayList<>(size);
         }
     }
     
@@ -158,7 +158,7 @@ public class TreeNode<T extends TreeNode> implements Replicateable, Iterable<T> 
      */
     public void add(T child) throws IllegalArgumentException {
         if (children == null) {
-            children = new ArrayList<T>();
+            children = new ArrayList<>();
         }
         
         if (isSupportedChild(child)) {
@@ -230,7 +230,7 @@ public class TreeNode<T extends TreeNode> implements Replicateable, Iterable<T> 
             return;
         }
         
-        List<T> list = new ArrayList<T>(children.size());
+        List<T> list = new ArrayList<>(children.size());
         for (T node : children) {
             list.add((T) map.get(node));
         }

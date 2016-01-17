@@ -55,7 +55,7 @@ public class TypeHandlerFactory {
 
     private TypeHandlerFactory parent;
     private ClassLoader classLoader;
-    private Map<String, TypeHandler> handlerMap = new HashMap<String, TypeHandler>();
+    private Map<String, TypeHandler> handlerMap = new HashMap<>();
 
     private static final String NAME_KEY = "name:";
     private static final String TYPE_KEY = "type:";

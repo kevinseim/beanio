@@ -34,7 +34,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
     private static final String WRITTEN_KEY = "written";
     
     /* state attributes */
-    private ParserLocal<Boolean> written = new ParserLocal<Boolean>(false);
+    private ParserLocal<Boolean> written = new ParserLocal<>(false);
     
     /* marshalling flags */
     private boolean group;

@@ -47,7 +47,7 @@ public abstract class FlatParserFactory extends ParserFactorySupport {
     @SuppressWarnings("unused")
     private static class NodeComparator implements Comparator<Component> {
 
-        private IdentityHashMap<Component, Integer> cache = new IdentityHashMap<Component, Integer>();
+        private IdentityHashMap<Component, Integer> cache = new IdentityHashMap<>();
         
         /*
          * (non-Javadoc)

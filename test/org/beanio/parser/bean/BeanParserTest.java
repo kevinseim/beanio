@@ -243,7 +243,7 @@ public class BeanParserTest extends ParserTest {
         w.setId(1);
         w.setName("name1");
         
-        Map<String,Widget> map = new HashMap<String,Widget>();
+        Map<String,Widget> map = new HashMap<>();
         map.put("widget", w);
         
         StringWriter text = new StringWriter();

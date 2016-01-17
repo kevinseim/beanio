@@ -32,7 +32,7 @@ public abstract class ParsingContext {
     
     private int fieldOffset = 0;
     private Object[] localHeap;
-    private ArrayList<Iteration> iterationStack = new ArrayList<Iteration>();
+    private ArrayList<Iteration> iterationStack = new ArrayList<>();
     
     /**
      * Constructs a new <tt>ParsingContext</tt>.

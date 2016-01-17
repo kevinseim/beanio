@@ -37,7 +37,7 @@ public class CsvRecordParser implements RecordMarshaller, RecordUnmarshaller {
     private boolean unquotedQuotesAllowed = false;
     private boolean alwaysQuote = false;
     
-    private List<String> fieldList = new ArrayList<String>();
+    private List<String> fieldList = new ArrayList<>();
     
     /**
      * Constructs a new <tt>CsvRecordParser</tt>.

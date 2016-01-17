@@ -35,7 +35,7 @@ import org.beanio.internal.parser.Stream;
 public class DefaultStreamFactory extends StreamFactory {
 
     private StreamCompiler compiler;
-    private Map<String, Stream> contextMap = new ConcurrentHashMap<String, Stream>();
+    private Map<String, Stream> contextMap = new ConcurrentHashMap<>();
 
     /**
      * Constructs a new <tt>DefaultStreamFactory</tt>.

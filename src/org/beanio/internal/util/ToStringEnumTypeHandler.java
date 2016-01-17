@@ -24,7 +24,7 @@ public class ToStringEnumTypeHandler implements TypeHandler {
     public ToStringEnumTypeHandler(Class<Enum> type) {
         this.type = type;
         
-        map = new HashMap<String,Enum>();
+        map = new HashMap<>();
         
         Enum[] values = type.getEnumConstants();
         for (Enum value : values) {

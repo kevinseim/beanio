@@ -35,7 +35,7 @@ public class XmlUnmarshallingContext extends UnmarshallingContext {
     /* The last parsed node in the document, which is the parent node of the next field/bean to parse */
     private Element position;
     /* This stack of elements is used to store the last XML node parsed for a field or bean collection. */
-    private LinkedList<Element> elementStack = new LinkedList<Element>();
+    private LinkedList<Element> elementStack = new LinkedList<>();
     /* Store previously matched groups for parsing subsequent records in a record group */
     private XmlNode[] groupStack;
     

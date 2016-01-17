@@ -34,7 +34,7 @@ public class MapParser extends Aggregation {
     // the child property used for the key
     private Property key;
     // the property value
-    private ParserLocal<Object> value = new ParserLocal<Object>();    
+    private ParserLocal<Object> value = new ParserLocal<>();    
     
     /**
      * Constructs a new <tt>MapParser</tt>.

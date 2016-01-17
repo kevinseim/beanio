@@ -51,7 +51,7 @@ public class Segment extends ParserComponent {
     // temporarily stores missing children during unmarshalling
     private ParserLocal<List<Parser>> missing = new ParserLocal<List<Parser>>() {
         protected List<Parser> createDefaultValue() {
-            return new ArrayList<Parser>();
+            return new ArrayList<>();
         }
     };
     

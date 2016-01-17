@@ -138,11 +138,11 @@ public class ErrorContext implements RecordContext, Cloneable {
      */
     public void addFieldError(String fieldName, String message) {
         if (fieldErrorMap == null) {
-            fieldErrorMap = new HashMap<String, Collection<String>>();
+            fieldErrorMap = new HashMap<>();
         }
         Collection<String> errors = fieldErrorMap.get(fieldName);
         if (errors == null) {
-            errors = new ArrayList<String>();
+            errors = new ArrayList<>();
             errors.add(message);
             fieldErrorMap.put(fieldName, errors);
         }
@@ -157,7 +157,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      */
     public void addRecordError(String message) {
         if (recordErrors == null) {
-            recordErrors = new ArrayList<String>(3);
+            recordErrors = new ArrayList<>(3);
         }
         recordErrors.add(message);
     }
@@ -170,13 +170,13 @@ public class ErrorContext implements RecordContext, Cloneable {
      */
     public void setFieldText(String fieldName, String text, boolean repeating) {
         if (fieldTextMap == null) {
-            fieldTextMap = new HashMap<String,String>();
+            fieldTextMap = new HashMap<>();
         }
         
         if (repeating) {
             // update the field count
             if (fieldCountMap == null) {
-                fieldCountMap = new HashMap<String,Counter>();
+                fieldCountMap = new HashMap<>();
             }
             
             Counter counter = fieldCountMap.get(fieldName);

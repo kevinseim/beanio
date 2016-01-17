@@ -61,7 +61,7 @@ public class JsonMarshallingContext extends MarshallingContext {
             value = new LinkedHashMap<String,String>();
         }
         else { // array
-            value = new ArrayList<Object>();
+            value = new ArrayList<>();
         }
         
         put(type, value);
@@ -99,14 +99,14 @@ public class JsonMarshallingContext extends MarshallingContext {
                     list = (List<Object>) list().get(index);
                 }
                 else {
-                    list = new ArrayList<Object>();
+                    list = new ArrayList<>();
                     list().add(list);                    
                 }
             }
             else { // object
                 list = (List<Object>) map().get(type.getJsonName());
                 if (list == null) {
-                    list = new ArrayList<Object>();
+                    list = new ArrayList<>();
                     map().put(type.getJsonName(), list);
                 }
             }

@@ -76,7 +76,7 @@ public class StreamBuilder extends GroupBuilderSupport<StreamBuilder> {
      * @return this
      */
     public StreamBuilder parser(RecordParserFactory parser) {
-        BeanConfig<RecordParserFactory> bc = new BeanConfig<RecordParserFactory>();
+        BeanConfig<RecordParserFactory> bc = new BeanConfig<>();
         bc.setInstance(parser);
         config.setParserFactory(bc);
         return this;

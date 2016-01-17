@@ -32,7 +32,7 @@ public class DelimitedRecordParser implements RecordUnmarshaller, RecordMarshall
     private char escape;
     private boolean escapeEnabled;
     
-    private List<String> fieldList = new ArrayList<String>();
+    private List<String> fieldList = new ArrayList<>();
     
     /**
      * Constructs a new <tt>DelimitedRecordParser</tt>.
