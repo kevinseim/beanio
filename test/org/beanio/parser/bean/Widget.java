@@ -28,6 +28,7 @@ public class Widget {
     private List<Widget> partsList;
     private Map<String,Widget> partsMap;
     
+    @Override
     public String toString() {
         return 
             "[id=" + id +

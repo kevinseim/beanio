@@ -40,6 +40,7 @@ public abstract class XmlFieldFormat implements FieldFormat, XmlNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#insertValue(org.beanio.internal.parser.MarshallingContext, java.lang.Object)
      */
+    @Override
     public boolean insertValue(MarshallingContext context, Object value) {
         return false;
     }
@@ -48,6 +49,7 @@ public abstract class XmlFieldFormat implements FieldFormat, XmlNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#insertField(org.beanio.internal.parser.MarshallingContext, java.lang.String)
      */
+    @Override
     public void insertField(MarshallingContext context, String fieldText) {
         XmlMarshallingContext ctx = (XmlMarshallingContext) context;
         
@@ -69,6 +71,7 @@ public abstract class XmlFieldFormat implements FieldFormat, XmlNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#extract(org.beanio.internal.parser.UnmarshallingContext, boolean)
      */
+    @Override
     public String extract(UnmarshallingContext context, boolean reportErrors) {
         XmlUnmarshallingContext ctx = (XmlUnmarshallingContext) context;
         
@@ -107,6 +110,7 @@ public abstract class XmlFieldFormat implements FieldFormat, XmlNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#getSize()
      */
+    @Override
     public int getSize() {
         return 1;
     }
@@ -131,6 +135,7 @@ public abstract class XmlFieldFormat implements FieldFormat, XmlNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#isLazy()
      */
+    @Override
     public boolean isLazy() {
         return lazy;
     }

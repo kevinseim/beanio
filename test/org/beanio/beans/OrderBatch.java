@@ -38,6 +38,7 @@ public class OrderBatch {
         orders = Arrays.asList(orderArray);
     }
     
+    @Override
     public String toString() {
         return "OrderBatch" +
             "[count=" + batchCount +

@@ -50,6 +50,7 @@ public abstract class PropertyComponent extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#isIdentifier()
      */
+    @Override
     public boolean isIdentifier() {
         return identifier;
     }
@@ -58,6 +59,7 @@ public abstract class PropertyComponent extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#setIdentifier(boolean)
      */
+    @Override
     public void setIdentifier(boolean identifier) {
         this.identifier = identifier;
     }
@@ -66,6 +68,7 @@ public abstract class PropertyComponent extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#getAccessor()
      */
+    @Override
     public PropertyAccessor getAccessor() {
         return accessor;
     }
@@ -74,6 +77,7 @@ public abstract class PropertyComponent extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#setAccessor(org.beanio.internal.parser.PropertyAccessor)
      */
+    @Override
     public void setAccessor(PropertyAccessor accessor) {
         this.accessor = accessor;
     }
@@ -82,6 +86,7 @@ public abstract class PropertyComponent extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#getType()
      */
+    @Override
     public Class<?> getType() {
         return type;
     }
@@ -90,6 +95,7 @@ public abstract class PropertyComponent extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#setType(java.lang.Class)
      */
+    @Override
     public void setType(Class<?> type) {
         this.type = type;
     }

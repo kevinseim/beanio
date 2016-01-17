@@ -29,6 +29,7 @@ public class DelimitedStreamFormat extends StreamFormatSupport {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.StreamFormat#createUnmarshallingContext()
      */
+    @Override
     public UnmarshallingContext createUnmarshallingContext() {
         return new DelimitedUnmarshallingContext();
     }
@@ -37,6 +38,7 @@ public class DelimitedStreamFormat extends StreamFormatSupport {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.StreamFormat#createMarshallingContext()
      */
+    @Override
     public MarshallingContext createMarshallingContext(boolean streaming) {
         return new DelimitedMarshallingContext();
     }

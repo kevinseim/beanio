@@ -141,6 +141,7 @@ public class DelimitedMarshallingContext extends MarshallingContext {
             this.text = text;
         }
         
+        @Override
         public int compareTo(Entry o) {
             return Integer.valueOf(this.order).compareTo(o.order);
         }

@@ -754,6 +754,7 @@ public class XmlMappingParser implements StringUtil.PropertySource {
      * (non-Javadoc)
      * @see org.beanio.internal.util.StringUtil.PropertiesSource#getProperty(java.lang.String)
      */
+    @Override
     public String getProperty(String key) {
         String value = null;
         if (properties != null) {

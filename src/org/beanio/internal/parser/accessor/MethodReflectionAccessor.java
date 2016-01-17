@@ -52,6 +52,7 @@ public class MethodReflectionAccessor extends PropertyAccessorSupport implements
      * (non-Javadoc)
      * @see org.beanio.parser.PropertyAccessor#getValue(java.lang.Object)
      */
+    @Override
     public Object getValue(Object bean) {
         if (getter == null) {
             throw new BeanIOException("There is no readable property named '" + 
@@ -72,6 +73,7 @@ public class MethodReflectionAccessor extends PropertyAccessorSupport implements
      * (non-Javadoc)
      * @see org.beanio.parser.PropertyAccessor#setValue(java.lang.Object, java.lang.Object)
      */
+    @Override
     public void setValue(Object bean, Object value) {
         if (setter == null) {
             throw new BeanIOException(

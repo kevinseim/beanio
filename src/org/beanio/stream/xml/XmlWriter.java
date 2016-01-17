@@ -182,6 +182,7 @@ public class XmlWriter implements RecordWriter, StatefulWriter {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordWriter#write(java.lang.Object)
      */
+    @Override
     public void write(Object record) throws IOException {
         try {
             // write the XMl header if needed
@@ -430,6 +431,7 @@ public class XmlWriter implements RecordWriter, StatefulWriter {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordWriter#flush()
      */
+    @Override
     public void flush() throws IOException {
         try {
             out.flush();
@@ -443,6 +445,7 @@ public class XmlWriter implements RecordWriter, StatefulWriter {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordWriter#close()
      */
+    @Override
     public void close() throws IOException {
         try {
             while (elementStack != null) {
@@ -524,6 +527,7 @@ public class XmlWriter implements RecordWriter, StatefulWriter {
      * (non-Javadoc)
      * @see org.beanio.util.StatefulWriter#updateState(java.lang.String, java.util.Map)
      */
+    @Override
     public void updateState(String namespace, Map<String, Object> state) {
         state.put(getKey(namespace, OUTPUT_HEADER_KEY), outputHeader);
         state.put(getKey(namespace, NAMESPACE_MAP_KEY), toToken(namespaceMap));
@@ -567,6 +571,7 @@ public class XmlWriter implements RecordWriter, StatefulWriter {
      * (non-Javadoc)
      * @see org.beanio.util.StatefulWriter#restoreState(java.lang.String, java.util.Map)
      */
+    @Override
     public void restoreState(String namespace, Map<String, Object> state) throws IllegalStateException {
         this.outputHeader = (Boolean) getRequired(namespace, OUTPUT_HEADER_KEY, state);
         

@@ -44,6 +44,7 @@ public class DelimitedRecordFormat implements RecordFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.RecordFormat#matches(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public boolean matches(UnmarshallingContext context) {
         int length = ((DelimitedUnmarshallingContext)context).getFieldCount();
         return !(length < minMatchLength || length > maxMatchLength);
@@ -53,6 +54,7 @@ public class DelimitedRecordFormat implements RecordFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.RecordFormat#validate(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public void validate(UnmarshallingContext context) {
         int length = ((DelimitedUnmarshallingContext)context).getFieldCount();
         

@@ -26,20 +26,25 @@ import java.io.*;
  */
 public class RecordParserFactorySupport implements RecordParserFactory {
 
+    @Override
     public void init() throws IllegalArgumentException { }
 
+    @Override
     public RecordReader createReader(Reader in) throws IllegalArgumentException {
         throw new UnsupportedOperationException("BeanReader not supported");
     }
 
+    @Override
     public RecordWriter createWriter(Writer out) throws IllegalArgumentException {
         throw new UnsupportedOperationException("BeanWriter not supported");
     }
 
+    @Override
     public RecordMarshaller createMarshaller() throws IllegalArgumentException {
         throw new UnsupportedOperationException("Marshaller not supported");
     }
 
+    @Override
     public RecordUnmarshaller createUnmarshaller() throws IllegalArgumentException {
         throw new UnsupportedOperationException("Unmarshaller not supported");
     }

@@ -44,6 +44,7 @@ public class FieldReflectionAccessor extends PropertyAccessorSupport implements 
      * (non-Javadoc)
      * @see org.beanio.internal.parser.PropertyAccessor#getValue(java.lang.Object)
      */
+    @Override
     public Object getValue(Object bean) {
         try {
             return field.get(bean);
@@ -58,6 +59,7 @@ public class FieldReflectionAccessor extends PropertyAccessorSupport implements 
      * (non-Javadoc)
      * @see org.beanio.internal.parser.PropertyAccessor#setValue(java.lang.Object, java.lang.Object)
      */
+    @Override
     public void setValue(Object bean, Object value) {
         try {
             field.set(bean, value);

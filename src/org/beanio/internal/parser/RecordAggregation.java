@@ -44,6 +44,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * Sets the collection type.
      * @param type {@link Collection} class type
      */
+    @Override
     public void setType(Class<?> type) {
         this.type = type;
     }
@@ -52,6 +53,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#getType()
      */
+    @Override
     public Class<?> getType() {
         return type;
     }
@@ -60,6 +62,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#createValue()
      */
+    @Override
     public Object createValue(ParsingContext context) {
         if (value.get(context) == Value.MISSING) {
             value.set(context, createAggregationType());
@@ -98,6 +101,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#getProperty()
      */
+    @Override
     public Property getProperty() {
         // for now, a collection cannot be a property root so its safe to return null here
         return null;
@@ -107,6 +111,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#matchNextRecord(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public Selector matchNext(UnmarshallingContext context) {
         if (getSelector().matchNext(context) != null) {
             return this;
@@ -118,6 +123,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#matchAny(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public Selector matchAny(UnmarshallingContext context) {
         return getSelector().matchAny(context);
     }
@@ -126,6 +132,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#matchNextBean(org.beanio.internal.parser.MarshallingContext, java.lang.Object)
      */
+    @Override
     public Selector matchNext(MarshallingContext context) {
         return getSelector().matchNext(context);
     }
@@ -134,6 +141,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#close(org.beanio.internal.parser.ParsingContext)
      */
+    @Override
     public Selector close(ParsingContext context) {
         return getSelector().close(context);
     }
@@ -142,6 +150,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#reset(org.beanio.internal.parser.ParsingContext)
      */
+    @Override
     public void reset(ParsingContext context) {
         getSelector().reset(context);
     }
@@ -150,6 +159,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#getCount(org.beanio.internal.parser.ParsingContext)
      */
+    @Override
     public int getCount(ParsingContext context) {
         return getSelector().getCount(context);
     }
@@ -158,6 +168,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#setCount(org.beanio.internal.parser.ParsingContext, int)
      */
+    @Override
     public void setCount(ParsingContext context, int count) {
         getSelector().setCount(context, count);
     }
@@ -166,6 +177,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#getOrder()
      */
+    @Override
     public int getOrder() {
         return getSelector().getOrder();
     }
@@ -174,6 +186,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#isMaxOccursReached(org.beanio.internal.parser.ParsingContext)
      */
+    @Override
     public boolean isMaxOccursReached(ParsingContext context) {
         return getSelector().isMaxOccursReached(context);
     }
@@ -182,6 +195,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.util.StatefulWriter#updateState(java.lang.String, java.util.Map)
      */
+    @Override
     public void updateState(ParsingContext context, String namespace, Map<String, Object> state) {
         getSelector().updateState(context, namespace, state);
     }
@@ -190,6 +204,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.util.StatefulWriter#restoreState(java.lang.String, java.util.Map)
      */
+    @Override
     public void restoreState(ParsingContext context, String namespace, Map<String, Object> state) throws IllegalStateException {
         getSelector().restoreState(context, namespace, state);
     }
@@ -198,6 +213,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#getMinOccurs()
      */
+    @Override
     public int getMinOccurs() {
         return getSelector().getMinOccurs();
     }
@@ -206,6 +222,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#getMaxOccurs()
      */
+    @Override
     public int getMaxOccurs() {
         return getSelector().getMaxOccurs();
     }
@@ -235,6 +252,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#getAccessor()
      */
+    @Override
     public PropertyAccessor getAccessor() {
         return accessor;
     }
@@ -243,6 +261,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#setAccessor(org.beanio.internal.parser.PropertyAccessor)
      */
+    @Override
     public void setAccessor(PropertyAccessor accessor) {
         this.accessor = accessor;
     }
@@ -251,6 +270,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#defines(java.lang.Object)
      */
+    @Override
     public boolean defines(Object value) {
         throw new IllegalStateException("RecordAggregation cannot identify a bean");
     }
@@ -259,6 +279,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#setIdentifier(boolean)
      */
+    @Override
     public void setIdentifier(boolean identifier) {
         // a collection cannot be used to identify a bean
     }
@@ -280,6 +301,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#skip(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public void skip(UnmarshallingContext context) {
         getSelector().skip(context);
     }
@@ -288,6 +310,7 @@ public abstract class RecordAggregation extends DelegatingParser implements Sele
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#isRecordGroup()
      */
+    @Override
     public boolean isRecordGroup() {
         return false;
     }

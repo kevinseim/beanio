@@ -39,6 +39,7 @@ public abstract class FlatFieldFormatSupport implements FlatFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#insertValue(org.beanio.internal.parser.MarshallingContext, java.lang.Object)
      */
+    @Override
     public boolean insertValue(MarshallingContext context, Object value) {
         return false;
     }
@@ -48,6 +49,7 @@ public abstract class FlatFieldFormatSupport implements FlatFieldFormat {
      * @param context the {@link MarshallingContext} holding the record
      * @param text the field text to insert into the record
      */
+    @Override
     public void insertField(MarshallingContext context, String text) {
         boolean commit = text != null || !isLazy();
         
@@ -67,6 +69,7 @@ public abstract class FlatFieldFormatSupport implements FlatFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#extract(org.beanio.internal.parser.UnmarshallingContext, boolean)
      */
+    @Override
     public String extract(UnmarshallingContext context, boolean reporting) {
         String text = extractFieldText(context, reporting);
         
@@ -116,6 +119,7 @@ public abstract class FlatFieldFormatSupport implements FlatFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.flat.FlatFieldFormat#getPosition()
      */
+    @Override
     public int getPosition() {
         return position;
     }
@@ -132,6 +136,7 @@ public abstract class FlatFieldFormatSupport implements FlatFieldFormat {
         this.until = until;
     }
 
+    @Override
     public int getSize() {
         return 1;
     }
@@ -140,6 +145,7 @@ public abstract class FlatFieldFormatSupport implements FlatFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#isNillable()
      */
+    @Override
     public boolean isNillable() {
         return false;
     }
@@ -164,6 +170,7 @@ public abstract class FlatFieldFormatSupport implements FlatFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#isLazy()
      */
+    @Override
     public boolean isLazy() {
         return lazy;
     }

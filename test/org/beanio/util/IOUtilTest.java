@@ -31,6 +31,7 @@ public class IOUtilTest {
     @Test
     public void testCloseReader() {
         Reader in = new FilterReader(new StringReader("value")) {
+            @Override
             public void close() throws IOException {
                 throw new IOException();
             }
@@ -42,6 +43,7 @@ public class IOUtilTest {
     @Test
     public void testCloseWriter() {
         Writer out = new StringWriter() {
+            @Override
             public void close() throws IOException {
                 throw new IOException();
             }
@@ -54,6 +56,7 @@ public class IOUtilTest {
     public void testCloseInputStream() {
         byte [] b = new byte[] { 1, 2, 3, 4 };
         InputStream in = new ByteArrayInputStream(b) {
+            @Override
             public void close() throws IOException {
                 throw new IOException();
             }
@@ -65,6 +68,7 @@ public class IOUtilTest {
     @Test
     public void testCloseOutputStream() {
         OutputStream out = new ByteArrayOutputStream() {
+            @Override
             public void close() throws IOException {
                 throw new IOException();
             }

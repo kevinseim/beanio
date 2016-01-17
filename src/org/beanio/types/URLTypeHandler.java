@@ -31,6 +31,7 @@ public class URLTypeHandler implements TypeHandler {
      * @return the parsed {@link URL} or null if <tt>text</tt>
      *   is null or an empty string
      */
+    @Override
     public Object parse(String text) throws TypeConversionException {
         if (text == null || "".equals(text)) {
             return null;
@@ -51,6 +52,7 @@ public class URLTypeHandler implements TypeHandler {
      * @param value the {@link URL} to format
      * @return the formatted text
      */
+    @Override
     public String format(Object value) {
         if (value == null)
             return null;
@@ -61,6 +63,7 @@ public class URLTypeHandler implements TypeHandler {
     /**
      * Returns {@link URL}.
      */
+    @Override
     public Class<?> getType() {
         return URL.class;
     }

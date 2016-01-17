@@ -39,6 +39,7 @@ public class FixedLengthRecordParserFactory extends FixedLengthParserConfigurati
      * (non-Javadoc)
      * @see org.beanio.stream.RecordParserFactory#init()
      */
+    @Override
     public void init() throws BeanIOConfigurationException {
         
     }
@@ -47,6 +48,7 @@ public class FixedLengthRecordParserFactory extends FixedLengthParserConfigurati
      * (non-Javadoc)
      * @see org.beanio.stream.RecordParserFactory#createReader(java.io.Reader)
      */
+    @Override
     public RecordReader createReader(Reader in) throws IllegalArgumentException {
         return new FixedLengthReader(in, this);
     }
@@ -55,6 +57,7 @@ public class FixedLengthRecordParserFactory extends FixedLengthParserConfigurati
      * (non-Javadoc)
      * @see org.beanio.stream.RecordParserFactory#createWriter(java.io.Writer)
      */
+    @Override
     public RecordWriter createWriter(Writer out) throws IllegalArgumentException {
         return new FixedLengthWriter(out, getRecordTerminator());
     }
@@ -63,6 +66,7 @@ public class FixedLengthRecordParserFactory extends FixedLengthParserConfigurati
      * (non-Javadoc)
      * @see org.beanio.stream.RecordParserFactory#createMarshaller()
      */
+    @Override
     public RecordMarshaller createMarshaller() throws IllegalArgumentException {
         return parser;
     }
@@ -71,6 +75,7 @@ public class FixedLengthRecordParserFactory extends FixedLengthParserConfigurati
      * (non-Javadoc)
      * @see org.beanio.stream.RecordParserFactory#createUnmarshaller()
      */
+    @Override
     public RecordUnmarshaller createUnmarshaller() throws IllegalArgumentException {
         return parser;
     }

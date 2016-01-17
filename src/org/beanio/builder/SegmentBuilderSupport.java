@@ -27,6 +27,7 @@ public abstract class SegmentBuilderSupport<T extends SegmentBuilderSupport<T>> 
 
     SegmentBuilderSupport() { }
     
+    @Override
     protected abstract SegmentConfig getConfig();
     
     /**

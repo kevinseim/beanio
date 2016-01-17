@@ -43,6 +43,7 @@ public class DoubleTypeHandler extends NumberTypeHandler {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#getType()
      */
+    @Override
     public Class<?> getType() {
         return Double.class;
     }

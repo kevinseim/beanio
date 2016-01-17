@@ -42,6 +42,7 @@ public class JsonRecordUnmarshaller extends JsonReaderSupport implements RecordU
      * (non-Javadoc)
      * @see org.beanio.stream.RecordUnmarshaller#unmarshal(java.lang.String)
      */
+    @Override
     public Map<String,Object> unmarshal(String text) throws RecordIOException {
         if (text == null) {
             return null;

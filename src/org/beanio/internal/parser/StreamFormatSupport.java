@@ -47,6 +47,7 @@ public abstract class StreamFormatSupport implements StreamFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.StreamFormat#getName()
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -57,6 +58,7 @@ public abstract class StreamFormatSupport implements StreamFormat {
      * @param in the input stream to read from
      * @return a new <tt>RecordReader</tt>
      */
+    @Override
     public RecordReader createRecordReader(Reader in) {
         return recordParserFactory.createReader(in);
     }
@@ -67,6 +69,7 @@ public abstract class StreamFormatSupport implements StreamFormat {
      * @param out the output stream to write to
      * @return a new <tt>RecordWriter</tt>
      */
+    @Override
     public RecordWriter createRecordWriter(Writer out) {
         return recordParserFactory.createWriter(out);
     }
@@ -75,6 +78,7 @@ public abstract class StreamFormatSupport implements StreamFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.StreamFormat#createRecordMarshaller()
      */
+    @Override
     public RecordMarshaller createRecordMarshaller() {
         return recordParserFactory.createMarshaller();
     }
@@ -83,6 +87,7 @@ public abstract class StreamFormatSupport implements StreamFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.StreamFormat#createRecordUnmarshaller()
      */
+    @Override
     public RecordUnmarshaller createRecordUnmarshaller() {
         return recordParserFactory.createUnmarshaller();
     }

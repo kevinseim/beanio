@@ -48,6 +48,7 @@ public class GroupConfig extends PropertyConfig implements SelectorConfig {
      * number may appear in any order.
      * @return the order of this record
      */
+    @Override
     public Integer getOrder() {
         return order;
     }
@@ -58,6 +59,7 @@ public class GroupConfig extends PropertyConfig implements SelectorConfig {
      * number may appear in any order.
      * @param order the order of this record
      */
+    @Override
     public void setOrder(Integer order) {
         this.order = order;
     }
@@ -67,6 +69,7 @@ public class GroupConfig extends PropertyConfig implements SelectorConfig {
      * Map key when <tt>collection</tt> is set to <tt>map</tt>.
      * @return the key property name
      */
+    @Override
     public String getKey() {
         return key;
     }

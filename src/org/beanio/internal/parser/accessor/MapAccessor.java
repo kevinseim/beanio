@@ -42,6 +42,7 @@ public class MapAccessor implements PropertyAccessor {
      * @see org.beanio.parser.PropertyAccessor#getValue(java.lang.Object)
      */
     @SuppressWarnings("rawtypes")
+    @Override
     public Object getValue(Object bean) {
         return ((Map)bean).get(key);
     }
@@ -51,6 +52,7 @@ public class MapAccessor implements PropertyAccessor {
      * @see org.beanio.parser.PropertyAccessor#setValue(java.lang.Object, java.lang.Object)
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Override
     public void setValue(Object bean, Object value) {
         ((Map)bean).put(key, value);
     }
@@ -59,6 +61,7 @@ public class MapAccessor implements PropertyAccessor {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.PropertyAccessor#isConstructorArgument()
      */
+    @Override
     public boolean isConstructorArgument() {
         return false;
     }
@@ -67,6 +70,7 @@ public class MapAccessor implements PropertyAccessor {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.PropertyAccessor#getConstructorArgumentIndex()
      */
+    @Override
     public int getConstructorArgumentIndex() {
         return -1;
     }

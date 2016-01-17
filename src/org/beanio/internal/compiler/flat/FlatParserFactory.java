@@ -53,6 +53,7 @@ public abstract class FlatParserFactory extends ParserFactorySupport {
          * (non-Javadoc)
          * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
          */
+        @Override
         public int compare(Component o1, Component o2) {
             return getPosition(o1).compareTo(getPosition(o2));
         }

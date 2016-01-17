@@ -32,6 +32,7 @@ public class AnnotatedUser extends AnnotatedUserSupport implements AnnotatedUser
     @Field(at=-1)
     public String end;
     
+    @Override
     public String[] getHands() {
         return hands;
     }

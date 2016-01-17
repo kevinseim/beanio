@@ -34,6 +34,7 @@ public class Bean extends PropertyComponent implements Property {
 
     // the bean object
     private ParserLocal<Object> bean = new ParserLocal<Object>() {
+        @Override
         public Object createDefaultValue() {
             return isRequired() ? null : Value.MISSING;
         }
@@ -42,6 +43,7 @@ public class Bean extends PropertyComponent implements Property {
     private Constructor<?> constructor;
     // used to temporarily hold constructor argument values when a constructor is specified
     private ParserLocal<Object[]> constructorArgs = new ParserLocal<Object[]>() {
+        @Override
         public Object[] createDefaultValue() {
             return constructor != null ? new Object[constructor.getParameterTypes().length] : null;
         }
@@ -58,6 +60,7 @@ public class Bean extends PropertyComponent implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#clearValue()
      */
+    @Override
     public void clearValue(ParsingContext context) {
         for (Component child : getChildren()) {
             ((Property) child).clearValue(context);
@@ -69,6 +72,7 @@ public class Bean extends PropertyComponent implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser2.Property#defines(java.lang.Object)
      */
+    @Override
     public boolean defines(Object bean) {   
         if (getType() == null) {
             return false;
@@ -110,6 +114,7 @@ public class Bean extends PropertyComponent implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#createValue()
      */
+    @Override
     public Object createValue(ParsingContext context) {
         Object b = null;
         
@@ -250,6 +255,7 @@ public class Bean extends PropertyComponent implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser2.Property#getValue()
      */
+    @Override
     public Object getValue(ParsingContext context) {
         return bean.get(context);
     }
@@ -258,6 +264,7 @@ public class Bean extends PropertyComponent implements Property {
      * Sets the bean object and populates all of its child properties.
      * 
      */
+    @Override
     public void setValue(ParsingContext context, Object value) {
         if (value == null) {
             clearValue(context);
@@ -320,6 +327,7 @@ public class Bean extends PropertyComponent implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#type()
      */
+    @Override
     public int type() {
         return (isMap()) ? Property.MAP : Property.COMPLEX;
     }

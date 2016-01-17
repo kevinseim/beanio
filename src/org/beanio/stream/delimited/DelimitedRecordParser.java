@@ -65,6 +65,7 @@ public class DelimitedRecordParser implements RecordUnmarshaller, RecordMarshall
      * (non-Javadoc)
      * @see org.beanio.stream.RecordParser#parse(java.lang.String)
      */
+    @Override
     public String[] unmarshal(String text) {
         fieldList.clear();
         
@@ -110,6 +111,7 @@ public class DelimitedRecordParser implements RecordUnmarshaller, RecordMarshall
      * (non-Javadoc)
      * @see org.beanio.stream.RecordMarshaller#marshal(java.lang.Object)
      */
+    @Override
     public String marshal(Object record) {
         return marshal((String[]) record);
     }

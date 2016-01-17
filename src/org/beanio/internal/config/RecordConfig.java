@@ -119,6 +119,7 @@ public class RecordConfig extends SegmentConfig implements SelectorConfig {
      * number may appear in any order.
      * @return the order of this record
      */
+    @Override
     public Integer getOrder() {
         return order;
     }
@@ -129,6 +130,7 @@ public class RecordConfig extends SegmentConfig implements SelectorConfig {
      * number may appear in any order.
      * @param order the order of this record
      */
+    @Override
     public void setOrder(Integer order) {
         this.order = order;
     }

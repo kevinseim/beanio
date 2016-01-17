@@ -48,6 +48,7 @@ public class UnmarshallerImpl implements Unmarshaller {
         this.layout = layout;
         
         this.context.setRecordReader(new RecordReader() {
+            @Override
             public Object read() throws RecordIOException {
                 try {
                     Object value = recordValue;
@@ -61,12 +62,15 @@ public class UnmarshallerImpl implements Unmarshaller {
                     recordValue = null;
                 }
             }
+            @Override
             public int getRecordLineNumber() {
                 return 0;
             }
+            @Override
             public String getRecordText() {
                 return recordText;
             }
+            @Override
             public void close() throws IOException { }
         });
     }
@@ -75,6 +79,7 @@ public class UnmarshallerImpl implements Unmarshaller {
      * (non-Javadoc)
      * @see org.beanio.Unmarshaller#unmarshal(java.lang.String)
      */
+    @Override
     public Object unmarshal(String text) throws MalformedRecordException, UnidentifiedRecordException,
         UnexpectedRecordException, InvalidRecordException {
         
@@ -92,6 +97,7 @@ public class UnmarshallerImpl implements Unmarshaller {
      * (non-Javadoc)
      * @see org.beanio.Unmarshaller#unmarshal(java.util.List)
      */
+    @Override
     public Object unmarshal(List<String> list) throws BeanReaderException, UnidentifiedRecordException,
         UnexpectedRecordException, InvalidRecordException {
         
@@ -113,6 +119,7 @@ public class UnmarshallerImpl implements Unmarshaller {
      * (non-Javadoc)
      * @see org.beanio.Unmarshaller#unmarshal(java.lang.String[])
      */
+    @Override
     public Object unmarshal(String[] array) throws BeanReaderException, UnidentifiedRecordException,
         UnexpectedRecordException, InvalidRecordException {
         
@@ -134,6 +141,7 @@ public class UnmarshallerImpl implements Unmarshaller {
      * (non-Javadoc)
      * @see org.beanio.Unmarshaller#unmarshal(org.w3c.dom.Node)
      */
+    @Override
     public Object unmarshal(Node node) throws BeanReaderException, UnidentifiedRecordException,
         UnexpectedRecordException, InvalidRecordException {
         
@@ -216,6 +224,7 @@ public class UnmarshallerImpl implements Unmarshaller {
      * (non-Javadoc)
      * @see org.beanio.Unmarshaller#getRecordName()
      */
+    @Override
     public String getRecordName() {
         return recordName;
     }
@@ -224,13 +233,16 @@ public class UnmarshallerImpl implements Unmarshaller {
      * (non-Javadoc)
      * @see org.beanio.Unmarshaller#getRecordContext()
      */
+    @Override
     public RecordContext getRecordContext() {
         return context.getRecordContext(0);
     }
     
+    @Override
     public void debug() {
         debug(System.out);
     }
+    @Override
     public void debug(PrintStream out) {
         ((Component)layout).print(out);
     }

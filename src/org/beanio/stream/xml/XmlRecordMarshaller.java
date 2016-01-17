@@ -99,6 +99,7 @@ public class XmlRecordMarshaller implements RecordMarshaller {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordMarshaller#marshal(java.lang.Object)
      */
+    @Override
     public String marshal(Object record) throws RecordIOException {
         try {
             return marshal((Document)record);

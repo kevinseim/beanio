@@ -50,6 +50,7 @@ public class CalendarTypeHandler extends DateTypeHandlerSupport {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#parse(java.lang.String)
      */
+    @Override
     public Calendar parse(String text) throws TypeConversionException {
         Date date = parseDate(text);
         if (date == null) {
@@ -64,6 +65,7 @@ public class CalendarTypeHandler extends DateTypeHandlerSupport {
      * (non-Javadoc)
      * @see org.beanio.types.AbstractDateTypeHandler#format(java.lang.Object)
      */
+    @Override
     public String format(Object value) {
         return formatCalendar((Calendar)value);
     }
@@ -76,6 +78,7 @@ public class CalendarTypeHandler extends DateTypeHandlerSupport {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#getType()
      */
+    @Override
     public Class<?> getType() {
         return Calendar.class;
     }

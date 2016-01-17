@@ -36,6 +36,7 @@ public abstract class PropertyAccessorSupport implements PropertyAccessor {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.PropertyAccessor#isConstructorArgument()
      */
+    @Override
     public boolean isConstructorArgument() {
         return getConstructorArgumentIndex() >= 0;
     }
@@ -53,6 +54,7 @@ public abstract class PropertyAccessorSupport implements PropertyAccessor {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.PropertyAccessor#getConstructorArgumentIndex()
      */
+    @Override
     public int getConstructorArgumentIndex() {
         return constructorArgumentIndex;
     }

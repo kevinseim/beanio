@@ -43,6 +43,7 @@ public class LongTypeHandler extends NumberTypeHandler {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#getType()
      */
+    @Override
     public Class<?> getType() {
         return Long.class;
     }

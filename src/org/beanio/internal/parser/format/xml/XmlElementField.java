@@ -48,6 +48,7 @@ public class XmlElementField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlFieldFormat#extractText(org.beanio.internal.parser.format.xml.XmlUnmarshallingContext)
      */
+    @Override
     public String extractText(XmlUnmarshallingContext context) {
         Element node = context.findElement(this);
         if (node == null) {
@@ -70,6 +71,7 @@ public class XmlElementField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlFieldFormat#insertText(org.beanio.internal.parser.format.xml.XmlMarshallingContext, java.lang.String)
      */
+    @Override
     public void insertText(XmlMarshallingContext ctx, String fieldText) {
         if (fieldText == null && isLazy()) {
             return;
@@ -108,6 +110,7 @@ public class XmlElementField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#isRepeating()
      */
+    @Override
     public boolean isRepeating() {
         return repeating;
     }
@@ -124,6 +127,7 @@ public class XmlElementField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getType()
      */
+    @Override
     public int getType() {
         return XmlNode.XML_TYPE_ELEMENT;
     }
@@ -132,6 +136,7 @@ public class XmlElementField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getLocalName()
      */
+    @Override
     public String getLocalName() {
         return localName;
     }
@@ -148,6 +153,7 @@ public class XmlElementField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getNamespace()
      */
+    @Override
     public String getNamespace() {
         return namespace;
     }
@@ -164,6 +170,7 @@ public class XmlElementField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getPrefix()
      */
+    @Override
     public String getPrefix() {
         return prefix;
     }
@@ -180,6 +187,7 @@ public class XmlElementField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#isNillable()
      */
+    @Override
     public boolean isNillable() {
         return nillable;
     }
@@ -196,6 +204,7 @@ public class XmlElementField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#isNamespaceAware()
      */
+    @Override
     public boolean isNamespaceAware() {
         return namespaceAware;
     }

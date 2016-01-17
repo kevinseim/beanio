@@ -137,6 +137,7 @@ public class TreeNode<T extends TreeNode> implements Replicateable, Iterable<T> 
      * (non-Javadoc)
      * @see java.lang.Iterable#iterator()
      */
+    @Override
     public Iterator<T> iterator() {
         //assert children != null;
         return getChildren().iterator();
@@ -207,6 +208,7 @@ public class TreeNode<T extends TreeNode> implements Replicateable, Iterable<T> 
      * @see java.lang.Object#clone()
      */
     @SuppressWarnings("unchecked")
+    @Override
     public T clone() {
         try {
             return (T) super.clone();
@@ -221,6 +223,7 @@ public class TreeNode<T extends TreeNode> implements Replicateable, Iterable<T> 
      * @see org.beanio.parser2.util.Replicateable#updateReferences(java.util.Map)
      */
     @SuppressWarnings("unchecked")
+    @Override
     public void updateReferences(Map<Object, Object> map) {
         if (children == null) {
             return;

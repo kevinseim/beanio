@@ -134,6 +134,7 @@ public class XmlWrapper extends DelegatingParser implements XmlNode {
         return true;
     }
 
+    @Override
     public String getLocalName() {
         return localName;
     }
@@ -142,6 +143,7 @@ public class XmlWrapper extends DelegatingParser implements XmlNode {
         this.localName = localName;
     }
 
+    @Override
     public String getPrefix() {
         return prefix;
     }
@@ -150,6 +152,7 @@ public class XmlWrapper extends DelegatingParser implements XmlNode {
         this.prefix = prefix;
     }
 
+    @Override
     public String getNamespace() {
         return namespace;
     }
@@ -158,6 +161,7 @@ public class XmlWrapper extends DelegatingParser implements XmlNode {
         this.namespace = namespace;
     }
 
+    @Override
     public boolean isNamespaceAware() {
         return namespaceAware;
     }
@@ -166,6 +170,7 @@ public class XmlWrapper extends DelegatingParser implements XmlNode {
         this.namespaceAware = namespaceAware;
     }
 
+    @Override
     public boolean isNillable() {
         return nillable;
     }
@@ -174,10 +179,12 @@ public class XmlWrapper extends DelegatingParser implements XmlNode {
         this.nillable = nillable;
     }
 
+    @Override
     public int getType() {
         return XmlNode.XML_TYPE_ELEMENT;
     }
     
+    @Override
     public boolean isRepeating() {
         return repeating;
     }
@@ -186,6 +193,7 @@ public class XmlWrapper extends DelegatingParser implements XmlNode {
         this.repeating = repeating;
     }
     
+    @Override
     public boolean isOptional() {
         return lazy;
     }

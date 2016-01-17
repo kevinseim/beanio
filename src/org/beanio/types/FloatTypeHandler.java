@@ -41,6 +41,7 @@ public class FloatTypeHandler extends NumberTypeHandler {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#getType()
      */
+    @Override
     public Class<?> getType() {
         return Float.class;
     }

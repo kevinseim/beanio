@@ -40,6 +40,7 @@ public class XmlRecordParserFactory extends XmlParserConfiguration
      * (non-Javadoc)
      * @see org.beanio.stream.RecordParserFactory#init()
      */
+    @Override
     public void init() throws IllegalArgumentException {
         
     }
@@ -48,6 +49,7 @@ public class XmlRecordParserFactory extends XmlParserConfiguration
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReaderFactory#createReader(java.io.Reader)
      */
+    @Override
     public RecordReader createReader(Reader in) throws IllegalArgumentException {
         Document base = null;
         if (source != null) {
@@ -61,6 +63,7 @@ public class XmlRecordParserFactory extends XmlParserConfiguration
      * (non-Javadoc)
      * @see org.beanio.stream.RecordWriterFactory#createWriter(java.io.Writer)
      */
+    @Override
     public RecordWriter createWriter(Writer out) throws IllegalArgumentException {
         return new XmlWriter(out, this);
     }
@@ -69,6 +72,7 @@ public class XmlRecordParserFactory extends XmlParserConfiguration
      * (non-Javadoc)
      * @see org.beanio.stream.RecordParserFactory#createMarshaller()
      */
+    @Override
     public RecordMarshaller createMarshaller() throws IllegalArgumentException {
         return new XmlRecordMarshaller(this);
     }
@@ -77,6 +81,7 @@ public class XmlRecordParserFactory extends XmlParserConfiguration
      * (non-Javadoc)
      * @see org.beanio.stream.RecordParserFactory#createUnmarshaller()
      */
+    @Override
     public RecordUnmarshaller createUnmarshaller() throws IllegalArgumentException {
         return new XmlRecordUnmarshaller();
     }
@@ -85,6 +90,7 @@ public class XmlRecordParserFactory extends XmlParserConfiguration
      * (non-Javadoc)
      * @see org.beanio.stream.xml.XmlDocumentAware#setSource(org.beanio.stream.xml.XmlDocumentSource)
      */
+    @Override
     public void setConfiguration(XmlStreamConfiguration source) {
         this.source = source;
     }

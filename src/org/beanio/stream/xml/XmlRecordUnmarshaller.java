@@ -55,6 +55,7 @@ public class XmlRecordUnmarshaller implements RecordUnmarshaller {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordUnmarshaller#unmarshal(java.lang.String)
      */
+    @Override
     public Object unmarshal(String text) throws RecordIOException {
         try {
             return documentBuilder.parse(new InputSource(new StringReader(text)));

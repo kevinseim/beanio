@@ -31,6 +31,7 @@ public class UUIDTypeHandler implements TypeHandler {
      * @return the parsed {@link UUID} or null if <tt>text</tt>
      *   is null or an empty string
      */
+    @Override
     public Object parse(String text) throws TypeConversionException {
         if (text == null || "".equals(text)) {
             return null;
@@ -51,6 +52,7 @@ public class UUIDTypeHandler implements TypeHandler {
      * @param value the {@link UUID} to format
      * @return the formatted text
      */
+    @Override
     public String format(Object value) {
         if (value == null)
             return null;
@@ -61,6 +63,7 @@ public class UUIDTypeHandler implements TypeHandler {
     /**
      * Returns {@link UUID}.
      */
+    @Override
     public Class<?> getType() {
         return UUID.class;
     }

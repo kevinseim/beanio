@@ -58,6 +58,7 @@ public final class StringUtil {
         throws IllegalArgumentException
     {
         return doPropertySubstitution(text, new PropertySource() {
+            @Override
             public String getProperty(String key) {
                 return properties != null ? properties.getProperty(key) : null;
             }
