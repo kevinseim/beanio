@@ -65,7 +65,7 @@ public class DomUtil {
      * @param title the name of the DOM
      * @param document the DOM to print
      */
-    public static void print(String title, Node document) {
+    public static void print(String title, Node document) throws BeanIOException{
         try {
             TransformerFactory factory = TransformerFactory.newInstance();
             Transformer trans = factory.newTransformer();
@@ -82,7 +82,7 @@ public class DomUtil {
             System.out.println("-------------------------------------------");
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+        	throw new BeanIOException(ex);
         }
     }
 }
