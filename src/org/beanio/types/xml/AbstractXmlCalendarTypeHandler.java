@@ -31,7 +31,9 @@ import org.beanio.types.*;
  */
 public abstract class AbstractXmlCalendarTypeHandler extends CalendarTypeHandler {
 
-    protected static final DatatypeFactory dataTypeFactory;
+    private static final String DATE_TIME = "dateTime";
+	private static final String INVALID_XML = "Invalid XML ";
+	protected static final DatatypeFactory dataTypeFactory;
     static {
         try {
             dataTypeFactory = DatatypeFactory.newInstance();
@@ -67,20 +69,20 @@ public abstract class AbstractXmlCalendarTypeHandler extends CalendarTypeHandler
         try {
             XMLGregorianCalendar xcal = dataTypeFactory.newXMLGregorianCalendar(text);
             if (!lenientDatatype && type != null && !xcal.getXMLSchemaType().equals(type)) {
-                throw new TypeConversionException("Invalid XML " + type.getLocalPart());
+                throw new TypeConversionException(INVALID_XML + type.getLocalPart());
             }
             
             if (!isTimeZoneAllowed() && xcal.getTimezone() != DatatypeConstants.FIELD_UNDEFINED) {
-                String typeName = type == null ? "dateTime" : type.getLocalPart();
-                throw new TypeConversionException("Invalid XML " + typeName + 
+                String typeName = type == null ? DATE_TIME : type.getLocalPart();
+                throw new TypeConversionException(INVALID_XML + typeName + 
                     ", time zone not allowed");
             }
             
             return xcal.toGregorianCalendar();
         }
         catch (IllegalArgumentException ex) {
-            String typeName = type == null ? "dateTime" : type.getLocalPart();
-            throw new TypeConversionException("Invalid XML " + typeName);
+            String typeName = type == null ? DATE_TIME : type.getLocalPart();
+            throw new TypeConversionException(INVALID_XML + typeName);
         }
     }
 
