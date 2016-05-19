@@ -15,8 +15,12 @@
  */
 package org.beanio.types;
 
-import java.text.*;
-import java.util.*;
+import java.text.DateFormat;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
+import java.util.TimeZone;
 
 /**
  * This abstract type handler uses a <tt>SimpleDateFormat</tt> class to parse and format 
@@ -38,7 +42,7 @@ public abstract class DateTypeHandlerSupport extends LocaleSupport implements Co
     // the same format instance can be reused if this type handler is not shared
     // by multiple unmarshallers/marshallers, this can lead to significant
     // performance improvements when parsing many records
-    private transient DateFormat format;
+    private transient ThreadLocal<DateFormat> format = new ThreadLocal<>();
     
     /**
      * Constructs a new AbstractDateTypeHandler.
@@ -81,7 +85,7 @@ public abstract class DateTypeHandlerSupport extends LocaleSupport implements Co
     }
     
     private DateFormat getFormat() {
-        return this.format != null ? this.format : createDateFormat();
+        return this.format.get() != null ? this.format.get() : createDateFormat();
     }
     
     /**
@@ -128,7 +132,8 @@ public abstract class DateTypeHandlerSupport extends LocaleSupport implements Co
             handler.setPattern(pattern);
             handler.lenient = this.lenient;
             handler.timeZone = this.timeZone;
-            handler.format = handler.createDateFormat();
+            handler.format = new ThreadLocal<>();
+            handler.format.set(handler.createDateFormat());
             return handler;
         }
         catch (CloneNotSupportedException e) {
