@@ -422,6 +422,7 @@ public class AnnotationParser {
         GroupConfig gc = new GroupConfig();
         gc.setName(info.name);
         gc.setType(info.propertyName);
+        gc.setOrder(toValue(group.order()));
         gc.setCollection(info.collectionName);
         
         Integer minOccurs = toValue(group.minOccurs());
