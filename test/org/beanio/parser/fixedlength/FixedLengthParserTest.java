@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.*;
 
 import org.beanio.*;
 import org.beanio.parser.ParserTest;
@@ -37,6 +38,43 @@ public class FixedLengthParserTest extends ParserTest {
     @Before
     public void setup() throws Exception {
         factory = newStreamFactory("fixedlength.xml");
+    }
+
+    @Test
+    public void testParallelLongConversion() throws InterruptedException, ExecutionException, TimeoutException {
+
+        Map<MyRec,String> dataMap = new HashMap<>();
+        for(int i = 0; i<1000; i++) {
+            String string = "T"+String.format("%010d", i);
+            MyRec rec = (MyRec)factory.createUnmarshaller("f9").unmarshal(string);
+            dataMap.put(rec,string);
+        }
+
+        ExecutorService service = Executors.newFixedThreadPool(10);
+        List<FutureTask<MyRec>> tasks = new ArrayList<>();
+        for(final String inp:dataMap.values()) {
+            tasks.add(new FutureTask<>(new Callable<MyRec>() {
+                @Override
+                public MyRec call() throws Exception {
+                    return (MyRec) factory.createUnmarshaller("f9").unmarshal(inp);
+                }
+            }));
+        }
+
+        for(FutureTask<MyRec> task:tasks) {
+            service.submit(task);
+        }
+
+        Set<MyRec> resultSet = new HashSet<>();
+        for(FutureTask<MyRec> task:tasks) {
+            resultSet.add(task.get(5, TimeUnit.SECONDS));
+        }
+
+        service.shutdown();
+
+        for(MyRec ok:dataMap.keySet()) {
+            assertTrue(resultSet.contains(ok));
+        }
     }
 
     @Test

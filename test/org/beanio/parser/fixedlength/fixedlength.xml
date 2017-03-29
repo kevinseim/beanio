@@ -104,4 +104,11 @@
     </record>
   </stream>
 
+  <stream name="f9" format="fixedlength">
+    <record name="id" order="1" minOccurs="1" maxOccurs="1" class="org.beanio.parser.fixedlength.MyRec">
+      <field name="string" length="1"/>
+      <field name="num" type="long" length="10" format="##########" justify="right" padding="0"/>
+    </record>
+  </stream>
+
 </beanio>

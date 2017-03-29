@@ -36,8 +36,8 @@ public abstract class NumberTypeHandler extends LocaleSupport implements Configu
     // the same format instance can be reused if this type handler is not shared
     // by multiple unmarshallers/marshallers, this can lead to significant
     // performance improvements if parsing thousands of records
-    private transient DecimalFormat format;
-    
+    private transient ThreadLocal<DecimalFormat> format = new ThreadLocal<>();
+
     /**
      * Parses a <tt>Number</tt> from the given text.
      * @param text the text to parse
@@ -63,7 +63,7 @@ public abstract class NumberTypeHandler extends LocaleSupport implements Configu
         }
         else {
             // create a DecimaFormat for parsing the number
-            DecimalFormat df = format;
+            DecimalFormat df = format.get();
             if (df == null) {
                 df = createDecimalFormat();
                 df.setParseBigDecimal(true);
@@ -122,8 +122,9 @@ public abstract class NumberTypeHandler extends LocaleSupport implements Configu
         try {
             NumberTypeHandler handler = (NumberTypeHandler) this.clone();
             handler.setPattern(pattern);
-            handler.format = handler.createDecimalFormat();
-            handler.format.setParseBigDecimal(true);
+            handler.format = new ThreadLocal<>();
+            handler.format.set(handler.createDecimalFormat());
+            handler.format.get().setParseBigDecimal(true);
             return handler;
         }
         catch (CloneNotSupportedException ex) {
@@ -151,7 +152,7 @@ public abstract class NumberTypeHandler extends LocaleSupport implements Configu
         else if (pattern == null)
             return ((Number) value).toString();
         else if (format != null) 
-            return format.format(value);
+            return format.get().format(value);
         else
             return createDecimalFormat().format(value);
     }
