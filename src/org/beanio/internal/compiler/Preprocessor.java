@@ -50,6 +50,7 @@ public class Preprocessor extends ProcessorSupport {
      * Initializes a stream configuration before its children have been processed.
      * @param stream the stream configuration to process
      */
+    @Override
     protected void initializeStream(StreamConfig stream) throws BeanIOConfigurationException { 
         if (stream.getMinOccurs() == null) {
             stream.setMinOccurs(0);
@@ -68,6 +69,7 @@ public class Preprocessor extends ProcessorSupport {
      * Finalizes a stream configuration after its children have been processed.
      * @param stream the stream configuration to finalize
      */
+    @Override
     protected void finalizeStream(StreamConfig stream) throws BeanIOConfigurationException { 
         finalizeGroup(stream);
         
@@ -78,6 +80,7 @@ public class Preprocessor extends ProcessorSupport {
         
         if (sorted) {
             stream.sort(new Comparator<ComponentConfig>() {
+                @Override
                 public int compare(ComponentConfig c1, ComponentConfig c2) {
                     Integer p1 = getPosition(c1);
                     Integer p2 = getPosition(c2);
@@ -125,6 +128,7 @@ public class Preprocessor extends ProcessorSupport {
      * Initializes a group configuration before its children have been processed.
      * @param group the group configuration to process
      */
+    @Override
     protected void initializeGroup(GroupConfig group) throws BeanIOConfigurationException {
         
         if (group.getMinOccurs() == null) {
@@ -171,6 +175,7 @@ public class Preprocessor extends ProcessorSupport {
      * Finalizes a group configuration after its children have been processed.
      * @param group the group configuration to finalize
      */
+    @Override
     protected void finalizeGroup(GroupConfig group) throws BeanIOConfigurationException {
         
         // order must be set for all group children, or for none of them
@@ -225,6 +230,7 @@ public class Preprocessor extends ProcessorSupport {
      * Initializes a record configuration before its children have been processed.
      * @param record the record configuration to process
      */
+    @Override
     protected void initializeRecord(RecordConfig record) throws BeanIOConfigurationException {
         
         // a record is ignored if a 'class' was not set and the property root is null
@@ -262,6 +268,7 @@ public class Preprocessor extends ProcessorSupport {
      * Finalizes a record configuration after its children have been processed.
      * @param record the record configuration to process
      */
+    @Override
     protected void finalizeRecord(RecordConfig record) throws BeanIOConfigurationException {
         finalizeSegment(record);
         
@@ -274,6 +281,7 @@ public class Preprocessor extends ProcessorSupport {
      * Initializes a segment configuration before its children have been processed.
      * @param segment the segment configuration to process
      */
+    @Override
     protected void initializeSegment(SegmentConfig segment) throws BeanIOConfigurationException {
 
         if (segment.getName() == null) {
@@ -339,6 +347,7 @@ public class Preprocessor extends ProcessorSupport {
      * Finalizes a segment configuration after its children have been processed.
      * @param segment the segment configuration to process
      */
+    @Override
     protected void finalizeSegment(SegmentConfig segment) throws BeanIOConfigurationException {
         for (PropertyConfig child : segment.getPropertyList()) {
             if (child.isIdentifier()) {
@@ -352,6 +361,7 @@ public class Preprocessor extends ProcessorSupport {
      * Processes a field configuration.
      * @param field the field configuration to process
      */
+    @Override
     protected void handleField(FieldConfig field) throws BeanIOConfigurationException {
         // ignore fields that belong to ignored records
         if (recordIgnored) {
@@ -418,6 +428,7 @@ public class Preprocessor extends ProcessorSupport {
      * Processes a constant configuration.
      * @param constant the constant configuration to process
      */
+    @Override
     protected void handleConstant(ConstantConfig constant) throws BeanIOConfigurationException {
         constant.setBound(true);
         

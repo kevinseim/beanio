@@ -106,6 +106,7 @@ public class FixedLengthReader implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.line.RecordReader#getRecordLineNumber()
      */
+    @Override
     public int getRecordLineNumber() {
         if (recordLineNumber < 0) {
             return recordLineNumber;
@@ -117,6 +118,7 @@ public class FixedLengthReader implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.line.RecordReader#getRecordText()
      */
+    @Override
     public String getRecordText() {
         return recordText;
     }
@@ -125,6 +127,7 @@ public class FixedLengthReader implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.line.RecordReader#read()
      */
+    @Override
     public String read() throws IOException, RecordIOException {
         if (eof) {
             recordText = null;
@@ -252,6 +255,7 @@ public class FixedLengthReader implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.line.RecordReader#close()
      */
+    @Override
     public void close() throws IOException {
         in.close();
     }

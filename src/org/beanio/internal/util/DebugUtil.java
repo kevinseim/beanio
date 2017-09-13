@@ -1,6 +1,7 @@
 package org.beanio.internal.util;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 import org.beanio.internal.parser.format.FieldPadding;
 
@@ -45,13 +46,8 @@ public class DebugUtil {
     }
     
     public static String toString(Debuggable c) {
-        try {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            c.debug(new PrintStream(out));
-            return new String(out.toByteArray(), "ASCII");
-        }
-        catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException(e);
-        }
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        c.debug(new PrintStream(out));
+        return new String(out.toByteArray(), StandardCharsets.US_ASCII);
     }
 }

@@ -65,7 +65,7 @@ public class ReplicatorTest {
     
     @SuppressWarnings("rawtypes")
     private static TreeNode createNode(String name) {
-        TreeNode<TreeNode> node = new TreeNode<TreeNode>();
+        TreeNode<TreeNode> node = new TreeNode<>();
         node.setName(name);
         replicator.register(node);
         return node;

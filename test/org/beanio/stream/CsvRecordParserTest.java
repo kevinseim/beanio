@@ -227,7 +227,7 @@ public class CsvRecordParserTest {
     }
 
     @Test
-    public void testMarshal_AlwaysQuote() throws IOException {
+    public void testMarshal_AlwaysQuote() {
         CsvRecordParserFactory factory = new CsvRecordParserFactory();
         factory.setQuote('\'');
         factory.setEscape('\\');

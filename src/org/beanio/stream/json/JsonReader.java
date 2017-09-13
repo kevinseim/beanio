@@ -49,6 +49,7 @@ public class JsonReader extends JsonReaderSupport implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReader#read()
      */
+    @Override
     public Map<String,Object> read() throws IOException, RecordIOException {
         if (eof) {
             return null;
@@ -83,6 +84,7 @@ public class JsonReader extends JsonReaderSupport implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReader#close()
      */
+    @Override
     public void close() throws IOException {
         if (in != null) {
             try {
@@ -98,6 +100,7 @@ public class JsonReader extends JsonReaderSupport implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReader#getRecordLineNumber()
      */
+    @Override
     public int getRecordLineNumber() {
         return recordLineNumber;
     }
@@ -106,6 +109,7 @@ public class JsonReader extends JsonReaderSupport implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReader#getRecordText()
      */
+    @Override
     public String getRecordText() {
         return recordText;
     }

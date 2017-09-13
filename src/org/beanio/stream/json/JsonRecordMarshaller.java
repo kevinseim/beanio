@@ -51,6 +51,7 @@ public class JsonRecordMarshaller extends JsonWriterSupport implements RecordMar
      * @see org.beanio.stream.RecordMarshaller#marshal(java.lang.Object)
      */
     @SuppressWarnings("unchecked")
+    @Override
     public String marshal(Object record) {
         return marshal((Map<String,Object>) record);
     }

@@ -50,8 +50,9 @@ public class Segment extends ParserComponent {
     private Property property;
     // temporarily stores missing children during unmarshalling
     private ParserLocal<List<Parser>> missing = new ParserLocal<List<Parser>>() {
+        @Override
         protected List<Parser> createDefaultValue() {
-            return new ArrayList<Parser>();
+            return new ArrayList<>();
         }
     };
     
@@ -64,6 +65,7 @@ public class Segment extends ParserComponent {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#clearValue()
      */
+    @Override
     public void clearValue(ParsingContext context) {
         if (property != null) {
             property.clearValue(context);
@@ -74,6 +76,7 @@ public class Segment extends ParserComponent {
      * (non-Javadoc)
      * @see org.beanio.parser2.Parser#matches(org.beanio.parser2.UnmarshallingContext)
      */
+    @Override
     public boolean matches(UnmarshallingContext context) {
         if (isIdentifier()) {
             for (Component node : getChildren()) {
@@ -89,6 +92,7 @@ public class Segment extends ParserComponent {
      * (non-Javadoc)
      * @see org.beanio.parser2.Parser#unmarshal(org.beanio.parser2.UnmarshallingContext)
      */
+    @Override
     public boolean unmarshal(UnmarshallingContext context) {
         List<Parser> missing = this.missing.get(context);
         
@@ -134,6 +138,7 @@ public class Segment extends ParserComponent {
      * (non-Javadoc)
      * @see org.beanio.parser2.Parser#marshal(org.beanio.parser2.MarshallingContext)
      */
+    @Override
     public boolean marshal(MarshallingContext context) throws IOException {
         // since we allow Collections containing a null reference to force
         // output of a bean, we also check that we are not repeating
@@ -154,6 +159,7 @@ public class Segment extends ParserComponent {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#hasContent()
      */
+    @Override
     public boolean hasContent(ParsingContext context) {
         if (property != null) {
             return property.getValue(context) != Value.MISSING;
@@ -172,6 +178,7 @@ public class Segment extends ParserComponent {
      * (non-Javadoc)
      * @see org.beanio.parser2.Parser#getValue()
      */
+    @Override
     public Object getValue(ParsingContext context) {
         // getValue() may be called for a record where no property is set
         if (property == null) {
@@ -186,6 +193,7 @@ public class Segment extends ParserComponent {
      * (non-Javadoc)
      * @see org.beanio.parser2.Parser#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(ParsingContext context, Object value) {
         if (property != null) {
             property.setValue(context, value);
@@ -204,6 +212,7 @@ public class Segment extends ParserComponent {
      * (non-Javadoc)
      * @see org.beanio.parser.Parser#isLazy()
      */
+    @Override
     public boolean isOptional() {
         return optional;
     }
@@ -220,10 +229,12 @@ public class Segment extends ParserComponent {
      * (non-Javadoc)
      * @see org.beanio.parser.Parser#getSize()
      */
+    @Override
     public int getSize() {
         return size;
     }
     
+    @Override
     public boolean isIdentifier() {
         return identifier;
     }

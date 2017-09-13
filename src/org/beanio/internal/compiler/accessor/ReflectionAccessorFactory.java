@@ -19,6 +19,7 @@ public class ReflectionAccessorFactory implements PropertyAccessorFactory {
      * (non-Javadoc)
      * @see org.beanio.internal.compiler.PropertyAccessorFactory#getPropertyAccessor(java.lang.Class, java.beans.PropertyDescriptor, int)
      */
+    @Override
     public PropertyAccessor getPropertyAccessor(
         Class<?> parent, PropertyDescriptor descriptor, int carg) {
     
@@ -31,6 +32,7 @@ public class ReflectionAccessorFactory implements PropertyAccessorFactory {
      * (non-Javadoc)
      * @see org.beanio.internal.compiler.PropertyAccessorFactory#getPropertyAccessor(java.lang.Class, java.lang.reflect.Field, int)
      */
+    @Override
     public PropertyAccessor getPropertyAccessor(
         Class<?> parent, Field field, int carg) {
     

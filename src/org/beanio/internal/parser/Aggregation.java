@@ -40,7 +40,7 @@ public abstract class Aggregation extends DelegatingParser implements Property, 
     protected Field occurs;
     
     // the current iteration index
-    private ParserLocal<Integer> index = new ParserLocal<Integer>();
+    private ParserLocal<Integer> index = new ParserLocal<>();
     
     /**
      * Constructs a new <tt>Aggregation</tt>.
@@ -65,6 +65,7 @@ public abstract class Aggregation extends DelegatingParser implements Property, 
      * (non-Javadoc)
      * @see org.beanio.parser2.Marshaller#marshal(org.beanio.parser2.MarshallingContext)
      */
+    @Override
     public final boolean marshal(MarshallingContext context) throws IOException {
         
         int min = minOccurs;
@@ -85,6 +86,7 @@ public abstract class Aggregation extends DelegatingParser implements Property, 
      * (non-Javadoc)
      * @see org.beanio.parser2.Field#unmarshal(org.beanio.parser2.UnmarshallingContext)
      */
+    @Override
     public final boolean unmarshal(UnmarshallingContext context) {
         
         int min = minOccurs;
@@ -123,6 +125,7 @@ public abstract class Aggregation extends DelegatingParser implements Property, 
      * (non-Javadoc)
      * @see org.beanio.parser2.DelegatingParser#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(ParsingContext context, Object value) {
         if (occurs != null && !occurs.isBound()) {
             occurs.setValue(context, length(value));
@@ -145,6 +148,7 @@ public abstract class Aggregation extends DelegatingParser implements Property, 
     /**
      * @throws UnsupportedOperationException
      */
+    @Override
     public void setIdentifier(boolean identifier) { 
         if (identifier) {
             throw new UnsupportedOperationException();
@@ -155,6 +159,7 @@ public abstract class Aggregation extends DelegatingParser implements Property, 
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#getAccessor()
      */
+    @Override
     public PropertyAccessor getAccessor() {
         return accessor;
     }
@@ -163,6 +168,7 @@ public abstract class Aggregation extends DelegatingParser implements Property, 
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#setAccessor(org.beanio.internal.parser.PropertyAccessor)
      */
+    @Override
     public void setAccessor(PropertyAccessor accessor) {
         this.accessor = accessor;
     }
@@ -171,6 +177,7 @@ public abstract class Aggregation extends DelegatingParser implements Property, 
      * (non-Javadoc)
      * @see org.beanio.parser2.Iteration#getIterationIndex()
      */
+    @Override
     public final int getIterationIndex(ParsingContext context) {
         return index.get(context);
     }
@@ -211,6 +218,7 @@ public abstract class Aggregation extends DelegatingParser implements Property, 
         this.lazy = lazy;
     }
     
+    @Override
     public boolean isDynamicIteration() {
         return occurs != null;
     }

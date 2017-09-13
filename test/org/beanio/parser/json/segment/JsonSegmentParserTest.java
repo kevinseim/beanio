@@ -56,7 +56,7 @@ public class JsonSegmentParserTest extends ParserTest {
         
         try {
             Map map = (Map) in.read();
-            assertEquals(new Integer(2), map.get("count"));
+            assertEquals(Integer.valueOf(2), map.get("count"));
             
             List list = (List) map.get("friends");
             Person person = (Person) list.get(0);

@@ -54,7 +54,7 @@ public class XmlMappingParser implements StringUtil.PropertySource {
     /* whether the current record class was annotated */
     private transient boolean annotatedRecord = false;
     
-    private LinkedList<Include> includeStack = new LinkedList<Include>();
+    private LinkedList<Include> includeStack = new LinkedList<>();
 
     /**
      * Constructs a new <tt>XmlMappingParser</tt>.
@@ -86,7 +86,7 @@ public class XmlMappingParser implements StringUtil.PropertySource {
         this.properties = properties;
         
         mapping = new XmlMapping();
-        mappings = new HashMap<String,XmlMapping>();
+        mappings = new HashMap<>();
         mappings.put("[root]", mapping);
         
         try {
@@ -100,13 +100,13 @@ public class XmlMappingParser implements StringUtil.PropertySource {
             throw ex;
         }
         
-        List<BeanIOConfig> configList = new ArrayList<BeanIOConfig>(mappings.size());
+        List<BeanIOConfig> configList = new ArrayList<>(mappings.size());
         for (XmlMapping m : mappings.values()) {
             BeanIOConfig config = m.getConfiguration().clone();
             
             // global type handlers are the only elements that need to be imported
             // from other mapping files
-            List<TypeHandlerConfig> handlerList = new ArrayList<TypeHandlerConfig>();
+            List<TypeHandlerConfig> handlerList = new ArrayList<>();
             m.addTypeHandlers(handlerList);
             
             config.setTypeHandlerList(handlerList);
@@ -754,6 +754,7 @@ public class XmlMappingParser implements StringUtil.PropertySource {
      * (non-Javadoc)
      * @see org.beanio.internal.util.StringUtil.PropertiesSource#getProperty(java.lang.String)
      */
+    @Override
     public String getProperty(String key) {
         String value = null;
         if (properties != null) {

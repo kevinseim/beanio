@@ -59,6 +59,7 @@ public class JsonFieldFormat implements FieldFormat, JsonNode {
      * @see org.beanio.internal.parser.FieldFormat#extract(org.beanio.internal.parser.UnmarshallingContext, boolean)
      */
     @SuppressWarnings("unchecked")
+    @Override
     public String extract(UnmarshallingContext context, boolean reportErrors) {
         JsonUnmarshallingContext ctx = (JsonUnmarshallingContext) context;
     
@@ -137,6 +138,7 @@ public class JsonFieldFormat implements FieldFormat, JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#insertValue(org.beanio.internal.parser.MarshallingContext, java.lang.Object)
      */
+    @Override
     public boolean insertValue(MarshallingContext context, Object value) {
         if (!bypassTypeHandler) {
             return false;
@@ -161,6 +163,7 @@ public class JsonFieldFormat implements FieldFormat, JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#insertField(org.beanio.internal.parser.MarshallingContext, java.lang.String)
      */
+    @Override
     public void insertField(MarshallingContext context, String text) {
         
         JsonMarshallingContext ctx = (JsonMarshallingContext) context;
@@ -211,6 +214,7 @@ public class JsonFieldFormat implements FieldFormat, JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.json.JsonType#getName()
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -235,6 +239,7 @@ public class JsonFieldFormat implements FieldFormat, JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#getSize()
      */
+    @Override
     public int getSize() {
         return 1;
     }
@@ -251,6 +256,7 @@ public class JsonFieldFormat implements FieldFormat, JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#isNillable()
      */
+    @Override
     public boolean isNillable() {
         return nillable;
     }
@@ -259,6 +265,7 @@ public class JsonFieldFormat implements FieldFormat, JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#isLazy()
      */
+    @Override
     public boolean isLazy() {
         return lazy;
     }
@@ -275,6 +282,7 @@ public class JsonFieldFormat implements FieldFormat, JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.json.JsonType#getJsonName()
      */
+    @Override
     public String getJsonName() {
         return jsonName;
     }
@@ -291,6 +299,7 @@ public class JsonFieldFormat implements FieldFormat, JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.json.JsonType#getJsonType()
      */
+    @Override
     public char getJsonType() {
         return jsonType;
     }
@@ -299,10 +308,12 @@ public class JsonFieldFormat implements FieldFormat, JsonNode {
         this.jsonArray = repeating;
     }
     
+    @Override
     public boolean isJsonArray() {
         return jsonArray;
     }
     
+    @Override
     public int getJsonArrayIndex() {
         return jsonArrayIndex;
     }

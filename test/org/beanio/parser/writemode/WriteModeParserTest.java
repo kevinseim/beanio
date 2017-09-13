@@ -45,15 +45,19 @@ public class WriteModeParserTest extends ParserTest {
     @Test
     public void testBasic() {
         PersonInterface person = new PersonInterface() {
+            @Override
             public String getFirstName() {
                 return "John";
             }
+            @Override
             public String getLastName() {
                 return "Smith";
             }
+            @Override
             public int getAge() {
                 return 21;
             }
+            @Override
             public Date getBirthDate() {
                 try {
                     return new SimpleDateFormat("yyyy-MM-dd").parse("2011-01-01");

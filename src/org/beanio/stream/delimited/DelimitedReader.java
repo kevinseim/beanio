@@ -68,7 +68,7 @@ public class DelimitedReader implements RecordReader {
     private transient int recordLineNumber;
     private transient int lineNumber = 0;
     private transient boolean skipLF = false;
-    private transient List<String> fieldList = new ArrayList<String>();
+    private transient List<String> fieldList = new ArrayList<>();
 
     /**
      * Constructs a new <tt>DelimitedReader</tt> using a tab character for
@@ -156,6 +156,7 @@ public class DelimitedReader implements RecordReader {
      * not terminated by new line characters.
      * @return the starting line number of the last record
      */
+    @Override
     public int getRecordLineNumber() {
         if (recordLineNumber < 0)
             return -1;
@@ -168,6 +169,7 @@ public class DelimitedReader implements RecordReader {
      * stream was reached.
      * @return the raw text of the last record
      */
+    @Override
     public String getRecordText() {
         return recordText;
     }
@@ -176,6 +178,7 @@ public class DelimitedReader implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReader#read()
      */
+    @Override
     public String[] read() throws IOException {
         // fieldList is set to null when the end of stream is reached
         if (fieldList == null) {
@@ -355,6 +358,7 @@ public class DelimitedReader implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReader#close()
      */
+    @Override
     public void close() throws IOException {
         in.close();
     }

@@ -57,7 +57,7 @@ public abstract class UnmarshallingContext extends ParsingContext {
     // indicates the record context was queried and must therefore be recreated when the next record is read 
     private boolean dirty;
     // a list of record contexts (for parsing record groups)
-    private List<ErrorContext> recordList = new ArrayList<ErrorContext>();
+    private List<ErrorContext> recordList = new ArrayList<>();
     
     /**
      * Constructs a new <tt>UnmarshallingContext</tt>.

@@ -75,6 +75,7 @@ public interface Marshaller extends Debuggable {
      * @return the record text
      * @throws BeanWriterException if a fatal error occurs
      */
+    @Override
     public String toString() throws BeanWriterException;
     
     /**

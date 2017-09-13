@@ -34,7 +34,7 @@ public class CollectionParser extends Aggregation {
     // the collection type
     private Class<? extends Collection<Object>> type;
     // the property value
-    private ParserLocal<Object> value = new ParserLocal<Object>();  
+    private ParserLocal<Object> value = new ParserLocal<>();  
     
     /**
      * Constructs a new <tt>CollectionParser</tt>.
@@ -45,6 +45,7 @@ public class CollectionParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser2.DelegatingParser#clear()
      */
+    @Override
     public void clearValue(ParsingContext context) {
         this.value.set(context, null);
     }
@@ -53,6 +54,7 @@ public class CollectionParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser2.Property#defines(java.lang.Object)
      */
+    @Override
     public boolean defines(Object value) {
         // TODO implement for arrays....
         
@@ -73,6 +75,7 @@ public class CollectionParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser.DelegatingParser#matches(org.beanio.parser.UnmarshallingContext)
      */
+    @Override
     public boolean matches(UnmarshallingContext context) {
         // matching repeating fields is not supported
         return true;
@@ -185,6 +188,7 @@ public class CollectionParser extends Aggregation {
      * Returns whether this iteration is a property of a bean object.
      * @return true if this iteration is a property, false otherwise
      */
+    @Override
     public boolean isProperty() {
         return type != null;
     }
@@ -222,6 +226,7 @@ public class CollectionParser extends Aggregation {
      * 
      */
     @SuppressWarnings("unchecked")
+    @Override
     public void setType(Class<?> collectionType) {
         this.type = (Class<? extends Collection<Object>>) collectionType;
     }
@@ -229,6 +234,7 @@ public class CollectionParser extends Aggregation {
     /*
      * Returns the property type.
      */
+    @Override
     public Class<? extends Collection<Object>> getType() {
         return type;
     }
@@ -237,6 +243,7 @@ public class CollectionParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser2.Property#create()
      */
+    @Override
     public Object createValue(ParsingContext context) {
         Object value = this.value.get(context);
         if (value == null) {
@@ -250,6 +257,7 @@ public class CollectionParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser2.DelegatingParser#getValue()
      */
+    @Override
     public Object getValue(ParsingContext context) {
         Object value = this.value.get(context);
         return value == null ? Value.MISSING : value;
@@ -259,6 +267,7 @@ public class CollectionParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser2.DelegatingParser#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(ParsingContext context, Object value) {
         // convert empty collections to null so that parent parsers
         // will consider this property missing during marshalling
@@ -279,6 +288,7 @@ public class CollectionParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser2.Property#type()
      */
+    @Override
     public int type() {
         return Property.AGGREGATION_COLLECTION;
     }
@@ -287,6 +297,7 @@ public class CollectionParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser2.Iteration#getIterationSize()
      */
+    @Override
     public int getIterationSize() {
         return getSize();
     }

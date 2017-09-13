@@ -122,6 +122,7 @@ public class RecordCollection extends RecordAggregation {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#type()
      */
+    @Override
     public int type() {
         return Property.AGGREGATION_COLLECTION;
     }

@@ -51,7 +51,7 @@ public class XmlRecordMarshaller implements RecordMarshaller {
     /* the next index to try when auto generating a namespace prefix */
     private int namespaceCount = 0;
     /* Map of auto-generated namespace prefixes to namespaces */
-    private Map<String,String> namespaceMap = new HashMap<String,String>();
+    private Map<String,String> namespaceMap = new HashMap<>();
 
     /**
      * Constructs a new <tt>XmlRecordMarshaller</tt>.
@@ -99,6 +99,7 @@ public class XmlRecordMarshaller implements RecordMarshaller {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordMarshaller#marshal(java.lang.Object)
      */
+    @Override
     public String marshal(Object record) throws RecordIOException {
         try {
             return marshal((Document)record);
@@ -295,7 +296,7 @@ public class XmlRecordMarshaller implements RecordMarshaller {
                 if (declareNamespace) {
                     out.writeNamespace(attPrefix, attNamespace);
                     if (attPrefixSet == null) {
-                        attPrefixSet = new HashSet<String>();
+                        attPrefixSet = new HashSet<>();
                     }
                     attPrefixSet.add(attPrefix);
                 }

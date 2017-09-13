@@ -37,7 +37,7 @@ public class ResourceBundleMessageFactory implements MessageFactory {
     /* default resource bundle for messages based on the stream format */
     private ResourceBundle defaultResourceBundle;
     /* cache messages from resource bundles */
-    private ConcurrentHashMap<String, String> messageCache = new ConcurrentHashMap<String, String>();
+    private ConcurrentHashMap<String, String> messageCache = new ConcurrentHashMap<>();
     /* used to flag cache misses */
     private static final String NOT_FOUND = new String();
     
@@ -47,6 +47,7 @@ public class ResourceBundleMessageFactory implements MessageFactory {
      * (non-Javadoc)
      * @see org.beanio.parser.MessageContext#getRecordLabel(java.lang.String)
      */
+    @Override
     public String getRecordLabel(String recordName) {
         return getLabel(LABEL_MESSAGE_PREFIX + "." + recordName);
     }
@@ -55,6 +56,7 @@ public class ResourceBundleMessageFactory implements MessageFactory {
      * (non-Javadoc)
      * @see org.beanio.parser.MessageContext#getFieldLabel(java.lang.String, java.lang.String)
      */
+    @Override
     public String getFieldLabel(String recordName, String fieldName) {
         return getLabel(LABEL_MESSAGE_PREFIX + "." + recordName + "." + fieldName);
     }
@@ -87,6 +89,7 @@ public class ResourceBundleMessageFactory implements MessageFactory {
      * (non-Javadoc)
      * @see org.bio.context.MessageContext#getFieldErrorMessage(java.lang.String, java.lang.String, java.lang.String)
      */
+    @Override
     public String getFieldErrorMessage(String recordName, String fieldName, String rule) {
         String key = FIELD_ERROR_MESSAGE_PREFIX + "." + recordName + "." + fieldName + "." + rule;
 
@@ -126,6 +129,7 @@ public class ResourceBundleMessageFactory implements MessageFactory {
      * (non-Javadoc)
      * @see org.bio.context.MessageContext#getRecordErrorMessage(java.lang.String, java.lang.String)
      */
+    @Override
     public String getRecordErrorMessage(String recordName, String rule) {
         String key = RECORD_ERROR_MESSAGE_PREFIX + "." + recordName + "." + rule;
 

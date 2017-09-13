@@ -147,7 +147,7 @@ public class JsonParserFactory extends ParserFactorySupport {
         format.setJsonName(config.getJsonName());
         format.setJsonArray(config.isJsonArray());
         format.setJsonArrayIndex(config.getJsonArrayIndex());
-        format.setLazy(config.getMinOccurs() != null && new Integer(0).equals(config.getMinOccurs()));
+        format.setLazy(config.getMinOccurs() != null && Integer.valueOf(0).equals(config.getMinOccurs()));
         format.setNillable(true); // for now, allow any JSON field to be nullable
         
         // default the JSON type based on the property type

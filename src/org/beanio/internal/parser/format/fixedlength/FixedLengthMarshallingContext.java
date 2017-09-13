@@ -33,7 +33,7 @@ public class FixedLengthMarshallingContext extends MarshallingContext {
     // appending the last required field
     private int committed = 0;
     // the list of entries for creating the record (may be unordered)
-    private ArrayList<Entry> entries = new ArrayList<Entry>();
+    private ArrayList<Entry> entries = new ArrayList<>();
     
     /**
      * Constructs a new <tt>FixedLengthMarshallingContext</tt>.
@@ -132,8 +132,9 @@ public class FixedLengthMarshallingContext extends MarshallingContext {
             this.text = text;
         }
         
+        @Override
         public int compareTo(Entry o) {
-            return new Integer(this.order).compareTo(o.order);
+            return Integer.valueOf(this.order).compareTo(o.order);
         }
         
         @Override

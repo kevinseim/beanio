@@ -37,7 +37,7 @@ public class CsvRecordParser implements RecordMarshaller, RecordUnmarshaller {
     private boolean unquotedQuotesAllowed = false;
     private boolean alwaysQuote = false;
     
-    private List<String> fieldList = new ArrayList<String>();
+    private List<String> fieldList = new ArrayList<>();
     
     /**
      * Constructs a new <tt>CsvRecordParser</tt>.
@@ -87,6 +87,7 @@ public class CsvRecordParser implements RecordMarshaller, RecordUnmarshaller {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordParser#parse(java.lang.String)
      */
+    @Override
     public Object unmarshal(String text) throws RecordIOException {
         fieldList.clear();
         
@@ -222,6 +223,7 @@ public class CsvRecordParser implements RecordMarshaller, RecordUnmarshaller {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordMarshaller#marshal(java.lang.Object)
      */
+    @Override
     public String marshal(Object record) {
         return marshal((String[])record);
     }

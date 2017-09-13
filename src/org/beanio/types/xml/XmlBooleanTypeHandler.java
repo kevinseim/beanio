@@ -39,6 +39,7 @@ public class XmlBooleanTypeHandler implements TypeHandler {
      * @param text the text to parse
      * @return new Boolean
      */
+    @Override
     public Boolean parse(String text) throws TypeConversionException {
         if (text == null || "".equals(text))
             return null;
@@ -58,6 +59,7 @@ public class XmlBooleanTypeHandler implements TypeHandler {
      * Returns {@link Boolean#toString()}, or <tt>null</tt> if <tt>value</tt>
      * is <tt>null</tt>.
      */
+    @Override
     public String format(Object value) {
         if (value == null)
             return null;
@@ -75,6 +77,7 @@ public class XmlBooleanTypeHandler implements TypeHandler {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#getType()
      */
+    @Override
     public Class<?> getType() {
         return Boolean.class;
     }

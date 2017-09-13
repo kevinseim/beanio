@@ -87,7 +87,7 @@ public class StreamCompiler {
         }
         
         // check for duplicate stream names...
-        HashSet<String> set = new HashSet<String>();
+        HashSet<String> set = new HashSet<>();
         for (BeanIOConfig config : configList) {
             for (StreamConfig streamConfig : config.getStreamList()) {
                 if (!set.add(streamConfig.getName())) {
@@ -103,7 +103,7 @@ public class StreamCompiler {
             return createStreamDefinitions(configList.iterator().next());
         }
         else {
-            List<Stream> list = new ArrayList<Stream>();
+            List<Stream> list = new ArrayList<>();
             for (BeanIOConfig config : configList) {
                 list.addAll(createStreamDefinitions(config));
             }
@@ -135,7 +135,7 @@ public class StreamCompiler {
             config.getTypeHandlerList());
         
         Collection<StreamConfig> streamConfigList = config.getStreamList();
-        Collection<Stream> streamDefinitionList = new ArrayList<Stream>(streamConfigList.size());
+        Collection<Stream> streamDefinitionList = new ArrayList<>(streamConfigList.size());
         
         for (StreamConfig streamConfig : streamConfigList) {
             

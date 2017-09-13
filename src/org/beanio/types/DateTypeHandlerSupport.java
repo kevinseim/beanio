@@ -114,6 +114,7 @@ public abstract class DateTypeHandlerSupport extends LocaleSupport implements Co
      * (non-Javadoc)
      * @see org.beanio.types.AbstractDateTypeHandler#newInstance(java.util.Properties)
      */
+    @Override
     public DateTypeHandlerSupport newInstance(Properties properties) throws IllegalArgumentException {
         String pattern = properties.getProperty(FORMAT_SETTING);
         if (pattern == null || "".equals(pattern)) {

@@ -37,6 +37,7 @@ public class BeanReaderErrorHandlerSupport implements BeanReaderErrorHandler {
      * @throws Exception if the BeanReaderException is rethrown or this error
      *   handler throws a new Exception
      */
+    @Override
     public final void handleError(BeanReaderException ex) throws Exception {
         if (ex instanceof InvalidRecordException) {
             invalidRecord((InvalidRecordException)ex);

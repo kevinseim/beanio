@@ -35,8 +35,8 @@ public class XmlMapping {
     private XmlMapping parent;
     private Properties properties;
     private BeanIOConfig config = new BeanIOConfig();
-    private List<XmlMapping> importList = new LinkedList<XmlMapping>();
-    private Map<String,Element> templateMap = new HashMap<String,Element>();
+    private List<XmlMapping> importList = new LinkedList<>();
+    private Map<String,Element> templateMap = new HashMap<>();
     
     /**
      * Constructs a new <tt>XmlMapping</tt>.

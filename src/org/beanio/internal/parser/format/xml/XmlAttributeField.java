@@ -41,6 +41,7 @@ public class XmlAttributeField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlFieldFormat#extractText(org.beanio.internal.parser.format.xml.XmlUnmarshallingContext)
      */
+    @Override
     public String extractText(XmlUnmarshallingContext context) {
         Element parent = context.getPosition();
         if (parent == null) {
@@ -55,6 +56,7 @@ public class XmlAttributeField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlFieldFormat#insertText(org.beanio.internal.parser.format.xml.XmlMarshallingContext, java.lang.String)
      */
+    @Override
     public void insertText(XmlMarshallingContext ctx, String fieldText) {
         Element parent = (Element) ctx.getParent();
         
@@ -82,6 +84,7 @@ public class XmlAttributeField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getType()
      */
+    @Override
     public int getType() {
         return XmlNode.XML_TYPE_ATTRIBUTE;
     }
@@ -90,6 +93,7 @@ public class XmlAttributeField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getLocalName()
      */
+    @Override
     public String getLocalName() {
         return localName;
     }
@@ -106,6 +110,7 @@ public class XmlAttributeField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getNamespace()
      */
+    @Override
     public String getNamespace() {
         return namespace;
     }
@@ -122,6 +127,7 @@ public class XmlAttributeField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getPrefix()
      */
+    @Override
     public String getPrefix() {
         return prefix;
     }
@@ -138,6 +144,7 @@ public class XmlAttributeField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#isNamespaceAware()
      */
+    @Override
     public boolean isNamespaceAware() {
         return namespaceAware;
     }
@@ -154,6 +161,7 @@ public class XmlAttributeField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#isNillable()
      */
+    @Override
     public boolean isNillable() {
         return false;
     }
@@ -162,6 +170,7 @@ public class XmlAttributeField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#isRepeating()
      */
+    @Override
     public boolean isRepeating() {
         return false;
     }

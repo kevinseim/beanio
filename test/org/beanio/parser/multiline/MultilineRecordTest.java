@@ -124,7 +124,7 @@ public class MultilineRecordTest extends ParserTest {
     }
         
     @Test
-    public void testNestedRecorGroup() throws ParseException {
+    public void testNestedRecorGroup() {
         BeanReader in = factory.createReader("ml2", new InputStreamReader(
             getClass().getResourceAsStream("ml2.txt")));
         
@@ -165,7 +165,7 @@ public class MultilineRecordTest extends ParserTest {
     
     @Test
     @SuppressWarnings("rawtypes")
-    public void testNestedRecorGroupCollections() throws ParseException {
+    public void testNestedRecorGroupCollections() {
         BeanReader in = factory.createReader("ml3", new InputStreamReader(
             getClass().getResourceAsStream("ml3.txt")));
         
@@ -206,7 +206,7 @@ public class MultilineRecordTest extends ParserTest {
     }
     
     @Test
-    public void testRecordMap() throws ParseException {
+    public void testRecordMap() {
         BeanReader in = factory.createReader("ml4", new InputStreamReader(
             getClass().getResourceAsStream("ml4.txt")));
         
@@ -257,7 +257,7 @@ public class MultilineRecordTest extends ParserTest {
     }
     
     @Test
-    public void testNestedRecorGroupNonCollection() throws ParseException {
+    public void testNestedRecorGroupNonCollection() {
         BeanReader in = factory.createReader("ml5", new InputStreamReader(
             getClass().getResourceAsStream("ml5.txt")));
         
@@ -286,7 +286,7 @@ public class MultilineRecordTest extends ParserTest {
     }
     
     @Test
-    public void testEmptyRecordList() throws ParseException {
+    public void testEmptyRecordList() {
         BeanReader in = factory.createReader("ml6", new InputStreamReader(
             getClass().getResourceAsStream("ml6.txt")));
         
@@ -306,7 +306,7 @@ public class MultilineRecordTest extends ParserTest {
     }
     
     @Test
-    public void testInlineRecordMap() throws ParseException {
+    public void testInlineRecordMap() {
         BeanReader in = factory.createReader("ml7", new InputStreamReader(
             getClass().getResourceAsStream("ml7.txt")));
         

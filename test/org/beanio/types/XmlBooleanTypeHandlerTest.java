@@ -41,7 +41,7 @@ public class XmlBooleanTypeHandlerTest {
     }
     
     @Test
-    public void testTextualFormat() throws TypeConversionException {
+    public void testTextualFormat() {
         XmlBooleanTypeHandler handler = new XmlBooleanTypeHandler();
         assertFalse(handler.isNumericFormatEnabled());
         assertNull(handler.format(null));
@@ -50,7 +50,7 @@ public class XmlBooleanTypeHandlerTest {
     }
     
     @Test
-    public void testNumericFormat() throws TypeConversionException {
+    public void testNumericFormat() {
         XmlBooleanTypeHandler handler = new XmlBooleanTypeHandler();
         handler.setNumericFormatEnabled(true);
         assertTrue(handler.isNumericFormatEnabled());

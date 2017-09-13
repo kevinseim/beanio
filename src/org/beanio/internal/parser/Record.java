@@ -36,7 +36,7 @@ public class Record extends Segment implements Selector {
     // the record format
     private RecordFormat format;
     // current record count
-    private ParserLocal<Integer> count = new ParserLocal<Integer>(0);
+    private ParserLocal<Integer> count = new ParserLocal<>(0);
 
     /**
      * Constructs a new <tt>Record</tt>.
@@ -47,6 +47,7 @@ public class Record extends Segment implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.Marshaller#marshal(org.beanio.parser2.MarshallingContext)
      */
+    @Override
     public boolean marshal(MarshallingContext context) throws IOException {
         try {
             boolean marshalled = super.marshal(context);
@@ -65,6 +66,7 @@ public class Record extends Segment implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.Unmarshaller#unmarshal(org.beanio.parser2.UnmarshallingContext)
      */
+    @Override
     public boolean unmarshal(UnmarshallingContext context) {
         try {
             // update the record context before unmarshalling
@@ -92,6 +94,7 @@ public class Record extends Segment implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#skip(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public void skip(UnmarshallingContext context) {
         context.recordSkipped();
     }
@@ -100,6 +103,7 @@ public class Record extends Segment implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#matchNext(org.beanio.internal.parser.MarshallingContext)
      */
+    @Override
     public Selector matchNext(MarshallingContext context) {
         Property property = getProperty();
         if (property != null) {
@@ -129,6 +133,7 @@ public class Record extends Segment implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#matchNext(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public Selector matchNext(UnmarshallingContext context) {
         if (matches(context)) {
             setCount(context, getCount(context) + 1);
@@ -141,6 +146,7 @@ public class Record extends Segment implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.Unmarshaller#matches(org.beanio.parser2.UnmarshallingContext)
      */
+    @Override
     public boolean matches(UnmarshallingContext context) {
         if (format != null) {
             if (!format.matches(context)) {
@@ -154,6 +160,7 @@ public class Record extends Segment implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#matchAny(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public Selector matchAny(UnmarshallingContext context) {
         return matches(context) ? this : null;
     }
@@ -162,6 +169,7 @@ public class Record extends Segment implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#close(org.beanio.internal.parser.ParsingContext)
      */
+    @Override
     public Selector close(ParsingContext context) {
         return getCount(context) < getMinOccurs() ? this : null;
     }
@@ -170,6 +178,7 @@ public class Record extends Segment implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#reset(org.beanio.internal.parser.ParsingContext)
      */
+    @Override
     public void reset(ParsingContext context) { }
     
     /**
@@ -179,6 +188,7 @@ public class Record extends Segment implements Selector {
      * @param state the Map to update with the latest state
      * @since 1.2
      */
+    @Override
     public void updateState(ParsingContext context, String namespace, Map<String, Object> state) {
         state.put(getKey(namespace, COUNT_KEY), count.get(context));
     }
@@ -190,6 +200,7 @@ public class Record extends Segment implements Selector {
      * @param state the Map containing the state to restore
      * @since 1.2
      */
+    @Override
     public void restoreState(ParsingContext context, String namespace, Map<String, Object> state) {
         String key = getKey(namespace, COUNT_KEY);
         Integer n = (Integer) state.get(key);
@@ -213,31 +224,37 @@ public class Record extends Segment implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#isRecordGroup()
      */
+    @Override
     public boolean isRecordGroup() {
         return false;
     }
     
+    @Override
     public int getMinOccurs() {
         return minOccurs;
     }
     public void setMinOccurs(int minOccurs) {
         this.minOccurs = minOccurs;
     }
+    @Override
     public int getMaxOccurs() {
         return maxOccurs;
     }
     public void setMaxOccurs(int maxOccurs) {
         this.maxOccurs = maxOccurs;
     }
+    @Override
     public int getOrder() {
         return order;
     }
     public void setOrder(int order) {
         this.order = order;
     }
+    @Override
     public int getCount(ParsingContext context) {
         return count.get(context);
     }
+    @Override
     public void setCount(ParsingContext context, int count) {
         this.count.set(context, count);
     }
@@ -259,6 +276,7 @@ public class Record extends Segment implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#isMaxOccursReached()
      */
+    @Override
     public boolean isMaxOccursReached(ParsingContext context) {
         return getCount(context) >= getMaxOccurs();
     }

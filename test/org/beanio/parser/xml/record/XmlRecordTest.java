@@ -55,7 +55,7 @@ public class XmlRecordTest extends XmlParserTest {
             List list = (List) in.read();
             assertEquals("John", list.get(0));
             assertNull(list.get(1));
-            assertEquals(new Integer(22), list.get(2));
+            assertEquals(Integer.valueOf(22), list.get(2));
 
             out.write(list);
             out.close();

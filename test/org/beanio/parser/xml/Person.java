@@ -25,7 +25,7 @@ import java.util.List;
 public class Person {
     /* used to test that the setter is not called for missing elements */
     public static final String DEFAULT_NAME = new String();
-    public static final Integer DEFAULT_AGE = new Integer(-1);
+    public static final Integer DEFAULT_AGE = Integer.valueOf(-1);
     
     private String type;
     private String gender;
@@ -89,6 +89,7 @@ public class Person {
         this.age = age;
     }
     
+    @Override
     public String toString() {
         return gender + ": " + firstName + " " + lastName + ":" + color + " " + addressList;
     }

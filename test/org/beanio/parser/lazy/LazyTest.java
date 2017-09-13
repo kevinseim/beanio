@@ -34,7 +34,7 @@ public class LazyTest extends ParserTest {
         user = (LazyUser) u.unmarshal("kevin1         ");
         assertEquals("kevin", user.name);
         assertNotNull(user.account);
-        assertEquals(new Integer(1), user.account.getNumber());
+        assertEquals(Integer.valueOf(1), user.account.getNumber());
         assertEquals("", user.account.getText());
     }
     

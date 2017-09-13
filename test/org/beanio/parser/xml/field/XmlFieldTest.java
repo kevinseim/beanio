@@ -49,7 +49,7 @@ public class XmlFieldTest extends XmlParserTest {
         BeanWriter out = factory.createWriter("stream", s);
         try {
             Person person = (Person) in.read();
-            assertEquals(new Integer(25), person.getAge());
+            assertEquals(Integer.valueOf(25), person.getAge());
             out.write(person);
             
             person = (Person) in.read();
@@ -76,7 +76,7 @@ public class XmlFieldTest extends XmlParserTest {
         BeanWriter out = factory.createWriter("stream2", s);
         try {
             Person person = (Person) in.read();
-            assertEquals(new Integer(25), person.getAge());
+            assertEquals(Integer.valueOf(25), person.getAge());
             out.write(person);
             
             assertFieldError(in, 5, "record", "age", "", "Required field not set");
@@ -105,7 +105,7 @@ public class XmlFieldTest extends XmlParserTest {
             Person person = (Person) in.read();
             assertEquals("Joe", person.getFirstName());
             assertNull(person.getLastName());
-            assertEquals(new Integer(10), person.getAge());
+            assertEquals(Integer.valueOf(10), person.getAge());
             
             person = (Person) in.read();
             assertEquals("John", person.getFirstName());

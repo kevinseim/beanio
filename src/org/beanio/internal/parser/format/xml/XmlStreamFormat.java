@@ -47,6 +47,7 @@ public class XmlStreamFormat extends StreamFormatSupport {
      * (non-Javadoc)
      * @see org.beanio.parser2.StreamFormat#createUnmarshallingContext()
      */
+    @Override
     public UnmarshallingContext createUnmarshallingContext() {
         return new XmlUnmarshallingContext(groupDepth);
     }
@@ -55,6 +56,7 @@ public class XmlStreamFormat extends StreamFormatSupport {
      * (non-Javadoc)
      * @see org.beanio.parser2.StreamFormat#createMarshallingContext()
      */
+    @Override
     public MarshallingContext createMarshallingContext(boolean streaming) {
         XmlMarshallingContext ctx = new XmlMarshallingContext(groupDepth);
         ctx.setStreaming(streaming);
@@ -65,6 +67,7 @@ public class XmlStreamFormat extends StreamFormatSupport {
     public void setRecordParserFactory(RecordParserFactory recordParserFactory) {
         if (recordParserFactory != null && recordParserFactory instanceof XmlStreamConfigurationAware) {
             ((XmlStreamConfigurationAware)recordParserFactory).setConfiguration(new XmlStreamConfiguration() {
+                @Override
                 public Document getDocument() {
                     return createBaseDocument(layout);
                 }

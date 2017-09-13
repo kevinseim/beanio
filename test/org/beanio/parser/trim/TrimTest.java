@@ -31,6 +31,6 @@ public class TrimTest extends ParserTest {
         Map map = (Map) u.unmarshal("\"jen  \",jen  ,1    ");
         assertEquals("jen  ", map.get("text"));
         assertEquals("jen", map.get("text_trim"));
-        assertEquals(new Integer(1), map.get("number"));
+        assertEquals(Integer.valueOf(1), map.get("number"));
     }
 }

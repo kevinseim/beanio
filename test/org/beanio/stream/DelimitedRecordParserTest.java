@@ -38,7 +38,7 @@ public class DelimitedRecordParserTest {
     }
     
     @Test
-    public void testUnmarshal_Basic() throws IOException {
+    public void testUnmarshal_Basic() {
         RecordUnmarshaller unmarshaller = factory.createUnmarshaller();
         String[] actual = (String[]) unmarshaller.unmarshal("1\t2\t33\t444\t");
         
@@ -47,7 +47,7 @@ public class DelimitedRecordParserTest {
     }
 
     @Test
-    public void testUnmarshal_EscapeDisabled() throws IOException {
+    public void testUnmarshal_EscapeDisabled() {
         factory.setEscape(null);
         
         RecordUnmarshaller unmarshaller = factory.createUnmarshaller();
@@ -57,7 +57,7 @@ public class DelimitedRecordParserTest {
     }
 
     @Test
-    public void testUnmarshal_EscapeEscape() throws IOException {
+    public void testUnmarshal_EscapeEscape() {
         factory.setEscape('\\');
         
         RecordUnmarshaller unmarshaller = factory.createUnmarshaller();
@@ -67,7 +67,7 @@ public class DelimitedRecordParserTest {
     }
 
     @Test
-    public void testUnmarshal_EscapeDelimiter() throws IOException {
+    public void testUnmarshal_EscapeDelimiter() {
         factory.setEscape('\\');
         
         RecordUnmarshaller unmarshaller = factory.createUnmarshaller();
@@ -77,7 +77,7 @@ public class DelimitedRecordParserTest {
     }
 
     @Test
-    public void testUnmarshal_EscapeOther() throws IOException {
+    public void testUnmarshal_EscapeOther() {
         factory.setEscape('\\');
         
         RecordUnmarshaller unmarshaller = factory.createUnmarshaller();
@@ -87,7 +87,7 @@ public class DelimitedRecordParserTest {
     }
 
     @Test
-    public void testUnmarshal_CustomDelimiter() throws IOException {
+    public void testUnmarshal_CustomDelimiter() {
         factory.setDelimiter(',');
         
         RecordUnmarshaller unmarshaller = factory.createUnmarshaller();
@@ -111,14 +111,14 @@ public class DelimitedRecordParserTest {
     }
 
     @Test
-    public void testMarshal_DefaultConfiguration() throws IOException {
+    public void testMarshal_DefaultConfiguration() {
         RecordMarshaller marshaller = factory.createMarshaller();
         String record = marshaller.marshal(new String[] { "value1", "value\t2" });
         assertEquals("value1\tvalue\t2", record);
     }
 
     @Test
-    public void testMarshal_CustomDelimiter() throws IOException {
+    public void testMarshal_CustomDelimiter() {
         factory.setDelimiter(',');
         
         RecordMarshaller marshaller = factory.createMarshaller();
@@ -127,7 +127,7 @@ public class DelimitedRecordParserTest {
     }
 
     @Test
-    public void testMarshal_CustomDelimiterAndEscape() throws IOException {
+    public void testMarshal_CustomDelimiterAndEscape() {
         factory.setDelimiter(',');
         factory.setEscape('\\');
         
@@ -137,14 +137,14 @@ public class DelimitedRecordParserTest {
     }
 
     @Test
-    public void testMarshal_DefaultFactoryConfiguration() throws IOException {
+    public void testMarshal_DefaultFactoryConfiguration() {
         RecordMarshaller marshaller = factory.createMarshaller();
         String record = marshaller.marshal(new String[] { "value1", "value\t2" });
         assertEquals("value1\tvalue\t2", record);
     }
 
     @Test
-    public void testMarshal_CustomFactoryConfiguration() throws IOException {
+    public void testMarshal_CustomFactoryConfiguration() {
         factory.setDelimiter(',');
         factory.setEscape('\\');
         factory.setRecordTerminator("");

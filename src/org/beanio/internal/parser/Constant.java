@@ -36,6 +36,7 @@ public class Constant extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#type()
      */
+    @Override
     public int type() {
         return Property.SIMPLE;
     }
@@ -44,6 +45,7 @@ public class Constant extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#defines(java.lang.Object)
      */
+    @Override
     public boolean defines(Object value) {
         return this.value.equals(value);
     }
@@ -52,12 +54,14 @@ public class Constant extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#clearValue()
      */
+    @Override
     public void clearValue(ParsingContext context) { }
 
     /*
      * (non-Javadoc)
      * @see org.beanio.parser.Property#createValue()
      */
+    @Override
     public Object createValue(ParsingContext context) {
         return getValue(context);
     }
@@ -66,6 +70,7 @@ public class Constant extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#getValue()
      */
+    @Override
     public Object getValue(ParsingContext context) {
         return value;
     }
@@ -82,6 +87,7 @@ public class Constant extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(ParsingContext context, Object value) {
         
     }
@@ -90,6 +96,7 @@ public class Constant extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#getType()
      */
+    @Override
     public Class<?> getType() {
         return type;
     }
@@ -98,6 +105,7 @@ public class Constant extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#setType(java.lang.Class)
      */
+    @Override
     public void setType(Class<?> type) {
         this.type = type;
     }
@@ -106,6 +114,7 @@ public class Constant extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#isIdentifier()
      */
+    @Override
     public boolean isIdentifier() {
         return identifier;
     }
@@ -114,6 +123,7 @@ public class Constant extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#setIdentifier(boolean)
      */
+    @Override
     public void setIdentifier(boolean identifier) {
         this.identifier = identifier;
     }
@@ -122,6 +132,7 @@ public class Constant extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#getAccessor()
      */
+    @Override
     public PropertyAccessor getAccessor() {
         return accessor;
     }
@@ -130,6 +141,7 @@ public class Constant extends Component implements Property {
      * (non-Javadoc)
      * @see org.beanio.parser.Property#setAccessor(org.beanio.parser.PropertyAccessor)
      */
+    @Override
     public void setAccessor(PropertyAccessor accessor) {
         this.accessor = accessor;
     }

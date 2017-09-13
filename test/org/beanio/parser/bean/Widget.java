@@ -28,6 +28,7 @@ public class Widget {
     private List<Widget> partsList;
     private Map<String,Widget> partsMap;
     
+    @Override
     public String toString() {
         return 
             "[id=" + id +
@@ -75,7 +76,7 @@ public class Widget {
     }
     public void addPart(Widget w) {
         if (partsList == null) {
-            partsList = new ArrayList<Widget>();
+            partsList = new ArrayList<>();
         }
         partsList.add(w);
     }

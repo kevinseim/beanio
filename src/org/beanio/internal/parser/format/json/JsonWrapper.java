@@ -112,6 +112,7 @@ public class JsonWrapper extends DelegatingParser implements JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.json.JsonNode#getJsonName()
      */
+    @Override
     public String getJsonName() {
         return jsonName;
     }
@@ -124,6 +125,7 @@ public class JsonWrapper extends DelegatingParser implements JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.json.JsonNode#getJsonType()
      */
+    @Override
     public char getJsonType() {
         return jsonType;
     }
@@ -136,6 +138,7 @@ public class JsonWrapper extends DelegatingParser implements JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.json.JsonNode#isJsonArray()
      */
+    @Override
     public boolean isJsonArray() {
         return jsonArray;
     }
@@ -148,6 +151,7 @@ public class JsonWrapper extends DelegatingParser implements JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.json.JsonNode#getJsonArrayIndex()
      */
+    @Override
     public int getJsonArrayIndex() {
         return jsonArrayIndex;
     }
@@ -160,6 +164,7 @@ public class JsonWrapper extends DelegatingParser implements JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.json.JsonNode#isNillable()
      */
+    @Override
     public boolean isNillable() {
         return nillable;
     }
@@ -172,6 +177,7 @@ public class JsonWrapper extends DelegatingParser implements JsonNode {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.DelegatingParser#isLazy()
      */
+    @Override
     public boolean isOptional() {
         return optional;
     }

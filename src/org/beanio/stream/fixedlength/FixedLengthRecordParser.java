@@ -35,6 +35,7 @@ public class FixedLengthRecordParser implements RecordMarshaller, RecordUnmarsha
      * (non-Javadoc)
      * @see org.beanio.stream.RecordUnmarshaller#unmarshal(java.lang.String)
      */
+    @Override
     public Object unmarshal(String text) {
         return text;
     }
@@ -43,6 +44,7 @@ public class FixedLengthRecordParser implements RecordMarshaller, RecordUnmarsha
      * (non-Javadoc)
      * @see org.beanio.stream.RecordMarshaller#marshal(java.lang.Object)
      */
+    @Override
     public String marshal(Object record) {
         return marshal((String)record);
     }

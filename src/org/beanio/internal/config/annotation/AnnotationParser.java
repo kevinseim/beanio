@@ -35,6 +35,7 @@ import org.beanio.internal.util.TypeUtil;
 public class AnnotationParser {
 
     private static final Comparator<ComponentConfig> ORDINAL_COMPARATOR = new Comparator<ComponentConfig>() {
+        @Override
         public int compare(ComponentConfig c1, ComponentConfig c2) {
             Integer o1 = c1.getOrdinal();
             Integer o2 = c2.getOrdinal();
@@ -754,7 +755,7 @@ public class AnnotationParser {
         if (val == null) {
             return null;
         }
-        if (val.compareTo(new Integer(0)) < 0) {
+        if (val.compareTo(Integer.valueOf(0)) < 0) {
             return Integer.MAX_VALUE;
         }
         return val;

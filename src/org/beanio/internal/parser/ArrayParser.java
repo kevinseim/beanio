@@ -70,7 +70,7 @@ public class ArrayParser extends CollectionParser {
         if (value != null) {
             int length = Array.getLength(value);
             if (length > 0) {
-                collection = new ArrayList<Object>(length);
+                collection = new ArrayList<>(length);
                 for (int i=0; i<length; i++) {
                     collection.add(Array.get(value, i));
                 }
@@ -81,7 +81,7 @@ public class ArrayParser extends CollectionParser {
     
     @Override
     protected Collection<Object> createCollection() {
-        return new ArrayList<Object>();
+        return new ArrayList<>();
     }
 
     public Class<?> getArrayType() {

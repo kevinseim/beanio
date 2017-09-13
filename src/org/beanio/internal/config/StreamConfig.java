@@ -45,7 +45,7 @@ public class StreamConfig extends GroupConfig {
     private boolean strict = false;
     private boolean ignoreUnidentifiedRecords = false;
     
-    private List<TypeHandlerConfig> handlerList = new ArrayList<TypeHandlerConfig>();
+    private List<TypeHandlerConfig> handlerList = new ArrayList<>();
     private BeanConfig<RecordParserFactory> parserFactory;
 
     /**

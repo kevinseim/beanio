@@ -75,12 +75,12 @@ public class JsonUtil {
             return d;
         } 
         else if (text.length() < INT_SIZE) {
-            return new Integer(text);
+            return Integer.valueOf(text);
         }
         else {
             Long n = new Long(text);
             if (n.intValue() == n.longValue()) {
-                return new Integer(n.intValue());
+                return Integer.valueOf(n.intValue());
             }
             return n;
         }

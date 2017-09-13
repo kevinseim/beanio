@@ -43,6 +43,7 @@ public class CollectionBean extends PropertyComponent implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#type()
      */
+    @Override
     public int type() {
         return Property.COLLECTION;
     }
@@ -51,6 +52,7 @@ public class CollectionBean extends PropertyComponent implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.PropertyComponent#clearValue()
      */
+    @Override
     public void clearValue(ParsingContext context) {
         for (Component child : getChildren()) {
             ((Property) child).clearValue(context);
@@ -63,6 +65,7 @@ public class CollectionBean extends PropertyComponent implements Property {
      * @see org.beanio.internal.parser.PropertyComponent#createValue()
      */
     @SuppressWarnings("unchecked")
+    @Override
     public Object createValue(ParsingContext context) {
         Object b = null;
         
@@ -115,6 +118,7 @@ public class CollectionBean extends PropertyComponent implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.PropertyComponent#getValue()
      */
+    @Override
     public Object getValue(ParsingContext context) {
         return bean.get(context);
     }
@@ -123,6 +127,7 @@ public class CollectionBean extends PropertyComponent implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.PropertyComponent#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(ParsingContext context, Object value) {
         if (value == null) {
             clearValue(null);
@@ -146,6 +151,7 @@ public class CollectionBean extends PropertyComponent implements Property {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.PropertyComponent#defines(java.lang.Object)
      */
+    @Override
     public boolean defines(Object value) {
         if (getType() == null) {
             return false;

@@ -99,6 +99,7 @@ public class DelimitedWriter implements RecordWriter {
      * (non-Javadoc)
      * @see org.beanio.line.RecordWriter#write(java.lang.Object)
      */
+    @Override
     public void write(Object value) throws IOException, RecordIOException {
         write((String[]) value);
     }
@@ -141,6 +142,7 @@ public class DelimitedWriter implements RecordWriter {
      * (non-Javadoc)
      * @see org.beanio.line.RecordWriter#flush()
      */
+    @Override
     public void flush() throws IOException {
         out.flush();
     }
@@ -149,6 +151,7 @@ public class DelimitedWriter implements RecordWriter {
      * (non-Javadoc)
      * @see org.beanio.line.RecordWriter#close()
      */
+    @Override
     public void close() throws IOException {
         out.close();
     }

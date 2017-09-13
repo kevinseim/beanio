@@ -62,8 +62,8 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
     private PropertyAccessorFactory accessorFactory;
     private ClassLoader classLoader;
     
-    private LinkedList<Component> parserStack = new LinkedList<Component>();
-    private LinkedList<Component> propertyStack = new LinkedList<Component>();
+    private LinkedList<Component> parserStack = new LinkedList<>();
+    private LinkedList<Component> propertyStack = new LinkedList<>();
     
     /**
      * Constructs a new <tt>ParserFactory</tt>.
@@ -76,6 +76,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
      * @return the new {@link Stream}
      * @throws BeanIOConfigurationException if the configuration is invalid
      */
+    @Override
     public Stream createStream(StreamConfig config) throws BeanIOConfigurationException {
         if (config.getName() == null) {
             throw new BeanIOConfigurationException("stream name not configured");
@@ -232,7 +233,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
             
             if (property.getAccessor().isConstructorArgument()) {
                 if (args == null) {
-                    args = new ArrayList<Property>();
+                    args = new ArrayList<>();
                 }
                 args.add(property);
             }
@@ -245,6 +246,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
         
         // sort arguments by constructor index
         Collections.sort(args, new Comparator<Property>() {
+            @Override
             public int compare(Property o1, Property o2) {
                 return o1.getAccessor().getConstructorArgumentIndex() -
                     o2.getAccessor().getConstructorArgumentIndex();
@@ -1527,7 +1529,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
             if (config.getComponentType() == ComponentConfig.SEGMENT) {
                 required = config.getMinOccurs() > 0 && !config.isNillable();
             }
-            boolean matchNull = !required && new Integer(0).equals(config.getMinOccurs());
+            boolean matchNull = !required && Integer.valueOf(0).equals(config.getMinOccurs());
             
             CollectionBean collection = new CollectionBean();
             collection.setName(config.getName());
@@ -1538,7 +1540,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
         }
         else {
             boolean required = propertyStack.isEmpty();
-            boolean matchNull = !required && new Integer(0).equals(config.getMinOccurs());
+            boolean matchNull = !required && Integer.valueOf(0).equals(config.getMinOccurs());
             
             Bean bean = new Bean();
             bean.setName(config.getName());
@@ -1652,6 +1654,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
      * @param typeHandlerFactory the <tt>TypeHandlerFactory</tt> to use to
      *   create the stream definition
      */
+    @Override
     public void setTypeHandlerFactory(TypeHandlerFactory typeHandlerFactory) {
         this.typeHandlerFactory = typeHandlerFactory;
     }
@@ -1721,6 +1724,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
      * (non-Javadoc)
      * @see org.beanio.factory.ParserFactory#setClassLoader(java.lang.ClassLoader)
      */
+    @Override
     public void setClassLoader(ClassLoader classLoader) {
         this.classLoader = classLoader;
     }

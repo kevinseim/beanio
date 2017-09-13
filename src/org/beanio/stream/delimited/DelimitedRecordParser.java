@@ -32,7 +32,7 @@ public class DelimitedRecordParser implements RecordUnmarshaller, RecordMarshall
     private char escape;
     private boolean escapeEnabled;
     
-    private List<String> fieldList = new ArrayList<String>();
+    private List<String> fieldList = new ArrayList<>();
     
     /**
      * Constructs a new <tt>DelimitedRecordParser</tt>.
@@ -65,6 +65,7 @@ public class DelimitedRecordParser implements RecordUnmarshaller, RecordMarshall
      * (non-Javadoc)
      * @see org.beanio.stream.RecordParser#parse(java.lang.String)
      */
+    @Override
     public String[] unmarshal(String text) {
         fieldList.clear();
         
@@ -110,6 +111,7 @@ public class DelimitedRecordParser implements RecordUnmarshaller, RecordMarshall
      * (non-Javadoc)
      * @see org.beanio.stream.RecordMarshaller#marshal(java.lang.Object)
      */
+    @Override
     public String marshal(Object record) {
         return marshal((String[]) record);
     }

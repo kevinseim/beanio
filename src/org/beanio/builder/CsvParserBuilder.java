@@ -79,7 +79,7 @@ public class CsvParserBuilder extends ParserBuilder {
     
     @Override
     public BeanConfig<RecordParserFactory> build() {
-        BeanConfig<RecordParserFactory> config = new BeanConfig<RecordParserFactory>();
+        BeanConfig<RecordParserFactory> config = new BeanConfig<>();
         config.setInstance(parser);
         return config;
     }

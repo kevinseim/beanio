@@ -34,7 +34,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
     private static final String WRITTEN_KEY = "written";
     
     /* state attributes */
-    private ParserLocal<Boolean> written = new ParserLocal<Boolean>(false);
+    private ParserLocal<Boolean> written = new ParserLocal<>(false);
     
     /* marshalling flags */
     private boolean group;
@@ -96,6 +96,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.parser2.Marshaller#marshal(org.beanio.parser2.MarshallingContext)
      */
+    @Override
     public boolean marshal(MarshallingContext context) throws IOException {
         XmlMarshallingContext ctx = (XmlMarshallingContext) context;
         
@@ -133,6 +134,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#unmarshal(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public boolean unmarshal(UnmarshallingContext context) {
         return getDelegate().unmarshal(context);
     }
@@ -141,6 +143,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#skip(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public void skip(UnmarshallingContext context) {
         getDelegate().skip(context);
     }
@@ -149,6 +152,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#matchNextBean(org.beanio.internal.parser.MarshallingContext, java.lang.Object)
      */
+    @Override
     public Selector matchNext(MarshallingContext context) {
         XmlMarshallingContext ctx = (XmlMarshallingContext) context;
         
@@ -196,6 +200,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#matchNext(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public Selector matchNext(UnmarshallingContext context) {
         return match(context, true);
     }
@@ -204,6 +209,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#matchAny(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public Selector matchAny(UnmarshallingContext context) {
         return match(context, false);
     }
@@ -261,6 +267,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#matches(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public boolean matches(UnmarshallingContext context) {
         // a group is never used to match a record
         return false;
@@ -273,6 +280,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * @param state the Map to update with the latest state
      * @since 1.2
      */
+    @Override
     public void updateState(ParsingContext context, String namespace, Map<String, Object> state) {
         state.put(getKey(namespace, WRITTEN_KEY), written.get(context));
         
@@ -289,6 +297,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * @param state the Map containing the state to restore
      * @since 1.2
      */
+    @Override
     public void restoreState(ParsingContext context, String namespace, Map<String, Object> state) {
         String key = getKey(namespace, WRITTEN_KEY); 
         Boolean written = (Boolean) state.get(key);
@@ -325,6 +334,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#getValue()
      */
+    @Override
     public Object getValue(ParsingContext context) {
         return getDelegate().getValue(context);
     }
@@ -333,6 +343,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(ParsingContext context, Object value) {
         getDelegate().setValue(context, value);
     }
@@ -341,6 +352,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#getSize()
      */
+    @Override
     public int getSize() {
         return getDelegate().getSize();
     }
@@ -349,6 +361,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#close(org.beanio.internal.parser.ParsingContext)
      */
+    @Override
     public Selector close(ParsingContext context) {
         return getDelegate().close(context);
     }
@@ -357,6 +370,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#reset(org.beanio.internal.parser.ParsingContext)
      */
+    @Override
     public void reset(ParsingContext context) {
         written.set(context, false);
         getDelegate().reset(context);
@@ -366,6 +380,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#getCount(org.beanio.internal.parser.ParsingContext)
      */
+    @Override
     public int getCount(ParsingContext context) {
         return getDelegate().getCount(context);
     }
@@ -374,6 +389,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#setCount(org.beanio.internal.parser.ParsingContext, int)
      */
+    @Override
     public void setCount(ParsingContext context, int count) {
         getDelegate().setCount(context, count);
     }
@@ -382,6 +398,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#getMinOccurs()
      */
+    @Override
     public int getMinOccurs() {
         return getDelegate().getMinOccurs();
     }
@@ -390,6 +407,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#getMaxOccurs()
      */
+    @Override
     public int getMaxOccurs() {
         return getDelegate().getMaxOccurs();
     }
@@ -398,6 +416,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#getOrder()
      */
+    @Override
     public int getOrder() {
         return getDelegate().getOrder();
     }
@@ -406,6 +425,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#isMaxOccursReached(org.beanio.internal.parser.ParsingContext)
      */
+    @Override
     public boolean isMaxOccursReached(ParsingContext context) {
         return getDelegate().isMaxOccursReached(context);
     }
@@ -414,6 +434,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#clearValue()
      */
+    @Override
     public void clearValue(ParsingContext context) {
         getDelegate().clearValue(context);
     }
@@ -422,6 +443,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#isIdentifier()
      */
+    @Override
     public boolean isIdentifier() {
         return getDelegate().isIdentifier();
     }
@@ -439,6 +461,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#isLazy()
      */
+    @Override
     public boolean isOptional() {
         return getDelegate().isOptional();
     }
@@ -447,6 +470,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getLocalName()
      */
+    @Override
     public String getLocalName() {
         return localName;
     }
@@ -461,6 +485,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getNamespace()
      */
+    @Override
     public String getNamespace() {
         return namespace;
     }
@@ -477,6 +502,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getPrefix()
      */
+    @Override
     public String getPrefix() {
         return prefix;
     }
@@ -493,6 +519,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#isNamespaceAware()
      */
+    @Override
     public boolean isNamespaceAware() {
         return namespaceAware;
     }
@@ -509,6 +536,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getType()
      */
+    @Override
     public int getType() {
         return XmlNode.XML_TYPE_ELEMENT;
     }
@@ -517,6 +545,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#isNillable()
      */
+    @Override
     public boolean isNillable() {
         return false;
     }
@@ -525,6 +554,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#isRepeating()
      */
+    @Override
     public boolean isRepeating() {
         return false;
     }
@@ -533,6 +563,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#getProperty()
      */
+    @Override
     public Property getProperty() {
         return getDelegate().getProperty();
     }
@@ -541,6 +572,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#hasContent()
      */
+    @Override
     public boolean hasContent(ParsingContext context) {
         return getDelegate().hasContent(context);
     }
@@ -549,6 +581,7 @@ public class XmlSelectorWrapper extends ParserComponent implements Selector, Xml
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#isRecordGroup()
      */
+    @Override
     public boolean isRecordGroup() {
         return false;
     }

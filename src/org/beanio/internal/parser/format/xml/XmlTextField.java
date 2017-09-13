@@ -60,6 +60,7 @@ public class XmlTextField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getType()
      */
+    @Override
     public int getType() {
         return XmlNode.XML_TYPE_TEXT;
     }
@@ -68,6 +69,7 @@ public class XmlTextField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.FieldFormat#isNillable()
      */
+    @Override
     public boolean isNillable() {
         return false;
     }
@@ -76,6 +78,7 @@ public class XmlTextField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getLocalName()
      */
+    @Override
     public String getLocalName() {
         return null;
     }
@@ -84,6 +87,7 @@ public class XmlTextField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getNamespace()
      */
+    @Override
     public String getNamespace() {
         return null;
     }
@@ -92,6 +96,7 @@ public class XmlTextField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#isNamespaceAware()
      */
+    @Override
     public boolean isNamespaceAware() {
         return false;
     }
@@ -100,10 +105,12 @@ public class XmlTextField extends XmlFieldFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.format.xml.XmlNode#getPrefix()
      */
+    @Override
     public String getPrefix() {
         return null;
     }
     
+    @Override
     public boolean isRepeating() {
         return false;
     }

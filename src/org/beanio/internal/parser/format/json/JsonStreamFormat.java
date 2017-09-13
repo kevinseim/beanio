@@ -36,6 +36,7 @@ public class JsonStreamFormat extends StreamFormatSupport implements StreamForma
      * (non-Javadoc)
      * @see org.beanio.internal.parser.StreamFormat#createUnmarshallingContext()
      */
+    @Override
     public UnmarshallingContext createUnmarshallingContext() {
         return new JsonUnmarshallingContext(maxDepth);
     }
@@ -44,6 +45,7 @@ public class JsonStreamFormat extends StreamFormatSupport implements StreamForma
      * (non-Javadoc)
      * @see org.beanio.internal.parser.StreamFormat#createMarshallingContext(boolean)
      */
+    @Override
     public MarshallingContext createMarshallingContext(boolean streaming) {
         return new JsonMarshallingContext(maxDepth);
     }

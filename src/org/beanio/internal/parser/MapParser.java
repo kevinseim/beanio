@@ -34,7 +34,7 @@ public class MapParser extends Aggregation {
     // the child property used for the key
     private Property key;
     // the property value
-    private ParserLocal<Object> value = new ParserLocal<Object>();    
+    private ParserLocal<Object> value = new ParserLocal<>();    
     
     /**
      * Constructs a new <tt>MapParser</tt>.
@@ -50,6 +50,7 @@ public class MapParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser2.Property#defines(java.lang.Object)
      */
+    @Override
     public boolean defines(Object value) {
         if (value == null || type == null) {
             return false;
@@ -68,6 +69,7 @@ public class MapParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.DelegatingParser#matches(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public boolean matches(UnmarshallingContext context) {
         // matching repeating fields is not supported
         return true;
@@ -182,6 +184,7 @@ public class MapParser extends Aggregation {
      * Returns whether this iteration is a property of a bean object.
      * @return true if this iteration is a property, false otherwise
      */
+    @Override
     public boolean isProperty() {
         return type != null;
     }
@@ -190,6 +193,7 @@ public class MapParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#getType()
      */
+    @Override
     public Class<? extends Map<Object,Object>> getType() {
         return type;
     }
@@ -198,6 +202,7 @@ public class MapParser extends Aggregation {
      * Sets the concrete {@link Map} type.
      */
     @SuppressWarnings("unchecked")
+    @Override
     public void setType(Class<?> mapType) {
         this.type = (Class<? extends Map<Object,Object>>) mapType;
     }
@@ -206,6 +211,7 @@ public class MapParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser2.Property#create()
      */
+    @Override
     public Object createValue(ParsingContext context) {
         Object value = this.value.get(context);
         if (value == null) {
@@ -219,6 +225,7 @@ public class MapParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser2.DelegatingParser#getValue()
      */
+    @Override
     public Object getValue(ParsingContext context) {
         Object value = this.value.get(context);
         return value == null ? Value.MISSING : value;
@@ -228,6 +235,7 @@ public class MapParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.parser2.DelegatingParser#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(ParsingContext context, Object value) {
         // convert empty collections to null so that parent parsers
         // will consider this property missing during marshalling
@@ -269,6 +277,7 @@ public class MapParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Iteration#getIterationSize()
      */
+    @Override
     public int getIterationSize() {
         return getSize();
     }
@@ -277,6 +286,7 @@ public class MapParser extends Aggregation {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Property#type()
      */
+    @Override
     public int type() {
         return Property.AGGREGATION_MAP;
     }

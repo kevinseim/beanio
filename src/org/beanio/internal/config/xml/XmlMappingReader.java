@@ -65,19 +65,22 @@ public class XmlMappingReader {
             DocumentBuilder builder = factory.newDocumentBuilder();
             builder.setEntityResolver(createEntityResolver());
 
-            final List<String> errorMessages = new ArrayList<String>();
+            final List<String> errorMessages = new ArrayList<>();
 
             builder.setErrorHandler(new ErrorHandler() {
+                @Override
                 public void warning(SAXParseException exception) throws SAXException {
                     errorMessages.add("Error at line " + exception.getLineNumber() +
                         ": " + exception.getMessage());
                 }
 
+                @Override
                 public void error(SAXParseException exception) throws SAXException {
                     errorMessages.add("Error at line " + exception.getLineNumber() +
                         ": " + exception.getMessage());
                 }
 
+                @Override
                 public void fatalError(SAXParseException exception) throws SAXException {
                     throw exception;
                 }
@@ -138,6 +141,7 @@ public class XmlMappingReader {
     }
 
     private static class DefaultEntityResolver implements EntityResolver {
+        @Override
         public InputSource resolveEntity(String publicId, String systemId) throws SAXException,
             IOException {
             if (publicId == null && (BEANIO_XMLNS.equals(systemId) ||

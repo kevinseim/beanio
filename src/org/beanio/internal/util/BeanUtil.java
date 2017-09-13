@@ -177,6 +177,7 @@ public class BeanUtil {
          * (non-Javadoc)
          * @see org.beanio.types.TypeHandler#parse(java.lang.String)
          */
+        @Override
         public Character parse(String text) throws TypeConversionException {
             if (text == null) {
                 return null;
@@ -211,6 +212,7 @@ public class BeanUtil {
          * (non-Javadoc)
          * @see org.beanio.types.TypeHandler#format(java.lang.Object)
          */
+        @Override
         public String format(Object value) {
             throw new UnsupportedOperationException();
         }
@@ -219,6 +221,7 @@ public class BeanUtil {
          * (non-Javadoc)
          * @see org.beanio.types.TypeHandler#getType()
          */
+        @Override
         public Class<?> getType() {
             return Character.class;
         }
@@ -234,6 +237,7 @@ public class BeanUtil {
          * (non-Javadoc)
          * @see org.beanio.types.TypeHandler#parse(java.lang.String)
          */
+        @Override
         public String parse(String text) throws TypeConversionException {
             if (text == null) {
                 return text;
@@ -295,6 +299,7 @@ public class BeanUtil {
          * (non-Javadoc)
          * @see org.beanio.types.TypeHandler#format(java.lang.Object)
          */
+        @Override
         public String format(Object value) {
             throw new UnsupportedOperationException();
         }
@@ -303,6 +308,7 @@ public class BeanUtil {
          * (non-Javadoc)
          * @see org.beanio.types.TypeHandler#getType()
          */
+        @Override
         public Class<?> getType() {
             return String.class;
         }
@@ -318,6 +324,7 @@ public class BeanUtil {
          * (non-Javadoc)
          * @see org.beanio.types.TypeHandler#parse(java.lang.String)
          */
+        @Override
         public String[] parse(String text) throws TypeConversionException {
             if (text == null || "".equals(text)) {
                 return null;
@@ -330,7 +337,7 @@ public class BeanUtil {
             
             boolean escaped = false;
             StringBuilder item = new StringBuilder();
-            List<String> list = new ArrayList<String>();
+            List<String> list = new ArrayList<>();
             
             char[] ca = text.toCharArray();
             for (char c : ca) {
@@ -360,6 +367,7 @@ public class BeanUtil {
          * (non-Javadoc)
          * @see org.beanio.types.TypeHandler#format(java.lang.Object)
          */
+        @Override
         public String format(Object value) {
             throw new UnsupportedOperationException();
         }
@@ -368,6 +376,7 @@ public class BeanUtil {
          * (non-Javadoc)
          * @see org.beanio.types.TypeHandler#getType()
          */
+        @Override
         public Class<?> getType() {
             return String[].class;
         }

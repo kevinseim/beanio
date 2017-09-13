@@ -54,6 +54,7 @@ public class BeanReaderImpl implements BeanReader {
      * (non-Javadoc)
      * @see org.beanio.BeanReader#read()
      */
+    @Override
     public Object read() {
         ensureOpen();
         
@@ -194,6 +195,7 @@ public class BeanReaderImpl implements BeanReader {
      * (non-Javadoc)
      * @see org.beanio.BeanReader#skip(int)
      */
+    @Override
     public int skip(int count) throws BeanReaderIOException, MalformedRecordException,
         UnidentifiedRecordException, UnexpectedRecordException {
         
@@ -229,6 +231,7 @@ public class BeanReaderImpl implements BeanReader {
      * (non-Javadoc)
      * @see org.beanio.impl.AbstractBeanReader#close()
      */
+    @Override
     public void close() throws BeanReaderIOException {
         ensureOpen();
         
@@ -247,6 +250,7 @@ public class BeanReaderImpl implements BeanReader {
      * (non-Javadoc)
      * @see org.beanio.BeanReader#getName()
      */
+    @Override
     public String getRecordName() {
         return recordName;
     }
@@ -255,6 +259,7 @@ public class BeanReaderImpl implements BeanReader {
      * (non-Javadoc)
      * @see org.beanio.BeanReader#getLineNumber()
      */
+    @Override
     public int getLineNumber() {
         return lineNumber;
     }
@@ -263,6 +268,7 @@ public class BeanReaderImpl implements BeanReader {
      * (non-Javadoc)
      * @see org.beanio.BeanReader#getRecordCount()
      */
+    @Override
     public int getRecordCount() {
         return context == null ? 0: context.getRecordCount();
     }
@@ -271,6 +277,7 @@ public class BeanReaderImpl implements BeanReader {
      * (non-Javadoc)
      * @see org.beanio.BeanReader#getRecordContext(int)
      */
+    @Override
     public RecordContext getRecordContext(int index) {
         if (context == null) {
             throw new IndexOutOfBoundsException();
@@ -282,6 +289,7 @@ public class BeanReaderImpl implements BeanReader {
      * (non-Javadoc)
      * @see org.beanio.BeanReader#setErrorHandler(org.beanio.BeanReaderErrorHandler)
      */
+    @Override
     public void setErrorHandler(BeanReaderErrorHandler errorHandler) {
         this.errorHandler = errorHandler;
     }
@@ -320,9 +328,11 @@ public class BeanReaderImpl implements BeanReader {
         this.ignoreUnidentifiedRecords = ignoreUnidentifiedRecords;
     }
     
+    @Override
     public void debug() {
         debug(System.out);
     }
+    @Override
     public void debug(PrintStream out) {
         ((Component)layout).print(out);
     }

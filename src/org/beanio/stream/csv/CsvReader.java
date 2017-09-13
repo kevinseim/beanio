@@ -62,7 +62,7 @@ public class CsvReader implements RecordReader {
     private transient int recordLineNumber;
     private transient int lineNumber = 0;
     private transient boolean skipLF = false;
-    private transient List<String> fieldList = new ArrayList<String>();
+    private transient List<String> fieldList = new ArrayList<>();
     
     /**
      * Constructs a new <tt>CsvReader</tt>.
@@ -121,6 +121,7 @@ public class CsvReader implements RecordReader {
      * -1 is returned if the end of the stream was reached.
      * @return the starting line number of the last record
      */
+    @Override
     public int getRecordLineNumber() {
         return recordLineNumber;
     }
@@ -130,6 +131,7 @@ public class CsvReader implements RecordReader {
      * stream was reached.
      * @return the raw text of the last record
      */
+    @Override
     public String getRecordText() {
         return recordText;
     }
@@ -140,6 +142,7 @@ public class CsvReader implements RecordReader {
      *   read from the stream
      * @throws IOException if an I/O error occurs
      */
+    @Override
     public String[] read() throws IOException, RecordIOException {
         // fieldList is set to null when the end of stream is reached
         if (fieldList == null) {
@@ -430,6 +433,7 @@ public class CsvReader implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReader#close()
      */
+    @Override
     public void close() throws IOException {
         in.close();
     }

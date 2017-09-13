@@ -42,11 +42,11 @@ public class FlatPreprocessor extends Preprocessor {
     // the component that immediately follows the unbounded component
     private PropertyConfig unboundedComponentFollower = null;
     // the list of components at the end of the record following the unbounded component
-    private List<PropertyConfig> endComponents = new ArrayList<PropertyConfig>();
+    private List<PropertyConfig> endComponents = new ArrayList<>();
     /* stack of non-record segments */
-    private LinkedList<SegmentConfig> segmentStack = new LinkedList<SegmentConfig>();
+    private LinkedList<SegmentConfig> segmentStack = new LinkedList<>();
     /* list of field components belonging to a record, used for validating dynamic occurrences */
-    private List<FieldConfig> fieldComponents = new ArrayList<FieldConfig>();
+    private List<FieldConfig> fieldComponents = new ArrayList<>();
     
     /**
      * Constructs a new <tt>FlatPreprocessor</tt>.
@@ -360,7 +360,7 @@ public class FlatPreprocessor extends Preprocessor {
             }
         }
         else {
-            if (new Integer(-1).equals(field.getLength())) {
+            if (Integer.valueOf(-1).equals(field.getLength())) {
                 field.setLength(null);
             }
         }

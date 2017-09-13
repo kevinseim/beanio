@@ -43,6 +43,7 @@ public class FixedLengthRecordFormat implements RecordFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.RecordFormat#matches(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public boolean matches(UnmarshallingContext context) {
         int length = ((FixedLengthUnmarshallingContext)context).getRecordLength();
         return !(length < minMatchLength || length > maxMatchLength);
@@ -52,6 +53,7 @@ public class FixedLengthRecordFormat implements RecordFormat {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.RecordFormat#validate(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public void validate(UnmarshallingContext context) {
         int length = ((FixedLengthUnmarshallingContext)context).getRecordLength();
         

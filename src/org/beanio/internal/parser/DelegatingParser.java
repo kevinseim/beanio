@@ -31,42 +31,52 @@ public abstract class DelegatingParser extends ParserComponent {
         super(1);
     }
     
+    @Override
     public boolean matches(UnmarshallingContext context) {
         return getParser().matches(context);
     }
 
+    @Override
     public boolean unmarshal(UnmarshallingContext context) {
         return getParser().unmarshal(context);
     }
     
+    @Override
     public boolean marshal(MarshallingContext context) throws IOException {
         return getParser().marshal(context);
     }
 
+    @Override
     public void clearValue(ParsingContext context) {
         getParser().clearValue(context);
     }
 
+    @Override
     public void setValue(ParsingContext context, Object value) {
         getParser().setValue(context, value);
     }
 
+    @Override
     public Object getValue(ParsingContext context) {
         return getParser().getValue(context);
     }
 
+    @Override
     public int getSize() {
         return getParser().getSize();
     }
 
+    @Override
     public boolean isOptional() {
         return getParser().isOptional();
     }
     
+    @Override
     public boolean isIdentifier() {
         return getParser().isIdentifier();
     }
 
+    @Override
     public boolean hasContent(ParsingContext context) {
         return getParser().hasContent(context);
     }

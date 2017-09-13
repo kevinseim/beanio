@@ -30,7 +30,7 @@ import org.beanio.internal.config.*;
  */
 public abstract class ProcessorSupport {
 
-    private LinkedList<ComponentConfig> configStack = new LinkedList<ComponentConfig>();
+    private LinkedList<ComponentConfig> configStack = new LinkedList<>();
     
     /**
      * Constructs a new <tt>ProcessorSupport</tt>.

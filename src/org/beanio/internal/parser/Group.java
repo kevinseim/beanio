@@ -39,9 +39,9 @@ public class Group extends ParserComponent implements Selector {
     private int order = 1;
     private Property property = null;
     // the current group count
-    private ParserLocal<Integer> count = new ParserLocal<Integer>(0);
+    private ParserLocal<Integer> count = new ParserLocal<>(0);
     // the last matched child
-    private ParserLocal<Selector> lastMatched = new ParserLocal<Selector>();
+    private ParserLocal<Selector> lastMatched = new ParserLocal<>();
     
     /**
      * Constructs a new <tt>Group</tt>.
@@ -54,6 +54,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.Marshaller#marshal(org.beanio.parser2.MarshallingContext)
      */
+    @Override
     public boolean marshal(MarshallingContext context) throws IOException {
         // this method is only invoked when this group is configured to
         // marshal a bean object that spans multiple records
@@ -70,6 +71,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#skip(org.beanio.internal.parser.UnmarshallingContext)
      */
+    @Override
     public void skip(UnmarshallingContext context) {
         // this method is only invoked when this group is configured to
         // unmarshal a bean object that spans multiple records
@@ -109,6 +111,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.Unmarshaller#unmarshal(org.beanio.parser2.UnmarshallingContext)
      */
+    @Override
     public boolean unmarshal(UnmarshallingContext context) {
         // this method is only invoked when this group is configured to
         // unmarshal a bean object that spans multiple records
@@ -157,6 +160,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.RecordMatcher#matchAny(org.beanio.parser2.UnmarshallingContext)
      */
+    @Override
     public Selector matchAny(UnmarshallingContext context) {
         for (Component n : getChildren()) {
             Selector node = (Selector) n;
@@ -173,6 +177,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.RecordMatcher#matchNext(org.beanio.parser2.UnmarshallingContext)
      */
+    @Override
     public Selector matchNext(UnmarshallingContext context) {
         try {
             return internalMatchNext(context);
@@ -186,6 +191,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.RecordMatcher#matchNextBean(java.lang.Object)
      */
+    @Override
     public Selector matchNext(MarshallingContext context) {
         try {
             if (property == null) {
@@ -419,6 +425,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#reset()
      */
+    @Override
     public void reset(ParsingContext context) {
         lastMatched.set(context, null);
         for (Component c : getChildren()) {
@@ -432,6 +439,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.RecordMatcher#close()
      */
+    @Override
     public Selector close(ParsingContext context) {
         Selector lastMatch = lastMatched.get(context);
         
@@ -483,6 +491,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.Unmarshaller#matches(org.beanio.parser2.UnmarshallingContext)
      */
+    @Override
     public boolean matches(UnmarshallingContext context) {
         return false;
     }
@@ -491,6 +500,7 @@ public class Group extends ParserComponent implements Selector {
      * Tests if the max occurs has been reached for this node.
      * @return true if max occurs has been reached
      */
+    @Override
     public boolean isMaxOccursReached(ParsingContext context) {
         return lastMatched.get(context) == null && getCount(context) >= getMaxOccurs();
     }
@@ -499,6 +509,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.Unmarshaller#getSize()
      */
+    @Override
     public int getSize() {
         return -1;
     }
@@ -510,6 +521,7 @@ public class Group extends ParserComponent implements Selector {
      * @param state the Map to update with the latest state
      * @since 1.2
      */
+    @Override
     public void updateState(ParsingContext context, String namespace, Map<String, Object> state) {
         state.put(getKey(namespace, COUNT_KEY), count.get(context));
         
@@ -533,6 +545,7 @@ public class Group extends ParserComponent implements Selector {
      * @param state the Map containing the state to restore
      * @since 1.2
      */
+    @Override
     public void restoreState(ParsingContext context, String namespace, Map<String, Object> state) {
         String key = getKey(namespace, COUNT_KEY);
         Integer n = (Integer) state.get(key);
@@ -577,25 +590,34 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#isRecordGroup()
      */
+    @Override
     public boolean isRecordGroup() {
         return true;
     }
 
+    @Override
     public int getMinOccurs() {
         return minOccurs;
     }
+
     public void setMinOccurs(int minOccurs) {
         this.minOccurs = minOccurs;
     }
+
+    @Override
     public int getMaxOccurs() {
         return maxOccurs;
     }
+
     public void setMaxOccurs(int maxOccurs) {
         this.maxOccurs = maxOccurs;
     }
+
+    @Override
     public int getOrder() {
         return order;
     }
+
     public void setOrder(int order) {
         this.order = order;
     }
@@ -604,6 +626,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#getCount()
      */
+    @Override
     public int getCount(ParsingContext context) {
         return count.get(context);
     }
@@ -612,6 +635,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Selector#setCount(int)
      */
+    @Override
     public void setCount(ParsingContext context, int count) {
         this.count.set(context, count);
     }
@@ -620,6 +644,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.Parser#clearValue()
      */
+    @Override
     public void clearValue(ParsingContext context) {
         if (property != null) {
             property.clearValue(context);
@@ -630,6 +655,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.Parser#setValue(java.lang.Object)
      */
+    @Override
     public void setValue(ParsingContext context, Object value) {
         property.setValue(context, value);
     }
@@ -638,11 +664,13 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.parser2.Parser#getValue()
      */
+    @Override
     public Object getValue(ParsingContext context) {
         return property.getValue(context);
     }
     
     
+    @Override
     public Property getProperty() {
         return property;
     }
@@ -654,6 +682,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#isLazy()
      */
+    @Override
     public boolean isOptional() {
         return minOccurs == 0;
     }
@@ -662,6 +691,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#isIdentifier()
      */
+    @Override
     public boolean isIdentifier() {
         return false;
     }
@@ -670,6 +700,7 @@ public class Group extends ParserComponent implements Selector {
      * (non-Javadoc)
      * @see org.beanio.internal.parser.Parser#hasContent()
      */
+    @Override
     public boolean hasContent(ParsingContext context) {
         if (property != null) {
             return property.getValue(context) != Value.MISSING;

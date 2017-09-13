@@ -47,12 +47,13 @@ public abstract class FlatParserFactory extends ParserFactorySupport {
     @SuppressWarnings("unused")
     private static class NodeComparator implements Comparator<Component> {
 
-        private IdentityHashMap<Component, Integer> cache = new IdentityHashMap<Component, Integer>();
+        private IdentityHashMap<Component, Integer> cache = new IdentityHashMap<>();
         
         /*
          * (non-Javadoc)
          * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
          */
+        @Override
         public int compare(Component o1, Component o2) {
             return getPosition(o1).compareTo(getPosition(o2));
         }

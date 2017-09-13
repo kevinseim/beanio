@@ -26,6 +26,7 @@ public class EnumTypeHandler implements TypeHandler {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#parse(java.lang.String)
      */
+    @Override
     public Object parse(String text) throws TypeConversionException {
         if (text == null || "".equals(text)) {
             return null;
@@ -43,6 +44,7 @@ public class EnumTypeHandler implements TypeHandler {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#format(java.lang.Object)
      */
+    @Override
     public String format(Object value) {
         if (value == null) {
             return null;
@@ -54,6 +56,7 @@ public class EnumTypeHandler implements TypeHandler {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#getType()
      */
+    @Override
     public Class<?> getType() {
         return type;
     }

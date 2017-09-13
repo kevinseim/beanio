@@ -48,6 +48,7 @@ public class DateTypeHandler extends DateTypeHandlerSupport {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#parse(java.lang.String)
      */
+    @Override
     public Date parse(String text) throws TypeConversionException {
         return super.parseDate(text);
     }
@@ -56,6 +57,7 @@ public class DateTypeHandler extends DateTypeHandlerSupport {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#format(java.lang.Object)
      */
+    @Override
     public String format(Object value) {
         return super.formatDate((Date)value);
     }
@@ -64,6 +66,7 @@ public class DateTypeHandler extends DateTypeHandlerSupport {
      * (non-Javadoc)
      * @see org.beanio.types.TypeHandler#getType()
      */
+    @Override
     public Class<?> getType() {
         return Date.class;
     }

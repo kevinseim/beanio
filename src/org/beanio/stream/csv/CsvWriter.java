@@ -94,6 +94,7 @@ public class CsvWriter implements RecordWriter {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordWriter#write(java.lang.Object)
      */
+    @Override
     public void write(Object value) throws IOException {
     	write((String[])value);
     }
@@ -172,6 +173,7 @@ public class CsvWriter implements RecordWriter {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordWriter#flush()
      */
+    @Override
     public void flush() throws IOException {
         out.flush();
     }
@@ -180,6 +182,7 @@ public class CsvWriter implements RecordWriter {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordWriter#close()
      */
+    @Override
     public void close() throws IOException {
         out.close();
     }

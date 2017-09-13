@@ -73,7 +73,7 @@ public class JsonReaderTest {
         map = in.read();
         assertEquals(int1, map.get("int1"));
         map = in.read();
-        assertEquals(new Integer(10), map.get("int2"));
+        assertEquals(Integer.valueOf(10), map.get("int2"));
         map = in.read();
         assertEquals(long1, map.get("long1"));
 
@@ -126,7 +126,7 @@ public class JsonReaderTest {
         Map object;
 
         Map map = in.read();
-        assertEquals(new Integer(20), map.get("field2"));
+        assertEquals(Integer.valueOf(20), map.get("field2"));
         object = (Map) map.get("o1");
         assertEquals("value1", object.get("field1"));
 
@@ -137,7 +137,7 @@ public class JsonReaderTest {
         map = in.read();
         object = (Map) map.get("o1");
         assertEquals("value1", object.get("field1"));
-        assertEquals(new Integer(10), object.get("field2"));
+        assertEquals(Integer.valueOf(10), object.get("field2"));
 
         assertNull(in.read());
     }
@@ -183,63 +183,63 @@ public class JsonReaderTest {
     
     @Test
     @SuppressWarnings("rawtypes")
-    public void test_mixedArray() throws IOException {
+    public void test_mixedArray() {
         JsonRecordUnmarshaller u = new JsonRecordUnmarshaller();
         
         Map map = u.unmarshal(
             "{ \"array\" : [ [10], { \"field\":\"value\" } ]}");
         
         List list = (List) ((List)map.get("array")).get(0);
-        assertEquals(new Integer(10), list.get(0));
+        assertEquals(Integer.valueOf(10), list.get(0));
         
         map = (Map) ((List)map.get("array")).get(1);
         assertEquals("value", map.get("field"));
     }
     
     @Test
-    public void test_missingObject() throws IOException {
+    public void test_missingObject() {
         assertError(null, "Expected '{' near position 1");
         assertError("", "Expected '{' near position 1");
         assertError(" ", "Expected '{' near position 1");
     }
     
     @Test
-    public void test_missingQuotes() throws IOException {
+    public void test_missingQuotes() {
         assertError("{ field : \"value\" }", "Expected string or '}' near position 3");
     }
     
     @Test
-    public void test_missingCommaInObject() throws IOException {
+    public void test_missingCommaInObject() {
         assertError("{ \"f1\" : \"value\" \"f2\" : \"value2\" }", "Expected ',' or '}' near position 18");
     }
 
     @Test
-    public void test_missingCommaInArray() throws IOException {
+    public void test_missingCommaInArray() {
         assertError("{ \"array\" : [ 10 20 ] }", "Expected ',' near position 18");
     }
     
     @Test
-    public void test_invalidValue() throws IOException {
+    public void test_invalidValue() {
         assertError("{ \"number\" : a }", "Cannot parse 'a' into a JSON string, number or boolean near position 15");
     }
 
     @Test
-    public void test_missingCloseObject() throws IOException {
+    public void test_missingCloseObject() {
         assertError("{ \"number\" : 10", "Expected ',' or '}' near position 15");
     }
 
     @Test
-    public void test_missingCloseArray() throws IOException {
+    public void test_missingCloseArray() {
         assertError("{ \"number\" : [ 10", "Expected ',' or ']' near position 17");
     }
     
     @Test
-    public void test_missingCloseString() throws IOException {
+    public void test_missingCloseString() {
         assertError("{ \"number", "Expected '\"' near position 9");
     }
     
     @Test
-    public void test_missingColon() throws IOException {
+    public void test_missingColon() {
         assertError("{ \"number\" 10 }", "Expected ':' near position 12");
     }    
     

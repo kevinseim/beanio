@@ -85,6 +85,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * Returns the raw text of the last record read from the record reader.
      * @return the raw text of the last record read
      */
+    @Override
     public String getRecordText() {
         return recordText;
     }
@@ -101,6 +102,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * Returns the starting line number of the last record read from the record reader.
      * @return the line number of the last record
      */
+    @Override
     public int getRecordLineNumber() {
         return lineNumber;
     }
@@ -119,6 +121,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * or <tt>null</tt> if not known.
      * @return the name of the record
      */
+    @Override
     public String getRecordName() {
         return recordName;
     }
@@ -138,11 +141,11 @@ public class ErrorContext implements RecordContext, Cloneable {
      */
     public void addFieldError(String fieldName, String message) {
         if (fieldErrorMap == null) {
-            fieldErrorMap = new HashMap<String, Collection<String>>();
+            fieldErrorMap = new HashMap<>();
         }
         Collection<String> errors = fieldErrorMap.get(fieldName);
         if (errors == null) {
-            errors = new ArrayList<String>();
+            errors = new ArrayList<>();
             errors.add(message);
             fieldErrorMap.put(fieldName, errors);
         }
@@ -157,7 +160,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      */
     public void addRecordError(String message) {
         if (recordErrors == null) {
-            recordErrors = new ArrayList<String>(3);
+            recordErrors = new ArrayList<>(3);
         }
         recordErrors.add(message);
     }
@@ -170,13 +173,13 @@ public class ErrorContext implements RecordContext, Cloneable {
      */
     public void setFieldText(String fieldName, String text, boolean repeating) {
         if (fieldTextMap == null) {
-            fieldTextMap = new HashMap<String,String>();
+            fieldTextMap = new HashMap<>();
         }
         
         if (repeating) {
             // update the field count
             if (fieldCountMap == null) {
-                fieldCountMap = new HashMap<String,Counter>();
+                fieldCountMap = new HashMap<>();
             }
             
             Counter counter = fieldCountMap.get(fieldName);
@@ -198,6 +201,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * (non-Javadoc)
      * @see org.beanio.RecordContext#hasErrors()
      */
+    @Override
     public boolean hasErrors() {
         return hasRecordErrors() || hasFieldErrors();
     }
@@ -206,6 +210,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * (non-Javadoc)
      * @see org.beanio.BeanReaderContext#hasRecordErrors()
      */
+    @Override
     public boolean hasRecordErrors() {
         return recordErrors != null && !recordErrors.isEmpty();
     }
@@ -214,6 +219,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * (non-Javadoc)
      * @see org.beanio.BeanReaderContext#getRecordErrors()
      */
+    @Override
     public Collection<String> getRecordErrors() {
         if (recordErrors == null)
             return Collections.emptyList();
@@ -224,6 +230,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * (non-Javadoc)
      * @see org.beanio.RecordContext#getFieldCount(java.lang.String)
      */
+    @Override
     public int getFieldCount(String fieldName) {
         if (fieldTextMap == null) {
             return 0;
@@ -243,6 +250,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * (non-Javadoc)
      * @see org.beanio.BeanReaderContext#getFieldText(java.lang.String)
      */
+    @Override
     public String getFieldText(String fieldName) {
         return getFieldText(fieldName, 0);
     }
@@ -251,6 +259,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * (non-Javadoc)
      * @see org.beanio.BeanReaderContext#getFieldText(java.lang.String, int)
      */
+    @Override
     public String getFieldText(String fieldName, int index) {
         if (fieldTextMap == null) {
             return null;
@@ -267,6 +276,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * (non-Javadoc)
      * @see org.beanio.BeanReaderContext#hasFieldErrors()
      */
+    @Override
     public boolean hasFieldErrors() {
         return fieldErrorMap != null && !fieldErrorMap.isEmpty();
     }
@@ -275,6 +285,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * (non-Javadoc)
      * @see org.beanio.BeanReaderContext#getFieldErrors()
      */
+    @Override
     public Map<String, Collection<String>> getFieldErrors() {
         if (fieldErrorMap == null) {
             return Collections.emptyMap();
@@ -286,6 +297,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * (non-Javadoc)
      * @see org.beanio.BeanReaderContext#getFieldErrors(java.lang.String)
      */
+    @Override
     public Collection<String> getFieldErrors(String fieldName) {
         if (fieldErrorMap == null)
             return null;
@@ -297,6 +309,7 @@ public class ErrorContext implements RecordContext, Cloneable {
      * (non-Javadoc)
      * @see org.beanio.RecordContext#getLineNumber()
      */
+    @Override
     public int getLineNumber() {
         return getRecordLineNumber();
     }

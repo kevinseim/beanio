@@ -52,6 +52,7 @@ public class SegmentConfig extends PropertyConfig {
      * (non-Javadoc)
      * @see org.beanio.config.PropertyConfig#type()
      */
+    @Override
     public char getComponentType() {
         return SEGMENT;
     }
@@ -62,7 +63,7 @@ public class SegmentConfig extends PropertyConfig {
      * @return list of children
      */
     public List<PropertyConfig> getPropertyList() {
-        List<PropertyConfig> list = new ArrayList<PropertyConfig>(getChildren().size());
+        List<PropertyConfig> list = new ArrayList<>(getChildren().size());
         toPropertyList(this, list);
         return list;
     }
@@ -134,6 +135,7 @@ public class SegmentConfig extends PropertyConfig {
      * Map key when <tt>collection</tt> is set to <tt>map</tt>.
      * @return the key property name
      */
+    @Override
     public String getKey() {
         return key;
     }

@@ -45,6 +45,7 @@ public abstract class NumberTypeHandler extends LocaleSupport implements Configu
      *    or an empty string
      * @throws TypeConversionException if the text is not a valid number
      */
+    @Override
     public final Number parse(String text) throws TypeConversionException {
         if (text == null || "".equals(text)) {
             return null;
@@ -113,6 +114,7 @@ public abstract class NumberTypeHandler extends LocaleSupport implements Configu
      * (non-Javadoc)
      * @see org.beanio.types.ConfigurableTypeHandler#newInstance(java.util.Properties)
      */
+    @Override
     public TypeHandler newInstance(Properties properties) throws IllegalArgumentException {
         String pattern = properties.getProperty(FORMAT_SETTING);
         if (pattern == null || "".equals(pattern)) {
@@ -145,6 +147,7 @@ public abstract class NumberTypeHandler extends LocaleSupport implements Configu
      * @param value the number to format
      * @return the formatted number
      */
+    @Override
     public String format(Object value) {
         if (value == null)
             return null;

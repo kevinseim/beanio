@@ -132,6 +132,7 @@ public class XmlReader implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReader#read()
      */
+    @Override
     public Document read() throws IOException, RecordIOException {
         if (eof) {
             return null;
@@ -302,6 +303,7 @@ public class XmlReader implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReader#close()
      */
+    @Override
     public void close() throws IOException {
         try {
             in.close();
@@ -317,6 +319,7 @@ public class XmlReader implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReader#getRecordLineNumber()
      */
+    @Override
     public int getRecordLineNumber() {
         return recordLineNumber;
     }
@@ -325,6 +328,7 @@ public class XmlReader implements RecordReader {
      * (non-Javadoc)
      * @see org.beanio.stream.RecordReader#getRecordText()
      */
+    @Override
     public String getRecordText() {
         return null;
     }
