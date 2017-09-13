@@ -1,5 +1,7 @@
 package org.beanio.parser.inlinemaps;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.StringReader;
 import java.util.Map;
 
@@ -104,5 +106,23 @@ public class InlineMapParserTest extends ParserTest {
             "entity,PERSON,-22.282174,166.441458,TEST_ENTITY_3\n";
         
         BeanReader in = factory.createReader("stream5", new StringReader(text));
+        
+        Map map = (Map) in.read();
+        assertEquals("ACTIVE", map.get("status"));
+        assertEquals("PERSON", map.get("subtype"));
+        assertEquals (Double.valueOf(8.4), map.get("lat"));
+        assertEquals(Double.valueOf(-77.2), map.get("lon"));
+        
+        map = (Map) in.read();
+        assertEquals ("ACTIVE", map.get("status"));
+        assertEquals("PERSON", map.get("subtype"));
+        assertEquals (Double.valueOf(-33.99367), map.get("lat"));
+        assertEquals(Double.valueOf(25.67632), map.get("lon"));
+        
+        map = (Map) in.read();
+        assertEquals ("ACTIVE", map.get("status"));
+        assertEquals("PERSON", map.get("subtype"));
+        assertEquals (Double.valueOf(-22.282174), map.get("lat"));
+        assertEquals(Double.valueOf(166.441458), map.get("lon"));
     }
 }

@@ -389,7 +389,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
     
     protected void initializeGroupIteration(GroupConfig config, Property property) {
         // wrap the segment in an iteration
-        Component aggregation = createRecordAggregation(config, property);
+        Component aggregation = createRecordAggregation(config);
 
         pushParser(aggregation);
         if (property != null || config.getTarget() != null) {
@@ -474,7 +474,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
     
     protected void initializeRecordIteration(RecordConfig config, Property property) {
         // wrap the segment in an iteration
-        Component collection = createRecordAggregation(config, property);
+        Component collection = createRecordAggregation(config);
 
         pushParser(collection);
         if (property != null || config.getTarget() != null) {
@@ -586,7 +586,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
 
     }
     
-    private Property findTarget(Component segment, String name) {
+    private static Property findTarget(Component segment, String name) {
         Component c = findDescendant("value", segment, name);
         if (c == null) {
             throw new BeanIOConfigurationException("Descendant value '" + name + "' not found");
@@ -602,7 +602,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
         return property;
     }
     
-    private Component findDescendant(String type, Component c, String name) {
+    private static Component findDescendant(String type, Component c, String name) {
         if (name.equals(c.getName())) {
             return c;
         }
@@ -1024,7 +1024,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
      * @return the created {@link RecordAggregation}
      * @throws BeanIOConfigurationException
      */
-    protected RecordAggregation createRecordAggregation(PropertyConfig config, Property property) 
+    protected RecordAggregation createRecordAggregation(PropertyConfig config) 
         throws BeanIOConfigurationException
     {
         boolean isMap = false;
@@ -1049,7 +1049,7 @@ public abstract class ParserFactorySupport extends ProcessorSupport implements P
         }
         
         // create the appropriate iteration type
-        RecordAggregation aggregation;;
+        RecordAggregation aggregation;
         if (collectionType == TypeUtil.ARRAY_TYPE) {
             aggregation = new RecordArray();
         }
