@@ -15,7 +15,6 @@
  */
 package org.beanio;
 
-import java.io.Closeable;
 import java.io.IOException;
 
 import org.beanio.internal.util.Debuggable;
@@ -29,7 +28,7 @@ import org.beanio.internal.util.Debuggable;
  * @since 1.0
  * @see StreamFactory
  */
-public interface BeanReader extends Debuggable, Closeable {
+public interface BeanReader extends Debuggable, AutoCloseable {
 
 	/**
 	 * Reads a single bean from the input stream.  If the end of the stream is
